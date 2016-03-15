@@ -4,11 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication  // same as @Configuration @EnableAutoConfiguration @ComponentScan
-public class TseoSSDAplication {
+public class TseoSSDApplication {
 
 	public static void main( String[] args )
     {
-    	SpringApplication.run(TseoSSDAplication.class, args);
+		System.out.println(" † ");
+    	SpringApplication.run(TseoSSDApplication.class, args);
     }
 	
 }
