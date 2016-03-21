@@ -1,5 +1,6 @@
 package rs.ac.uns.ftn.tseo.ssd.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,12 +9,17 @@ import javax.persistence.Id;
 @Entity
 public class Korisnik {
 
-	// -> {Student-Administrator-Profesor}.JMBG
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer korisnikID;
+	
+	@Column(unique=true, nullable=false)
 	private Integer JMBG;
 	
+	@Column(unique=true, nullable=false)
 	private String korisnickoIme;
+	
+	@Column(nullable=false)
 	private String lozinka;
 	
 	private String ime;
@@ -21,18 +27,17 @@ public class Korisnik {
 	private String brojTelefona;
 	private String email;
 	
-	private String ulicaIBroj;
-	private String postanskiBroj;
-	private String mesto;
+	private String adresa;
 	
 	public Korisnik() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Korisnik(Integer jMBG, String korisnickoIme, String lozinka, String ime, String prezime, String brojTelefona,
-			String email, String ulicaIBroj, String postanskiBroj, String mesto) {
+	public Korisnik(Integer korisnikID, Integer jMBG, String korisnickoIme, String lozinka, String ime, String prezime,
+			String brojTelefona, String email, String adresa) {
 		super();
+		this.korisnikID = korisnikID;
 		JMBG = jMBG;
 		this.korisnickoIme = korisnickoIme;
 		this.lozinka = lozinka;
@@ -40,9 +45,15 @@ public class Korisnik {
 		this.prezime = prezime;
 		this.brojTelefona = brojTelefona;
 		this.email = email;
-		this.ulicaIBroj = ulicaIBroj;
-		this.postanskiBroj = postanskiBroj;
-		this.mesto = mesto;
+		this.adresa = adresa;
+	}
+
+	public Integer getKorisnikID() {
+		return korisnikID;
+	}
+
+	public void setKorisnikID(Integer korisnikID) {
+		this.korisnikID = korisnikID;
 	}
 
 	public Integer getJMBG() {
@@ -101,28 +112,12 @@ public class Korisnik {
 		this.email = email;
 	}
 
-	public String getUlicaIBroj() {
-		return ulicaIBroj;
+	public String getAdresa() {
+		return adresa;
 	}
 
-	public void setUlicaIBroj(String ulicaIBroj) {
-		this.ulicaIBroj = ulicaIBroj;
+	public void setAdresa(String adresa) {
+		this.adresa = adresa;
 	}
 
-	public String getPostanskiBroj() {
-		return postanskiBroj;
-	}
-
-	public void setPostanskiBroj(String postanskiBroj) {
-		this.postanskiBroj = postanskiBroj;
-	}
-
-	public String getMesto() {
-		return mesto;
-	}
-
-	public void setMesto(String mesto) {
-		this.mesto = mesto;
-	}
-	
 }

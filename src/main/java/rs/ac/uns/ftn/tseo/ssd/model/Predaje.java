@@ -15,28 +15,33 @@ public class Predaje {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer predajeID;
 	
-	// -> Predmet.profesori
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	private Integer predmetID;
+	private Predmet predmet;
 	
-	// -> Profesor.predmeti
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	private Integer profesorID;
+	private Profesor profesor;
 	
 	private String tipPredavanja; // Predavanja, Vezbe, ...
-
+	
+	private String uloga;//Uloga profesora (Profesor, Asistent...)
+	
+	
 	public Predaje() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Predaje(Integer predajeID, Integer predmetID, Integer profesorID, String tipPredavanja) {
+
+	public Predaje(Integer predajeID, Predmet predmet, Profesor profesor, String tipPredavanja, String uloga) {
 		super();
 		this.predajeID = predajeID;
-		this.predmetID = predmetID;
-		this.profesorID = profesorID;
+		this.predmet = predmet;
+		this.profesor = profesor;
 		this.tipPredavanja = tipPredavanja;
+		this.uloga = uloga;
 	}
+
+
 
 	public Integer getPredajeID() {
 		return predajeID;
@@ -46,21 +51,43 @@ public class Predaje {
 		this.predajeID = predajeID;
 	}
 
-	public Integer getPredmetID() {
-		return predmetID;
+
+
+	public Predmet getPredmet() {
+		return predmet;
 	}
 
-	public void setPredmetID(Integer predmetID) {
-		this.predmetID = predmetID;
+
+
+	public void setPredmet(Predmet predmet) {
+		this.predmet = predmet;
 	}
 
-	public Integer getProfesorID() {
-		return profesorID;
+
+
+	public Profesor getProfesor() {
+		return profesor;
 	}
 
-	public void setProfesorID(Integer profesorID) {
-		this.profesorID = profesorID;
+
+
+	public void setProfesor(Profesor profesor) {
+		this.profesor = profesor;
 	}
+
+
+
+	public String getUloga() {
+		return uloga;
+	}
+
+
+
+	public void setUloga(String uloga) {
+		this.uloga = uloga;
+	}
+
+
 
 	public String getTipPredavanja() {
 		return tipPredavanja;

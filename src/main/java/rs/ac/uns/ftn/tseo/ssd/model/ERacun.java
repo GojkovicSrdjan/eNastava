@@ -20,8 +20,7 @@ public class ERacun {
 	
 	private Double stanjeNaERacunu;
 	
-	// -> Uplata.eRacunID
-	@OneToMany(mappedBy = "eRacunID", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	@OneToMany(mappedBy = "eRacun", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<Uplata> uplate = new HashSet<Uplata>();
 
 	public ERacun() {

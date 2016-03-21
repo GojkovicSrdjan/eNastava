@@ -8,10 +8,10 @@ import rs.ac.uns.ftn.tseo.ssd.model.Predaje;
 import rs.ac.uns.ftn.tseo.ssd.model.Predmet;
 import rs.ac.uns.ftn.tseo.ssd.model.Profesor;
 
-public interface PredajeRepository extends JpaRepository <Predaje,Long>{
+public interface PredajeRepository extends JpaRepository <Predaje,Integer>{
 	
-	List<Predaje> findByPredmetID (Predmet PredmetID);
-	List<Predaje> findByProfesorID (Profesor ProfesorID);
-	Predaje findByTipPredavanja (String TipPredavanja); 
+	List<Predaje> findByPredmetID (Predmet predmetID);
+	List<Predaje> findByProfesorID (Profesor profesorID);
+	Predaje findByTipPredavanja (String tipPredavanja); 
 
 }

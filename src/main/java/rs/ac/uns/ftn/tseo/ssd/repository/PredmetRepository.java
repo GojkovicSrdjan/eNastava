@@ -4,8 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import rs.ac.uns.ftn.tseo.ssd.model.Predmet;
 
-public interface PredmetRepository extends JpaRepository <Predmet, Long>{
+public interface PredmetRepository extends JpaRepository <Predmet, Integer>{
 	
-	Predmet findByNaziv (String Naziv);
+	Predmet findByNaziv (String naziv);
 
 }

@@ -17,9 +17,9 @@ public class Uplata {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer uplataID;
 	
-	// -> ERacun.uplate
+	// -> ERacun.eRacunID
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	private Integer eRacunID;
+	private ERacun eRacun;
 	
 	private Date datum;
 	private String svrha;
@@ -30,10 +30,11 @@ public class Uplata {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Uplata(Integer uplataID, Integer eRacunID, Date datum, String svrha, Double iznos) {
+	
+	public Uplata(Integer uplataID, ERacun eRacun, Date datum, String svrha, Double iznos) {
 		super();
 		this.uplataID = uplataID;
-		this.eRacunID = eRacunID;
+		this.eRacun = eRacun;
 		this.datum = datum;
 		this.svrha = svrha;
 		this.iznos = iznos;
@@ -47,13 +48,16 @@ public class Uplata {
 		this.uplataID = uplataID;
 	}
 
-	public Integer geteRacunID() {
-		return eRacunID;
+
+	public ERacun geteRacun() {
+		return eRacun;
 	}
 
-	public void seteRacunID(Integer eRacunID) {
-		this.eRacunID = eRacunID;
+
+	public void seteRacun(ERacun eRacun) {
+		this.eRacun = eRacun;
 	}
+
 
 	public Date getDatum() {
 		return datum;

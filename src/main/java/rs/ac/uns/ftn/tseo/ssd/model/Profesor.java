@@ -19,27 +19,27 @@ public class Profesor {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer profesorID;
 	
-	// -> Korisnik.JMBG
+	// -> Korisnik.korisnikID
 	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	private Integer JMBG;
+	private Korisnik korisnik;
 	
 	private String zvanje;
 	
 	// -> Predaje.profesorID
-	@OneToMany(mappedBy="profesorID", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	private Set<Predmet> predmeti = new HashSet<Predmet>();
+	@OneToMany(mappedBy="profesor", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	private Set<Predaje> predavanja = new HashSet<Predaje>();
 
 	public Profesor() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Profesor(Integer profesorID, Integer jMBG, String zvanje, Set<Predmet> predmeti) {
+	public Profesor(Integer profesorID, Korisnik korisnik, String zvanje, Set<Predaje> predavanja) {
 		super();
 		this.profesorID = profesorID;
-		JMBG = jMBG;
+		this.korisnik = korisnik;
 		this.zvanje = zvanje;
-		this.predmeti = predmeti;
+		this.predavanja = predavanja;
 	}
 
 	public Integer getProfesorID() {
@@ -50,12 +50,12 @@ public class Profesor {
 		this.profesorID = profesorID;
 	}
 
-	public Integer getJMBG() {
-		return JMBG;
+	public Korisnik getKorisnik() {
+		return korisnik;
 	}
 
-	public void setJMBG(Integer jMBG) {
-		JMBG = jMBG;
+	public void setKorisnik(Korisnik korisnik) {
+		this.korisnik = korisnik;
 	}
 
 	public String getZvanje() {
@@ -66,12 +66,13 @@ public class Profesor {
 		this.zvanje = zvanje;
 	}
 
-	public Set<Predmet> getPredmeti() {
-		return predmeti;
+	public Set<Predaje> getPredavanja() {
+		return predavanja;
 	}
 
-	public void setPredmeti(Set<Predmet> predmeti) {
-		this.predmeti = predmeti;
+	public void setPredavanja(Set<Predaje> predavanja) {
+		this.predavanja = predavanja;
 	}
+
 	
 }

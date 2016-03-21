@@ -3,6 +3,7 @@ package rs.ac.uns.ftn.tseo.ssd.model;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,36 +19,47 @@ public class Student {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer studentID;
+	
+	@Column(nullable=false, unique=true)
 	private String brojIndexa;
 	
-	// -> Korisnik.JMBG
+	// -> Korisnik.korisnikID
 	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	private Integer JMBG;
+	private Korisnik korisnik;
 	
 	// -> ERacun.eRacunID
 	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	private Integer eRacunID;
+	private ERacun eRacun;
 	
-	// -> Dokument.dokumentID
-	@OneToMany(mappedBy = "documentID", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<Dokument> dokumenta = new HashSet<Dokument>();
 	
-	// -> Pohadja.brojIndexa
-	@OneToMany(mappedBy = "brojIndexa", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-	private Set<Predmet> predmeti = new HashSet<Predmet>();
+	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	private Set<Pohadja> pohadjanja = new HashSet<Pohadja>();
 
 	public Student() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Student(String brojIndexa, Integer jMBG, Integer eRacunID, Set<Dokument> dokumenta, Set<Predmet> predmeti) {
+	public Student(Integer studentID, String brojIndexa, Korisnik korisnik, ERacun eRacun, Set<Dokument> dokumenta,
+			Set<Pohadja> pohadjanja) {
 		super();
+		this.studentID = studentID;
 		this.brojIndexa = brojIndexa;
-		JMBG = jMBG;
-		this.eRacunID = eRacunID;
+		this.korisnik = korisnik;
+		this.eRacun = eRacun;
 		this.dokumenta = dokumenta;
-		this.predmeti = predmeti;
+		this.pohadjanja = pohadjanja;
+	}
+
+	public Integer getStudentID() {
+		return studentID;
+	}
+
+	public void setStudentID(Integer studentID) {
+		this.studentID = studentID;
 	}
 
 	public String getBrojIndexa() {
@@ -58,20 +70,20 @@ public class Student {
 		this.brojIndexa = brojIndexa;
 	}
 
-	public Integer getJMBG() {
-		return JMBG;
+	public Korisnik getKorisnik() {
+		return korisnik;
 	}
 
-	public void setJMBG(Integer jMBG) {
-		JMBG = jMBG;
+	public void setKorisnik(Korisnik korisnik) {
+		this.korisnik = korisnik;
 	}
 
-	public Integer geteRacunID() {
-		return eRacunID;
+	public ERacun geteRacun() {
+		return eRacun;
 	}
 
-	public void seteRacunID(Integer eRacunID) {
-		this.eRacunID = eRacunID;
+	public void seteRacun(ERacun eRacun) {
+		this.eRacun = eRacun;
 	}
 
 	public Set<Dokument> getDokumenta() {
@@ -82,12 +94,13 @@ public class Student {
 		this.dokumenta = dokumenta;
 	}
 
-	public Set<Predmet> getPredmeti() {
-		return predmeti;
+	public Set<Pohadja> getPohadjanja() {
+		return pohadjanja;
 	}
 
-	public void setPredmeti(Set<Predmet> predmeti) {
-		this.predmeti = predmeti;
+	public void setPohadjanja(Set<Pohadja> pohadjanja) {
+		this.pohadjanja = pohadjanja;
 	}
+
 	
 }

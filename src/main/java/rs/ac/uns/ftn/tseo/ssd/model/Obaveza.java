@@ -19,7 +19,7 @@ public class Obaveza {
 	
 	// -> Pohadja.obaveze
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	private Integer pohadjaID;
+	private Pohadja pohadja;
 	
 	private Date datum;
 	private String tipObaveze;
@@ -32,11 +32,11 @@ public class Obaveza {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Obaveza(Integer obavezaID, Integer pohadjaID, Date datum, String tipObaveze, Boolean polozeno,
+	public Obaveza(Integer obavezaID, Pohadja pohadja, Date datum, String tipObaveze, Boolean polozeno,
 			Integer brojBodova, Integer ocena) {
 		super();
 		this.obavezaID = obavezaID;
-		this.pohadjaID = pohadjaID;
+		this.pohadja = pohadja;
 		this.datum = datum;
 		this.tipObaveze = tipObaveze;
 		this.polozeno = polozeno;
@@ -50,14 +50,6 @@ public class Obaveza {
 
 	public void setObavezaID(Integer obavezaID) {
 		this.obavezaID = obavezaID;
-	}
-
-	public Integer getPohadjaID() {
-		return pohadjaID;
-	}
-
-	public void setPohadjaID(Integer pohadjaID) {
-		this.pohadjaID = pohadjaID;
 	}
 
 	public Date getDatum() {
@@ -82,6 +74,14 @@ public class Obaveza {
 
 	public void setPolozeno(Boolean polozeno) {
 		this.polozeno = polozeno;
+	}
+
+	public Pohadja getPohadja() {
+		return pohadja;
+	}
+
+	public void setPohadja(Pohadja pohadja) {
+		this.pohadja = pohadja;
 	}
 
 	public Integer getBrojBodova() {

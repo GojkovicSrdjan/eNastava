@@ -19,16 +19,14 @@ public class Pohadja {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer pohadjaID;
 	
-	// -> Student.predmeti
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	private Integer brojIndexa;
+	private Student student;
 	
-	// -> Predmet.studenti
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	private Integer predmetID;
+	private Predmet predmet;
 	
 	// -> Obaveza.pohadjaID
-	@OneToMany(mappedBy="pohadjaID",cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="pohadja",cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Set<Obaveza> obaveze = new HashSet<Obaveza>();
 
 	public Pohadja() {
@@ -36,13 +34,15 @@ public class Pohadja {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Pohadja(Integer pohadjaID, Integer brojIndexa, Integer predmetID, Set<Obaveza> obaveze) {
+
+	public Pohadja(Integer pohadjaID, Student student, Predmet predmet, Set<Obaveza> obaveze) {
 		super();
 		this.pohadjaID = pohadjaID;
-		this.brojIndexa = brojIndexa;
-		this.predmetID = predmetID;
+		this.student = student;
+		this.predmet = predmet;
 		this.obaveze = obaveze;
 	}
+
 
 	public Integer getPohadjaID() {
 		return pohadjaID;
@@ -52,21 +52,25 @@ public class Pohadja {
 		this.pohadjaID = pohadjaID;
 	}
 
-	public Integer getBrojIndexa() {
-		return brojIndexa;
+	public Student getStudent() {
+		return student;
 	}
 
-	public void setBrojIndexa(Integer brojIndexa) {
-		this.brojIndexa = brojIndexa;
+
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
-	public Integer getPredmetID() {
-		return predmetID;
+
+	public Predmet getPredmet() {
+		return predmet;
 	}
 
-	public void setPredmetID(Integer predmetID) {
-		this.predmetID = predmetID;
+
+	public void setPredmet(Predmet predmet) {
+		this.predmet = predmet;
 	}
+
 
 	public Set<Obaveza> getObaveze() {
 		return obaveze;

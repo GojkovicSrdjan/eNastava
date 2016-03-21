@@ -15,20 +15,24 @@ public class Administrator {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer adminID;
 	
-	// Korisnik.JMBG
+	//Korisnik.korisnikID
 	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	private Integer JMBG;
+	private Korisnik korisnik;
+
+	public Administrator(Integer adminID, Korisnik korisnik) {
+		super();
+		this.adminID = adminID;
+		this.korisnik = korisnik;
+	}
+
+
 
 	public Administrator() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Administrator(Integer adminID, Integer jMBG) {
-		super();
-		this.adminID = adminID;
-		JMBG = jMBG;
-	}
+
 
 	public Integer getAdminID() {
 		return adminID;
@@ -38,12 +42,18 @@ public class Administrator {
 		this.adminID = adminID;
 	}
 
-	public Integer getJMBG() {
-		return JMBG;
+
+
+	public Korisnik getKorisnik() {
+		return korisnik;
 	}
 
-	public void setJMBG(Integer jMBG) {
-		JMBG = jMBG;
+
+
+	public void setKorisnik(Korisnik korisnik) {
+		this.korisnik = korisnik;
 	}
+
+
 	
 }

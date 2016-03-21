@@ -23,26 +23,29 @@ public class Predmet {
 	private String opis;
 	
 	// -> Predaje.predmetID
-	@OneToMany(mappedBy="predmetID", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	private Set<Profesor> profesori = new HashSet<Profesor>();
+	@OneToMany(mappedBy="predmet", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	private Set<Predaje> predavanja = new HashSet<Predaje>();
 	
 	// -> Pohadja.predmetID
-	@OneToMany(mappedBy="predmetID", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	private Set<Student> studenti = new HashSet<Student>();
+	@OneToMany(mappedBy="predmet", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	private Set<Pohadja> pohadjanja = new HashSet<Pohadja>();
 
 	public Predmet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Predmet(Integer predmetID, String naziv, String opis, Set<Profesor> profesori, Set<Student> studenti) {
+
+	public Predmet(Integer predmetID, String naziv, String opis, Set<Predaje> predavanja, Set<Pohadja> pohadjanja) {
 		super();
 		this.predmetID = predmetID;
 		this.naziv = naziv;
 		this.opis = opis;
-		this.profesori = profesori;
-		this.studenti = studenti;
+		this.predavanja = predavanja;
+		this.pohadjanja = pohadjanja;
 	}
+
+
 
 	public Integer getPredmetID() {
 		return predmetID;
@@ -50,6 +53,24 @@ public class Predmet {
 
 	public void setPredmetID(Integer predmetID) {
 		this.predmetID = predmetID;
+	}
+
+	public Set<Predaje> getPredavanja() {
+		return predavanja;
+	}
+
+
+	public void setPredavanja(Set<Predaje> predavanja) {
+		this.predavanja = predavanja;
+	}
+
+	public Set<Pohadja> getPohadjanja() {
+		return pohadjanja;
+	}
+
+
+	public void setPohadjanja(Set<Pohadja> pohadjanja) {
+		this.pohadjanja = pohadjanja;
 	}
 
 	public String getNaziv() {
@@ -68,20 +89,6 @@ public class Predmet {
 		this.opis = opis;
 	}
 
-	public Set<Profesor> getProfesori() {
-		return profesori;
-	}
 
-	public void setProfesori(Set<Profesor> profesori) {
-		this.profesori = profesori;
-	}
-
-	public Set<Student> getStudenti() {
-		return studenti;
-	}
-
-	public void setStudenti(Set<Student> studenti) {
-		this.studenti = studenti;
-	}
 	
 }

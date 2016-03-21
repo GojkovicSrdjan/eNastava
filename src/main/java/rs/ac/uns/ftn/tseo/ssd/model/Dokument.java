@@ -17,7 +17,7 @@ public class Dokument {
 	
 	// -> Student.dokumenta
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	private Integer brojIndexa;
+	private Student student;
 	
 	private String naziv;
 	private String tip;
@@ -28,14 +28,16 @@ public class Dokument {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Dokument(Integer dokumentID, Integer brojIndexa, String naziv, String tip, String putanjaDoDokumenta) {
+
+	public Dokument(Integer dokumentID, Student student, String naziv, String tip, String putanjaDoDokumenta) {
 		super();
 		this.dokumentID = dokumentID;
-		this.brojIndexa = brojIndexa;
+		this.student = student;
 		this.naziv = naziv;
 		this.tip = tip;
 		this.putanjaDoDokumenta = putanjaDoDokumenta;
 	}
+
 
 	public Integer getDokumentID() {
 		return dokumentID;
@@ -45,14 +47,6 @@ public class Dokument {
 		this.dokumentID = dokumentID;
 	}
 
-	public Integer getBrojIndexa() {
-		return brojIndexa;
-	}
-
-	public void setBrojIndexa(Integer brojIndexa) {
-		this.brojIndexa = brojIndexa;
-	}
-
 	public String getNaziv() {
 		return naziv;
 	}
@@ -60,6 +54,16 @@ public class Dokument {
 	public void setNaziv(String naziv) {
 		this.naziv = naziv;
 	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
 
 	public String getTip() {
 		return tip;
