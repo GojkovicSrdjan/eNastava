@@ -8,6 +8,6 @@ import rs.ac.uns.ftn.tseo.ssd.model.Profesor;
 
 public interface ProfesorRepository extends JpaRepository <Profesor, Integer> {
 	
-	List<Profesor> findAllByZvanje (String zvanje);
+	List<Profesor> findAllByZvanje(String zvanje);
 
 }

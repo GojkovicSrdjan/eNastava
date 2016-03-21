@@ -10,7 +10,7 @@ import rs.ac.uns.ftn.tseo.ssd.model.Profesor;
 
 public interface PredajeRepository extends JpaRepository <Predaje,Integer>{
 	
-	List<Predaje> findAllByPredmet (Predmet predmet);
-	List<Predaje> findAllByProfesor (Profesor profesor);
+	List<Predaje> findAllByPredmet(Predmet predmet);
+	List<Predaje> findAllByProfesor(Profesor profesor);
 	
 }

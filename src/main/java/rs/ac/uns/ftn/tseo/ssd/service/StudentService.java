@@ -30,7 +30,7 @@ public class StudentService {
 		studentRepo.delete(studentID);
 	}
 	
-	public Student findByBrojIndexa (String brojIndexa){
+	public Student findByBrojIndexa(String brojIndexa){
 		return studentRepo.findOneByBrojIndexa(brojIndexa);
 	}
 	

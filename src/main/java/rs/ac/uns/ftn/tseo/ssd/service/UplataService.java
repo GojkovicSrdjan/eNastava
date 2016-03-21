@@ -40,7 +40,7 @@ public class UplataService {
 		return uplataRepo.findAllByDatum(datum);
 	}
 	
-	public List<Uplata> findAllBySvrha (String svrha){
+	public List<Uplata> findAllBySvrha(String svrha){
 		return uplataRepo.findAllBySvrha(svrha);
 	}
 	
