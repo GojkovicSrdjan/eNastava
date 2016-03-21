@@ -30,8 +30,8 @@ public class ProfesorService {
 		profRepo.delete(profesorID);
 	}
 	
-	public Profesor findByZvanje (String zvanje){
-		return profRepo.findByZvanje(zvanje);
+	public List<Profesor> findAllByZvanje(String zvanje){
+		return profRepo.findAllByZvanje(zvanje);
 	}
 	
 }

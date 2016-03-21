@@ -31,7 +31,7 @@ public class StudentService {
 	}
 	
 	public Student findByBrojIndexa (String brojIndexa){
-		return studentRepo.findByBrojIndexa(brojIndexa);
+		return studentRepo.findOneByBrojIndexa(brojIndexa);
 	}
 	
 }

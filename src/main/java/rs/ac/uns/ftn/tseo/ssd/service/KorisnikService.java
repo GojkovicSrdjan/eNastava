@@ -30,12 +30,12 @@ public class KorisnikService {
 		korRepo.delete(korisnikID);
 	}
 	
-	public Korisnik findByImeAndPrezime(String ime, String prezime){
-		return korRepo.findByImeAndPrezime(ime, prezime);
+	public Korisnik findOneByImeAndPrezime(String ime, String prezime){
+		return korRepo.findOneByImeAndPrezime(ime, prezime);
 	}
 	
-	public Korisnik findByKorisnickoIme(String korisnickoIme){
-		return korRepo.findByKorisnickoIme(korisnickoIme);
+	public Korisnik findOneByKorisnickoIme(String korisnickoIme){
+		return korRepo.findOneByKorisnickoIme(korisnickoIme);
 	}
 	
 }

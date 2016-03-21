@@ -10,8 +10,8 @@ import rs.ac.uns.ftn.tseo.ssd.model.Uplata;
 
 public interface UplataRepository extends JpaRepository <Uplata, Integer> {
 	
-	List<Uplata> findByERacunID (ERacun eRacunID);
-	Uplata findByDatum (Date datum);
-	Uplata findBySvrha (String svrha);
+	List<Uplata> findAllByERacun (ERacun eRacun);
+	List<Uplata> findAllByDatum (Date datum);
+	List<Uplata> findAllBySvrha (String svrha);
 	
 }

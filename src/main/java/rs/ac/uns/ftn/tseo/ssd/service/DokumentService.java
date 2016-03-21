@@ -30,12 +30,12 @@ public class DokumentService {
 		dokRepo.delete(dokumentID);
 	}
 	
-	public Dokument findByNaziv(String naziv){
-		return dokRepo.findByNaziv(naziv);
+	public Dokument findOneByNaziv(String naziv){
+		return dokRepo.findOneByNaziv(naziv);
 	}
 	
-	public List<Dokument> findByTip(String tip){
-		return dokRepo.findByTip(tip);
+	public List<Dokument> findAllByTip(String tip){
+		return dokRepo.findAllByTip(tip);
 	}
 	
 }

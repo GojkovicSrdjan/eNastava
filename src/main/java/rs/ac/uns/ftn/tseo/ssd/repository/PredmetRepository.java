@@ -6,6 +6,6 @@ import rs.ac.uns.ftn.tseo.ssd.model.Predmet;
 
 public interface PredmetRepository extends JpaRepository <Predmet, Integer>{
 	
-	Predmet findByNaziv (String naziv);
+	Predmet findOneByNaziv (String naziv);
 
 }

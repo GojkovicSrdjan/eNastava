@@ -32,16 +32,12 @@ public class PredajeService {
 		predajeRepo.delete(predajeID);
 	}
 	
-	public List<Predaje> findByPredmetID (Predmet predmetID){
-		return predajeRepo.findByPredmetID(predmetID);
+	public List<Predaje> findAllByPredmet(Predmet predmet){
+		return predajeRepo.findAllByPredmet(predmet);
 	}
 	
-	public List<Predaje> findByProfesorID (Profesor profesorID){
-		return predajeRepo.findByProfesorID(profesorID);
-	}
-	
-	public Predaje findByTipPredavanja (String tipPredavanja){
-		return predajeRepo.findByTipPredavanja(tipPredavanja);
+	public List<Predaje> findAllByProfesor(Profesor profesor){
+		return predajeRepo.findAllByProfesor(profesor);
 	}
 	
 }

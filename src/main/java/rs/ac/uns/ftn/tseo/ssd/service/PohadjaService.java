@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import rs.ac.uns.ftn.tseo.ssd.model.Pohadja;
 import rs.ac.uns.ftn.tseo.ssd.model.Predmet;
+import rs.ac.uns.ftn.tseo.ssd.model.Student;
 import rs.ac.uns.ftn.tseo.ssd.repository.PohadjaRepository;
 
 @Service
@@ -31,12 +32,12 @@ public class PohadjaService {
 		pohadjaRepo.delete(pohadjaID);
 	}
 	
-	public Pohadja findByBrojIndexa(Integer brojIndexa){
-		return pohadjaRepo.findByBrojIndexa(brojIndexa);
+	public List<Pohadja> find(Student student){
+		return pohadjaRepo.findAllByStudent(student);
 	}
 	
-	public List<Pohadja> findByPredmetId(Predmet predmetID){
-		return pohadjaRepo.findByPredmetId(predmetID);
+	public List<Pohadja> findAllByPredmet(Predmet predmet){
+		return pohadjaRepo.findAllByPredmet(predmet);
 	}
 	
 }

@@ -30,8 +30,8 @@ public class PredmetService {
 		predRepo.delete(predmetID);
 	}
 	
-	public Predmet findByNaziv (String naziv){
-		return predRepo.findByNaziv(naziv);
+	public Predmet findOneByNaziv(String naziv){
+		return predRepo.findOneByNaziv(naziv);
 	}
 	
 }

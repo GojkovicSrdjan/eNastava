@@ -7,6 +7,6 @@ import rs.ac.uns.ftn.tseo.ssd.model.Uplata;
 
 public interface ERacunRepository extends JpaRepository <ERacun,Integer> {
 	
-	ERacun findByUplata(Uplata uplata);
+	
 
 }

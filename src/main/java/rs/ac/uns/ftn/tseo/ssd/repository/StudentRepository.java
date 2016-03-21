@@ -6,6 +6,6 @@ import rs.ac.uns.ftn.tseo.ssd.model.Student;
 
 public interface StudentRepository extends JpaRepository <Student, Integer> {
 	
-	Student findByBrojIndexa (String brojIndexa);
+	Student findOneByBrojIndexa(String brojIndexa);
 
 }

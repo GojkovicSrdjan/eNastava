@@ -31,8 +31,4 @@ public class ERacunService {
 		eRacunRepo.delete(eRacunID);
 	}
 	
-	public ERacun findByUplata(Uplata uplata){
-		return eRacunRepo.findByUplata(uplata);
-	}
-	
 }

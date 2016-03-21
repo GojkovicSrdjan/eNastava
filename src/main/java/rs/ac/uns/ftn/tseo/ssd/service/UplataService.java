@@ -32,16 +32,16 @@ public class UplataService {
 		uplataRepo.delete(uplataID);
 	}
 	
-	public List<Uplata> findByERacunID (ERacun eRacunID){
-		return uplataRepo.findByERacunID(eRacunID);
+	public List<Uplata> findByERacun(ERacun eRacun){
+		return uplataRepo.findAllByERacun(eRacun);
 	}
 	
-	public Uplata findByDatum (Date datum){
-		return uplataRepo.findByDatum(datum);
+	public List<Uplata> findAllByDatum(Date datum){
+		return uplataRepo.findAllByDatum(datum);
 	}
 	
-	public Uplata findBySvrha (String svrha){
-		return uplataRepo.findBySvrha(svrha);
+	public List<Uplata> findAllBySvrha (String svrha){
+		return uplataRepo.findAllBySvrha(svrha);
 	}
 	
 }

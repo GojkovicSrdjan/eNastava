@@ -1,12 +1,12 @@
 package rs.ac.uns.ftn.tseo.ssd.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import rs.ac.uns.ftn.tseo.ssd.model.Obaveza;
+import rs.ac.uns.ftn.tseo.ssd.model.Pohadja;
 import rs.ac.uns.ftn.tseo.ssd.repository.ObavezaRepository;
 
 @Service
@@ -31,8 +31,8 @@ public class ObavezaService {
 		obavezaRepo.delete(obavezaID);
 	}
 	
-	public Obaveza findByDatum(Date datum){
-		return obavezaRepo.findByDatum(datum);
+	public Obaveza findOneByPohadja(Pohadja pohadja){
+		return obavezaRepo.findOneByPohadja(pohadja);
 	}
 
 }
