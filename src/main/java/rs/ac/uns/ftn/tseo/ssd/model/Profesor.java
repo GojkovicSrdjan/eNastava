@@ -19,16 +19,18 @@ public class Profesor {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer profesorID;
 	
-	// -> Korisnik.korisnikID
+	// -> Korisnik
 	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Korisnik korisnik;
 	
 	private String zvanje;
 	
-	// -> Predaje.profesorID
+	// -> Predaje.profesor
 	@OneToMany(mappedBy="profesor", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Set<Predaje> predavanja = new HashSet<Predaje>();
-
+	
+	
+	
 	public Profesor() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -41,7 +43,9 @@ public class Profesor {
 		this.zvanje = zvanje;
 		this.predavanja = predavanja;
 	}
-
+	
+	
+	
 	public Integer getProfesorID() {
 		return profesorID;
 	}

@@ -13,4 +13,5 @@ public interface UplataRepository extends JpaRepository <Uplata, Integer> {
 	List<Uplata> findByERacunID (ERacun eRacunID);
 	Uplata findByDatum (Date datum);
 	Uplata findBySvrha (String svrha);
-	}
+	
+}

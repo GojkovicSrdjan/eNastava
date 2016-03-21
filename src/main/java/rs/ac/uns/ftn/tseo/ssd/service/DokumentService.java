@@ -10,6 +10,7 @@ import rs.ac.uns.ftn.tseo.ssd.repository.DokumentRepository;
 
 @Service
 public class DokumentService {
+	
 	@Autowired
 	DokumentRepository dokRepo;
 	
@@ -36,4 +37,5 @@ public class DokumentService {
 	public List<Dokument> findByTip(String tip){
 		return dokRepo.findByTip(tip);
 	}
+	
 }

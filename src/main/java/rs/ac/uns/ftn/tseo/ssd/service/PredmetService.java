@@ -10,6 +10,7 @@ import rs.ac.uns.ftn.tseo.ssd.repository.PredmetRepository;
 
 @Service
 public class PredmetService {
+	
 	@Autowired
 	PredmetRepository predRepo;
 	
@@ -32,4 +33,5 @@ public class PredmetService {
 	public Predmet findByNaziv (String naziv){
 		return predRepo.findByNaziv(naziv);
 	}
+	
 }

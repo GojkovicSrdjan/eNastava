@@ -12,6 +12,7 @@ import rs.ac.uns.ftn.tseo.ssd.repository.UplataRepository;
 
 @Service
 public class UplataService {
+	
 	@Autowired
 	UplataRepository uplataRepo;
 	
@@ -42,4 +43,5 @@ public class UplataService {
 	public Uplata findBySvrha (String svrha){
 		return uplataRepo.findBySvrha(svrha);
 	}
+	
 }

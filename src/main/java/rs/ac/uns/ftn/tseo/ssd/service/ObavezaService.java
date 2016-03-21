@@ -11,6 +11,7 @@ import rs.ac.uns.ftn.tseo.ssd.repository.ObavezaRepository;
 
 @Service
 public class ObavezaService {
+
 	@Autowired
 	ObavezaRepository obavezaRepo;
 	
@@ -33,4 +34,5 @@ public class ObavezaService {
 	public Obaveza findByDatum(Date datum){
 		return obavezaRepo.findByDatum(datum);
 	}
+
 }

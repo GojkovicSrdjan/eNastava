@@ -20,21 +20,26 @@ public class ERacun {
 	
 	private Double stanjeNaERacunu;
 	
+	// -> Uplata.eRacun
 	@OneToMany(mappedBy = "eRacun", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<Uplata> uplate = new HashSet<Uplata>();
-
+	
+	
+	
 	public ERacun() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	public ERacun(Integer eRacunID, Double stanjeNaERacunu, Set<Uplata> uplate) {
 		super();
 		this.eRacunID = eRacunID;
 		this.stanjeNaERacunu = stanjeNaERacunu;
 		this.uplate = uplate;
 	}
-
+	
+	
+	
 	public Integer geteRacunID() {
 		return eRacunID;
 	}

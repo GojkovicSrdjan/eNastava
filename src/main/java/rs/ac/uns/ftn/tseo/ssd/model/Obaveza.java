@@ -27,6 +27,8 @@ public class Obaveza {
 	private Integer brojBodova;
 	private Integer ocena;
 	
+	
+	
 	public Obaveza() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -44,6 +46,8 @@ public class Obaveza {
 		this.ocena = ocena;
 	}
 
+	
+	
 	public Integer getObavezaID() {
 		return obavezaID;
 	}

@@ -15,21 +15,21 @@ public class Administrator {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer adminID;
 	
-	//Korisnik.korisnikID
+	// -> Korisnik
 	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Korisnik korisnik;
-
+	
+	
+	
+	public Administrator() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 	public Administrator(Integer adminID, Korisnik korisnik) {
 		super();
 		this.adminID = adminID;
 		this.korisnik = korisnik;
-	}
-
-
-
-	public Administrator() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 

@@ -11,9 +11,9 @@ import rs.ac.uns.ftn.tseo.ssd.repository.PohadjaRepository;
 
 @Service
 public class PohadjaService {
+	
 	@Autowired
 	PohadjaRepository pohadjaRepo;
-	
 	
 	public Pohadja findOne(Integer pohadjaID){
 		return pohadjaRepo.findOne(pohadjaID);
@@ -38,4 +38,5 @@ public class PohadjaService {
 	public List<Pohadja> findByPredmetId(Predmet predmetID){
 		return pohadjaRepo.findByPredmetId(predmetID);
 	}
+	
 }

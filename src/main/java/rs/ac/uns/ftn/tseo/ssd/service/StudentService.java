@@ -10,6 +10,7 @@ import rs.ac.uns.ftn.tseo.ssd.repository.StudentRepository;
 
 @Service
 public class StudentService {
+	
 	@Autowired
 	StudentRepository studentRepo;
 	
@@ -32,4 +33,5 @@ public class StudentService {
 	public Student findByBrojIndexa (String brojIndexa){
 		return studentRepo.findByBrojIndexa(brojIndexa);
 	}
+	
 }

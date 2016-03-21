@@ -10,6 +10,7 @@ import rs.ac.uns.ftn.tseo.ssd.repository.AdministratorRepository;
 
 @Service
 public class AdministratorService {
+	
 	@Autowired
 	AdministratorRepository adminRepo;
 	

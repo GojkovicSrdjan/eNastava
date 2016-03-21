@@ -12,6 +12,7 @@ import rs.ac.uns.ftn.tseo.ssd.repository.PredajeRepository;
 
 @Service
 public class PredajeService {
+	
 	@Autowired
 	PredajeRepository predajeRepo;
 	
@@ -42,4 +43,5 @@ public class PredajeService {
 	public Predaje findByTipPredavanja (String tipPredavanja){
 		return predajeRepo.findByTipPredavanja(tipPredavanja);
 	}
+	
 }

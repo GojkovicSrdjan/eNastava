@@ -10,6 +10,7 @@ import rs.ac.uns.ftn.tseo.ssd.repository.ProfesorRepository;
 
 @Service
 public class ProfesorService {
+	
 	@Autowired
 	ProfesorRepository profRepo;
 	
@@ -32,4 +33,5 @@ public class ProfesorService {
 	public Profesor findByZvanje (String zvanje){
 		return profRepo.findByZvanje(zvanje);
 	}
+	
 }

@@ -19,21 +19,24 @@ public class Pohadja {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer pohadjaID;
 	
+	// -> Student.pohadjanja
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Student student;
 	
+	// -> Predmet.pohadjanja
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Predmet predmet;
 	
-	// -> Obaveza.pohadjaID
+	// -> Obaveza.pohadja
 	@OneToMany(mappedBy="pohadja",cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Set<Obaveza> obaveze = new HashSet<Obaveza>();
-
+	
+	
+	
 	public Pohadja() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 
 	public Pohadja(Integer pohadjaID, Student student, Predmet predmet, Set<Obaveza> obaveze) {
 		super();
@@ -42,6 +45,7 @@ public class Pohadja {
 		this.predmet = predmet;
 		this.obaveze = obaveze;
 	}
+	
 
 
 	public Integer getPohadjaID() {

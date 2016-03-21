@@ -29,6 +29,8 @@ public class Korisnik {
 	
 	private String adresa;
 	
+	
+	
 	public Korisnik() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -47,6 +49,8 @@ public class Korisnik {
 		this.email = email;
 		this.adresa = adresa;
 	}
+	
+	
 
 	public Integer getKorisnikID() {
 		return korisnikID;

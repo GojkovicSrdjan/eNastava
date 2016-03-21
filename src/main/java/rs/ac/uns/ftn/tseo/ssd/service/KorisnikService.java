@@ -10,6 +10,7 @@ import rs.ac.uns.ftn.tseo.ssd.repository.KorisnikRepository;
 
 @Service
 public class KorisnikService {
+	
 	@Autowired
 	KorisnikRepository korRepo;
 	
@@ -36,4 +37,5 @@ public class KorisnikService {
 	public Korisnik findByKorisnickoIme(String korisnickoIme){
 		return korRepo.findByKorisnickoIme(korisnickoIme);
 	}
+	
 }

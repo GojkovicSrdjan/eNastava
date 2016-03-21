@@ -22,20 +22,21 @@ public class Predmet {
 	
 	private String opis;
 	
-	// -> Predaje.predmetID
+	// -> Predaje.predmet
 	@OneToMany(mappedBy="predmet", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Set<Predaje> predavanja = new HashSet<Predaje>();
 	
-	// -> Pohadja.predmetID
+	// -> Pohadja.predmet
 	@OneToMany(mappedBy="predmet", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Set<Pohadja> pohadjanja = new HashSet<Pohadja>();
-
+	
+	
+	
 	public Predmet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
+	
 	public Predmet(Integer predmetID, String naziv, String opis, Set<Predaje> predavanja, Set<Pohadja> pohadjanja) {
 		super();
 		this.predmetID = predmetID;
@@ -59,7 +60,6 @@ public class Predmet {
 		return predavanja;
 	}
 
-
 	public void setPredavanja(Set<Predaje> predavanja) {
 		this.predavanja = predavanja;
 	}
@@ -67,7 +67,6 @@ public class Predmet {
 	public Set<Pohadja> getPohadjanja() {
 		return pohadjanja;
 	}
-
 
 	public void setPohadjanja(Set<Pohadja> pohadjanja) {
 		this.pohadjanja = pohadjanja;

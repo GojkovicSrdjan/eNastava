@@ -24,20 +24,24 @@ public class Student {
 	@Column(nullable=false, unique=true)
 	private String brojIndexa;
 	
-	// -> Korisnik.korisnikID
+	// -> Korisnik
 	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Korisnik korisnik;
 	
-	// -> ERacun.eRacunID
+	// -> ERacun
 	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private ERacun eRacun;
 	
+	// -> Dokument.student
 	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<Dokument> dokumenta = new HashSet<Dokument>();
 	
+	// -> Pohadja.student
 	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<Pohadja> pohadjanja = new HashSet<Pohadja>();
-
+	
+	
+	
 	public Student() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -53,6 +57,8 @@ public class Student {
 		this.dokumenta = dokumenta;
 		this.pohadjanja = pohadjanja;
 	}
+	
+	
 
 	public Integer getStudentID() {
 		return studentID;
