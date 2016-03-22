@@ -9,6 +9,4 @@ import rs.ac.uns.ftn.tseo.ssd.model.Pohadja;
 
 public interface ObavezaRepository extends JpaRepository <Obaveza,Integer>{
 	
-	Obaveza findOneByPohadja(Pohadja pohadja);
-
 }

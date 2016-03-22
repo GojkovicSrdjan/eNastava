@@ -31,8 +31,4 @@ public class ObavezaService {
 		obavezaRepo.delete(obavezaID);
 	}
 	
-	public Obaveza findOneByPohadja(Pohadja pohadja){
-		return obavezaRepo.findOneByPohadja(pohadja);
-	}
-
 }
