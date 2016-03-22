@@ -40,15 +40,18 @@ public class Student {
 	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Set<Pohadja> pohadjanja = new HashSet<Pohadja>();
 	
+	// -> Obaveza.student
+	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	private Set<Obaveza> obaveze = new HashSet<Obaveza>();
 	
 	
 	public Student() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
+	}	
 
 	public Student(Integer studentID, String brojIndexa, Korisnik korisnik, ERacun eRacun, Set<Dokument> dokumenta,
-			Set<Pohadja> pohadjanja) {
+			Set<Pohadja> pohadjanja, Set<Obaveza> obaveze) {
 		super();
 		this.studentID = studentID;
 		this.brojIndexa = brojIndexa;
@@ -56,9 +59,10 @@ public class Student {
 		this.eRacun = eRacun;
 		this.dokumenta = dokumenta;
 		this.pohadjanja = pohadjanja;
+		this.obaveze = obaveze;
 	}
-	
-	
+
+
 
 	public Integer getStudentID() {
 		return studentID;
@@ -106,6 +110,14 @@ public class Student {
 
 	public void setPohadjanja(Set<Pohadja> pohadjanja) {
 		this.pohadjanja = pohadjanja;
+	}
+
+	public Set<Obaveza> getObaveze() {
+		return obaveze;
+	}
+
+	public void setObaveze(Set<Obaveza> obaveze) {
+		this.obaveze = obaveze;
 	}
 
 	

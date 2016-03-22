@@ -1,7 +1,5 @@
 package rs.ac.uns.ftn.tseo.ssd.model;
 
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Pohadja {
@@ -27,10 +24,6 @@ public class Pohadja {
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Predmet predmet;
 	
-	// -> Obaveza.pohadja
-	@OneToMany(mappedBy="pohadja",cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	private Set<Obaveza> obaveze = new HashSet<Obaveza>();
-	
 	
 	
 	public Pohadja() {
@@ -38,12 +31,11 @@ public class Pohadja {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Pohadja(Integer pohadjaID, Student student, Predmet predmet, Set<Obaveza> obaveze) {
+	public Pohadja(Integer pohadjaID, Student student, Predmet predmet) {
 		super();
 		this.pohadjaID = pohadjaID;
 		this.student = student;
 		this.predmet = predmet;
-		this.obaveze = obaveze;
 	}
 	
 
@@ -76,12 +68,4 @@ public class Pohadja {
 	}
 
 
-	public Set<Obaveza> getObaveze() {
-		return obaveze;
-	}
-
-	public void setObaveze(Set<Obaveza> obaveze) {
-		this.obaveze = obaveze;
-	}
-	
 }

@@ -23,12 +23,16 @@ public class Predmet {
 	private String opis;
 	
 	// -> Predaje.predmet
-	@OneToMany(mappedBy="predmet", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="predmet", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	private Set<Predaje> predavanja = new HashSet<Predaje>();
 	
 	// -> Pohadja.predmet
-	@OneToMany(mappedBy="predmet", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="predmet", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	private Set<Pohadja> pohadjanja = new HashSet<Pohadja>();
+	
+	// -> TipObaveze.predmet
+	@OneToMany(mappedBy="predmet", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	private Set<TipObaveze> tipoviObaveza = new HashSet<TipObaveze>();
 	
 	
 	
@@ -37,17 +41,19 @@ public class Predmet {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Predmet(Integer predmetID, String naziv, String opis, Set<Predaje> predavanja, Set<Pohadja> pohadjanja) {
+	public Predmet(Integer predmetID, String naziv, String opis, Set<Predaje> predavanja, Set<Pohadja> pohadjanja,
+			Set<TipObaveze> tipoviObaveza) {
 		super();
 		this.predmetID = predmetID;
 		this.naziv = naziv;
 		this.opis = opis;
 		this.predavanja = predavanja;
 		this.pohadjanja = pohadjanja;
+		this.tipoviObaveza = tipoviObaveza;
 	}
-
-
-
+	
+	
+	
 	public Integer getPredmetID() {
 		return predmetID;
 	}
@@ -88,6 +94,15 @@ public class Predmet {
 		this.opis = opis;
 	}
 
+	public Set<TipObaveze> getTipoviObaveza() {
+		return tipoviObaveza;
+	}
+
+	public void setTipoviObaveza(Set<TipObaveze> tipoviObaveza) {
+		this.tipoviObaveza = tipoviObaveza;
+	}
+
+	
 
 	
 }

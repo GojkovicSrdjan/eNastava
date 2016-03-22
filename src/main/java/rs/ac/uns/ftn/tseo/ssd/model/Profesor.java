@@ -26,7 +26,7 @@ public class Profesor {
 	private String zvanje;
 	
 	// -> Predaje.profesor
-	@OneToMany(mappedBy="profesor", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="profesor", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	private Set<Predaje> predavanja = new HashSet<Predaje>();
 	
 	
