@@ -53,7 +53,6 @@ public class Student {
 	public Student(Integer studentID, String brojIndexa, Korisnik korisnik, ERacun eRacun, Set<Dokument> dokumenta,
 			Set<Pohadja> pohadjanja, Set<Obaveza> obaveze) {
 		super();
-		this.studentID = studentID;
 		this.brojIndexa = brojIndexa;
 		this.korisnik = korisnik;
 		this.eRacun = eRacun;

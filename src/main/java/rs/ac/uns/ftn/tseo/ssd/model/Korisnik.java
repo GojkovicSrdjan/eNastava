@@ -38,10 +38,9 @@ public class Korisnik {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Korisnik(Integer korisnikID, Integer jMBG, String korisnickoIme, String lozinka, String ime, String prezime,
+	public Korisnik(Integer jMBG, String korisnickoIme, String lozinka, String ime, String prezime,
 			String brojTelefona, String email, String ulicaIBroj, Integer postanskiBroj, String mesto) {
 		super();
-		this.korisnikID = korisnikID;
 		JMBG = jMBG;
 		this.korisnickoIme = korisnickoIme;
 		this.lozinka = lozinka;
