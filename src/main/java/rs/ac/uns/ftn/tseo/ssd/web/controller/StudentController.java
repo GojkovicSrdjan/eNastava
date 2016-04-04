@@ -16,20 +16,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import rs.ac.uns.ftn.tseo.ssd.model.Dokument;
 import rs.ac.uns.ftn.tseo.ssd.model.ERacun;
 import rs.ac.uns.ftn.tseo.ssd.model.Korisnik;
+import rs.ac.uns.ftn.tseo.ssd.model.Obaveza;
 import rs.ac.uns.ftn.tseo.ssd.model.Pohadja;
 import rs.ac.uns.ftn.tseo.ssd.model.Student;
+import rs.ac.uns.ftn.tseo.ssd.service.DokumentService;
 import rs.ac.uns.ftn.tseo.ssd.service.ERacunService;
 import rs.ac.uns.ftn.tseo.ssd.service.KorisnikService;
 import rs.ac.uns.ftn.tseo.ssd.service.StudentService;
+import rs.ac.uns.ftn.tseo.ssd.web.dto.DokumentDTO;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.KorisnikDTO;
+import rs.ac.uns.ftn.tseo.ssd.web.dto.ObavezaDTO;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.PohadjaDTO;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.PredmetDTO;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.StudentDTO;
+import rs.ac.uns.ftn.tseo.ssd.web.dto.TipObavezeDTO;
 
 @RestController
-@RequestMapping(value="api/studeni")
+@RequestMapping(value="api/studenti")
 public class StudentController {
 	
 	@Autowired
@@ -38,6 +44,8 @@ public class StudentController {
 	private KorisnikService korisnikService;
 	@Autowired
 	private ERacunService eRacunService;
+	@Autowired
+	private DokumentService dokService;
 	
 	//GET ALL
 	@RequestMapping(value="/all", method = RequestMethod.GET)
@@ -79,21 +87,23 @@ public class StudentController {
 	
 	// CREATE
 	@RequestMapping(method=RequestMethod.POST, consumes="application/json")
-	public ResponseEntity<StudentDTO> saveStudent(@RequestBody StudentDTO studentDTO,
-			@RequestBody KorisnikDTO korisnikDTO){
+	public ResponseEntity<StudentDTO> saveStudent(@RequestBody StudentDTO studentDTO){
 		//Potvrdi lozinku?
-		Korisnik korisnik = new Korisnik( 
-				korisnikDTO.getJMBG(), 
-				korisnikDTO.getKorisnickoIme(), 
-				korisnikDTO.getLozinka(), 
-				korisnikDTO.getIme(), 
-				korisnikDTO.getPrezime(), 
-				korisnikDTO.getBrojTelefona(), 
-				korisnikDTO.getEmail(), 
-				korisnikDTO.getUlicaIBroj(), 
-				korisnikDTO.getPostanskiBroj(), 
-				korisnikDTO.getMesto());
-		korisnik = korisnikService.save(korisnik);
+		Korisnik kor = new Korisnik();
+
+		kor.setJMBG(studentDTO.getKorisnik().getJMBG());
+		kor.setBrojTelefona(studentDTO.getKorisnik().getBrojTelefona());
+		kor.setEmail(studentDTO.getKorisnik().getEmail());
+		kor.setKorisnickoIme(studentDTO.getKorisnik().getKorisnickoIme());
+		kor.setLozinka(studentDTO.getKorisnik().getLozinka());
+		kor.setMesto(studentDTO.getKorisnik().getMesto());
+		kor.setPostanskiBroj(studentDTO.getKorisnik().getPostanskiBroj());
+		kor.setUlicaIBroj(studentDTO.getKorisnik().getUlicaIBroj());
+		kor.setIme(studentDTO.getKorisnik().getIme());
+		kor.setPrezime(studentDTO.getKorisnik().getPrezime());
+		
+		
+		kor = korisnikService.save(kor);
 		
 		ERacun eRacun = new ERacun();
 		eRacun.setStanjeNaERacunu(0.00);
@@ -101,7 +111,7 @@ public class StudentController {
 		
 		Student student = new Student();
 		student.setBrojIndexa(studentDTO.getBrojIndexa());
-		student.setKorisnik(korisnik);
+		student.setKorisnik(kor);
 		student.seteRacun(eRacun);
 		
 		student = studentService.save(student);
@@ -142,6 +152,8 @@ public class StudentController {
 		Student student = studentService.findOne(id);
 		if (student != null){
 			studentService.remove(id);
+			//Kada se obrise student brise se i korisnik
+			korisnikService.remove(student.getKorisnik().getKorisnikID());
 			return new ResponseEntity<>(HttpStatus.OK);
 		} else {		
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -158,19 +170,6 @@ public class StudentController {
 		}		
 		return new ResponseEntity<>(new StudentDTO(student), HttpStatus.OK);
 	}
-	
-	// FIND ALL STUDENTI by prezime
-	@RequestMapping(value = "/prezime", method = RequestMethod.GET)
-	public ResponseEntity<List<StudentDTO>> getStudentsByLastName(
-			@RequestParam String prezime) {
-		List<Student> students = studentService.findAllByPrezime(prezime);
-		//convert students to DTOs
-		List<StudentDTO> studentsDTO = new ArrayList<>();
-		for (Student s : students) {
-			studentsDTO.add(new StudentDTO(s));
-		}
-		return new ResponseEntity<>(studentsDTO, HttpStatus.OK);
-	}	
 	
 	//
 	@RequestMapping(value = "/{studentID}/predmeti", method = RequestMethod.GET)
@@ -189,4 +188,71 @@ public class StudentController {
 		}
 		return new ResponseEntity<>(pohadjanjaDTO, HttpStatus.OK);
 	}
+	
+	//All student documents
+	@RequestMapping(value="/{id}/dokumenti", method=RequestMethod.GET)
+	public ResponseEntity<List<DokumentDTO>> getStudentDocuments(@PathVariable Integer id){
+		Student s=studentService.findOne(id);
+		if(s==null)
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		
+		Set<Dokument> dokumenta=s.getDokumenta();
+		List<DokumentDTO> dokumentaDTO=new ArrayList<>();
+		for (Dokument d : dokumenta) {
+			DokumentDTO dokDTO=new DokumentDTO();
+			dokDTO.setDokumentID(d.getDokumentID());
+			dokDTO.setNaziv(d.getNaziv());
+			dokDTO.setPutanjaDoDokumenta(d.getPutanjaDoDokumenta());
+			dokDTO.setTip(d.getTip());
+			dokumentaDTO.add(dokDTO);
+		}
+		return new ResponseEntity<>(dokumentaDTO, HttpStatus.OK);
+		
+		
+		
+	}
+	
+	//All student exams
+	@RequestMapping(value="/{studentID}/obaveze", method=RequestMethod.GET)
+	public ResponseEntity<List<ObavezaDTO>> getStudentExams(@PathVariable Integer id){
+		Student s=studentService.findOne(id);
+		if(s==null)
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		
+		Set<Obaveza> obaveze=s.getObaveze();
+		List<ObavezaDTO> obavezeDTO=new ArrayList<>();
+		for (Obaveza o: obaveze) {
+			ObavezaDTO oDTO=new ObavezaDTO();
+			oDTO.setBrojBodova(o.getBrojBodova());
+			oDTO.setObavezaID(o.getObavezaID());
+			oDTO.setOcena(o.getOcena());
+			oDTO.setPolozeno(o.getPolozeno());
+			oDTO.setTipObaveze(new TipObavezeDTO(o.getTipObaveze()));
+			obavezeDTO.add(oDTO);
+			
+		}
+		return new ResponseEntity<>(obavezeDTO, HttpStatus.OK);
+		
+		
+		
+	}
+	
+//	//Dodavanje novog studentovog dokumenta
+//	@RequestMapping(value = "/{id}/dokument", method=RequestMethod.POST)
+//	public ResponseEntity<DokumentDTO> addDocumentToStudent(@RequestParam Integer id,
+//			@RequestBody DokumentDTO dokDTO){
+//		Student s=studentService.findOne(id);
+//		if(s==null)
+//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//		
+//		Dokument dok=new Dokument();
+//		
+//		dok.setNaziv(dokDTO.getNaziv());
+//		dok.setPutanjaDoDokumenta(dokDTO.getPutanjaDoDokumenta());
+//		dok.setTip(dokDTO.getTip());
+//		dok.setStudent(s);
+//		dokService.save(dok);
+//		
+//		return new ResponseEntity<>(new DokumentDTO(dok), HttpStatus.CREATED);
+//	}
 }

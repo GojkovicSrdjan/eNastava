@@ -2,7 +2,7 @@ package rs.ac.uns.ftn.tseo.ssd.web.dto;
 
 import rs.ac.uns.ftn.tseo.ssd.model.Dokument;
 
-public class DocumentDTO {
+public class DokumentDTO {
 
 	private Integer dokumentID;
 	private StudentDTO student;
@@ -12,17 +12,17 @@ public class DocumentDTO {
 	
 	
 	
-	public DocumentDTO() {
+	public DokumentDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public DocumentDTO(Dokument dokument) {
+	public DokumentDTO(Dokument dokument) {
 		dokumentID = dokument.getDokumentID();
 		student = new StudentDTO(dokument.getStudent());
 	}
 
-	public DocumentDTO(Integer dokumentID, StudentDTO student, String naziv, String tip, String putanjaDoDokumenta) {
+	public DokumentDTO(Integer dokumentID, StudentDTO student, String naziv, String tip, String putanjaDoDokumenta) {
 		super();
 		this.dokumentID = dokumentID;
 		this.student = student;

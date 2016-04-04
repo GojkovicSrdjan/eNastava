@@ -7,6 +7,6 @@ import rs.ac.uns.ftn.tseo.ssd.model.Korisnik;
 public interface KorisnikRepository extends JpaRepository <Korisnik,Integer> {
 	
 	Korisnik findOneByImeAndPrezime(String ime, String prezime);
-	Korisnik findOneByKorisnickoIme(String korisnickoIme);
+	Korisnik findByKorisnickoImeAndLozinka(String korisnickoIme, String lozinka);
 
 }

@@ -39,9 +39,6 @@ public class StudentService {
 	public Page<Student> findAll(Pageable page) {
 		return studentRepository.findAll(page);
 	}
-	
-	public List<Student> findAllByPrezime(String prezime){
-		return studentRepository.findAllByPrezime(prezime);
-	}
+
 	
 }
