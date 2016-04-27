@@ -27,7 +27,6 @@ import rs.ac.uns.ftn.tseo.ssd.service.ERacunService;
 import rs.ac.uns.ftn.tseo.ssd.service.KorisnikService;
 import rs.ac.uns.ftn.tseo.ssd.service.StudentService;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.DokumentDTO;
-import rs.ac.uns.ftn.tseo.ssd.web.dto.KorisnikDTO;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.ObavezaDTO;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.PohadjaDTO;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.PredmetDTO;
@@ -120,25 +119,25 @@ public class StudentController {
 	
 	// UPDATE
 	@RequestMapping(method=RequestMethod.PUT, consumes="application/json")
-	public ResponseEntity<StudentDTO> updateStudent(@RequestBody StudentDTO studentDTO,
-			@RequestBody KorisnikDTO korisnikDTO){
+	public ResponseEntity<StudentDTO> updateStudent(@RequestBody StudentDTO studentDTO){
 		//a student must exist
 		Student student = studentService.findOne(studentDTO.getStudentID()); 
 		if (student == null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		Korisnik korisnik = korisnikService.findOne(student.getKorisnik().getKorisnikID());
-		korisnik.setJMBG(korisnikDTO.getJMBG()); 
-		korisnik.setKorisnickoIme(korisnikDTO.getKorisnickoIme());
-		korisnik.setLozinka(korisnikDTO.getLozinka());
-		korisnik.setIme(korisnikDTO.getIme());
-		korisnik.setPrezime(korisnikDTO.getPrezime()); 
-		korisnik.setBrojTelefona(korisnikDTO.getBrojTelefona()); 
-		korisnik.setEmail(korisnikDTO.getEmail());
-		korisnik.setUlicaIBroj(korisnikDTO.getUlicaIBroj()); 
-		korisnik.setPostanskiBroj(korisnikDTO.getPostanskiBroj()); 
-		korisnik.setMesto(korisnikDTO.getMesto());
-		korisnikService.save(korisnik);
+		Korisnik kor = korisnikService.findOne(student.getKorisnik().getKorisnikID());
+		kor.setJMBG(studentDTO.getKorisnik().getJMBG());
+		kor.setBrojTelefona(studentDTO.getKorisnik().getBrojTelefona());
+		kor.setEmail(studentDTO.getKorisnik().getEmail());
+		kor.setKorisnickoIme(studentDTO.getKorisnik().getKorisnickoIme());
+		kor.setLozinka(studentDTO.getKorisnik().getLozinka());
+		kor.setMesto(studentDTO.getKorisnik().getMesto());
+		kor.setPostanskiBroj(studentDTO.getKorisnik().getPostanskiBroj());
+		kor.setUlicaIBroj(studentDTO.getKorisnik().getUlicaIBroj());
+		kor.setIme(studentDTO.getKorisnik().getIme());
+		kor.setPrezime(studentDTO.getKorisnik().getPrezime());
+		
+		korisnikService.save(kor);
 		
 		student.setBrojIndexa(student.getBrojIndexa());
 		

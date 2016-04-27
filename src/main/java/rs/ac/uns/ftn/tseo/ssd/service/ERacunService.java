@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import rs.ac.uns.ftn.tseo.ssd.model.ERacun;
-import rs.ac.uns.ftn.tseo.ssd.model.Uplata;
 import rs.ac.uns.ftn.tseo.ssd.repository.ERacunRepository;
 
 @Service
