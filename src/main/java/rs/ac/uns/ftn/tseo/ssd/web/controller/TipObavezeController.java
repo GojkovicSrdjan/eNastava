@@ -56,7 +56,7 @@ public class TipObavezeController {
 	}
 	
 	//Update
-	@RequestMapping(method=RequestMethod.POST, consumes="application/json")
+	@RequestMapping(method=RequestMethod.PUT, consumes="application/json")
 	public ResponseEntity<TipObavezeDTO> updateTipObaveze(@RequestBody TipObavezeDTO tipDTO){
 		TipObaveze tip=tipService.findOne(tipDTO.getTipObavezeID());
 		
