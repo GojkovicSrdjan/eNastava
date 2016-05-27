@@ -50,7 +50,7 @@ public class PohadjaController {
 	
 	
 	//Delete
-	@RequestMapping(method=RequestMethod.DELETE, value="/{id}")
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> deletePohadja(@PathVariable Integer id){
 		Pohadja p=pohadjaService.findOne(id);
 		if(p!=null){

@@ -1,0 +1,65 @@
+<div class="modal-header">
+  <h3 class="modal-title">Student</h3>
+</div>
+<div class="modal-body">
+  <form>
+    <fieldset class="form-group">
+      <label for="brojIndexa">Broj indeksa</label>
+      <input type="text" class="form-control" id="brojIndexa" ng-model="student.brojIndexa">
+    </fieldset>
+    <fieldset class="form-group">
+      <label for="ime">Ime</label>
+      <input type="text" class="form-control" id="ime" ng-model="student.korisnik.ime">
+    </fieldset>
+    <fieldset class="form-group">
+      <label for="prezime">Prezime</label>
+      <input type="text" class="form-control" id="prezime" ng-model="student.korisnik.prezime">
+    </fieldset>
+    <fieldset class="form-group">
+    	<label>JMBG</label>
+    	<input type="text" class="form-control" id="jmbg" ng-model="student.korisnik.jmbg" >
+    </fieldset>    
+    <fieldset class="form-group">
+    	<label>Korisnicko ime</label>
+    	<input type="text" class="form-control" id="korisnickoIme" ng-model="student.korisnik.korisnickoIme" >
+    </fieldset>
+    <fieldset class="form-group">
+    	<label>Lozinka</label>
+    	<input type="text" class="form-control" id="lozinka" ng-model="student.korisnik.lozinka">
+    </fieldset>
+    
+    <fieldset class="form-group">
+    	<label>Br. telefona</label>
+    	<input type="text" class="form-control" id="brojTelefona" ng-model="student.korisnik.brojTelefona" >
+    </fieldset> 
+    <fieldset class="form-group">
+    	<label>E-mail</label>
+    	<input type="text" class="form-control" id="email" ng-model="student.korisnik.email" >
+    </fieldset> 
+    <fieldset class="form-group">
+    	<label>Ulica i broj</label>
+    	<input type="text" class="form-control" id="ulicaIBroj" ng-model="student.korisnik.ulicaIBroj" >
+    </fieldset> 
+    <fieldset class="form-group">
+    	<label>Postanski broj</label>
+    	<input type="text" class="form-control" id="postanskiBroj" ng-model="student.korisnik.postanskiBroj" >
+    </fieldset> 
+    <fieldset class="form-group">
+    	<label>Mesto</label>
+    	<input type="text" class="form-control" id="mesto" ng-model="student.korisnik.mesto" >
+    </fieldset>     
+  </form>
+  <br>
+  <label for="predmeti">predmeti</label>
+    <table id="predmeti" class="table table-bordered">
+      <tr ng-repeat="enrollment in enrollments">
+        <td>
+          {{enrollment.predmet.naziv}}
+        </td>
+      </tr>
+    </table>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" type="button" ng-click="ok()">OK</button>
+  <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+</div>
