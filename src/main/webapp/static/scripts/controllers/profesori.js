@@ -1,4 +1,4 @@
-angular.module('professorsClientApp')
+angular.module('studentsClientApp')
   .controller('ProfessorsCtrl', ['$scope', 'Restangular', '$uibModal', '$log', '_', function($scope, Restangular, $uibModal, $log, _) {
     Restangular.all("profesori").getList().then(function(entries) {
       $scope.professors = entries;
@@ -56,7 +56,7 @@ angular.module('professorsClientApp')
 
         var modalInstance = $uibModal.open({
           templateUrl: 'views/modals/professor.html',
-          controller: StudentsModalCtrl,
+          controller: ProfessorsModalCtrl,
           scope: $scope,
           resolve: {
         	 professor: function() {

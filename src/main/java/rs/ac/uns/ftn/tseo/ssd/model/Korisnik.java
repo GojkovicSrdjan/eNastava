@@ -13,7 +13,7 @@ public class Korisnik {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer korisnikID;
 	
-	@Column(unique=true, nullable=false)
+	@Column(unique=true, nullable=false, length=13)
 	private Integer JMBG;
 	
 	@Column(unique=true, nullable=false)

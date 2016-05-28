@@ -1,0 +1,56 @@
+<div class="modal-header">
+  <h3 class="modal-title">Student</h3>
+</div>
+<div class="modal-body">
+  <form>
+    <fieldset class="form-group">
+      <label for="ime">Ime</label>
+      <input type="text" class="form-control" id="ime" ng-model="professor.korisnik.ime">
+    </fieldset>
+    <fieldset class="form-group">
+      <label for="prezime">Prezime</label>
+      <input type="text" class="form-control" id="prezime" ng-model="professor.korisnik.prezime">
+    </fieldset>
+    <fieldset class="form-group">
+      <label for="brojIndexa">Zvanje</label>
+      <input type="text" class="form-control" id="zvanje" ng-model="professor.zvanje">
+    </fieldset>
+    <fieldset class="form-group">
+    	<label>JMBG</label>
+    	<input type="text" class="form-control" id="jmbg" ng-model="professor.korisnik.jmbg" >
+    </fieldset>    
+    <fieldset class="form-group">
+    	<label>Korisnicko ime</label>
+    	<input type="text" class="form-control" id="korisnickoIme" ng-model="professor.korisnik.korisnickoIme" >
+    </fieldset>
+    <fieldset class="form-group">
+    	<label>Lozinka</label>
+    	<input type="text" class="form-control" id="lozinka" ng-model="professor.korisnik.lozinka">
+    </fieldset>
+    
+    <fieldset class="form-group">
+    	<label>Br. telefona</label>
+    	<input type="text" class="form-control" id="brojTelefona" ng-model="professor.korisnik.brojTelefona" >
+    </fieldset> 
+    <fieldset class="form-group">
+    	<label>E-mail</label>
+    	<input type="text" class="form-control" id="email" ng-model="professor.korisnik.email" >
+    </fieldset> 
+    <fieldset class="form-group">
+    	<label>Ulica i broj</label>
+    	<input type="text" class="form-control" id="ulicaIBroj" ng-model="professor.korisnik.ulicaIBroj" >
+    </fieldset> 
+    <fieldset class="form-group">
+    	<label>Postanski broj</label>
+    	<input type="text" class="form-control" id="postanskiBroj" ng-model="professor.korisnik.postanskiBroj" >
+    </fieldset> 
+    <fieldset class="form-group">
+    	<label>Mesto</label>
+    	<input type="text" class="form-control" id="mesto" ng-model="professor.korisnik.mesto" >
+    </fieldset>     
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" type="button" ng-click="ok()">OK</button>
+  <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+</div>
