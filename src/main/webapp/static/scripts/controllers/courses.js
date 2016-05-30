@@ -29,6 +29,9 @@ angular.module('studentsClientApp')
             Restangular.one("predmeti", $scope.course.predmetID).getList("studenti").then(function(entries) {
               $scope.enrollments = entries;
             });
+            Restangular.one("predmeti", $scope.course.predmetID).getList("profesori").then(function (entries) {
+				$scope.teachings=entries;
+			});
           }
 
           $scope.ok = function() {
@@ -62,15 +65,25 @@ angular.module('studentsClientApp')
               $log.info("something went wrong");
             });
           };
-
+          ////
+          $scope.deleteTeaching = function (id) {
+              Restangular.one("predaje", id).remove().then(function() {
+                _.remove($scope.teachings, {
+                  id: id
+                });
+              }, function() {
+                $log.info("something went wrong");
+              });
+            };
+            
           var StudentEnrollmentModalCtrl = ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
             var enrolledStudentIds = _.map($scope.enrollments,function (value) {
-              return value.student.id;
+              return value.student.studentID;
             });
             Restangular.all('studenti').getList().then(function (data) {
               $scope.students = data;
               _.remove($scope.students, function (student) {
-                return _.contains(enrolledStudentIds, student.id);
+                return _.contains(enrolledStudentIds, student.studentID);
               });
             });
 
@@ -97,8 +110,47 @@ angular.module('studentsClientApp')
             };
 
           }];
+          
+          var ProfessorTeachingModalCtrl=['$scope', '$uibModalInstance', function ($scope, $uibModalInstance){
+        	 var teachingProfessorIds=_.map($scope.teachings, function(value){
+        		return value.profesor.profesorID; 
+        	 });
+        	 Restangular.all('profesori').getList().then(function (data) {
+				$scope.professors=data;
+				_.remove($scope.professors, function (professor) {
+					return _.contains(teachingProfessorIds, professor.profesorID);
+					
+				});
+        	 });
+        	 
+             $scope.ok = function() {
+                 $scope.teachings.profesor={"id":$scope.professor.id}; //!!!!!!!!!!!!!
+                 Restangular.all('predaje').post($scope.teaching).then(function (data) {
+                     $scope.teachings.push(data);
+                 });
+                 $uibModalInstance.close('ok');
+               };
 
-          $scope.openModal = function() {
+             $scope.cancel = function() {
+                 $uibModalInstance.dismiss('cancel');
+               };
+          }];
+          /////////
+          $scope.openModalT= function () {
+        	  $scope.teaching = {"course":{"id":$scope.course.id}};
+              var modalInstance = $uibModal.open({
+                templateUrl: 'views/modals/professorTeaching.html',
+                controller: ProfessorTeachingModalCtrl,
+                scope: $scope,
+                resolve: {
+                  course: function() {
+                    return course;
+                  }
+                }
+              });
+		};
+          
+          $scope.openModalS = function() {
             $scope.enrollment = {"course":{"id":$scope.course.id}};
             var modalInstance = $uibModal.open({
               templateUrl: 'views/modals/studentEnrollment.html',

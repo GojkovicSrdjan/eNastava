@@ -49,6 +49,15 @@
     	<input type="text" class="form-control" id="mesto" ng-model="professor.korisnik.mesto" >
     </fieldset>     
   </form>
+  <br>
+  <label for="predmeti">predmeti</label>
+    <table id="predmeti" class="table table-bordered">
+      <tr ng-repeat="t in teachings">
+        <td>
+          {{t.predmet.naziv}}
+        </td>
+      </tr>
+    </table>
 </div>
 <div class="modal-footer">
   <button class="btn btn-default" type="button" ng-click="ok()">OK</button>

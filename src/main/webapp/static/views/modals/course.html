@@ -8,8 +8,8 @@
       <input type="text" class="form-control" id="name" ng-model="course.naziv">
     </fieldset>
   </form>
-  <label for="students">students</label>
-    <table id="students" class="table table-bordered">
+  <label>students</label>
+    <table class="table table-bordered">
       <tr ng-repeat="enrollment in enrollments">
         <td>
           {{enrollment.student.korisnik.ime}} {{enrollment.student.korisnik.prezime}} {{enrollment.student.brojIndexa}}
@@ -18,9 +18,26 @@
           </button>
         </td>
       </tr>
+      </table>
+    <span class="right">
+      <button type="button" class="btn btn-default" aria-label="Dodavanje"  ng-click="openModalS(course)">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      </button>
+    </span>
+    <br>
+    <label>profesori</label>
+    <table class="table table-bordered">
+      <tr ng-repeat="t in teachings">
+        <td>
+          {{t.profesor.korisnik.ime}} {{t.profesor.korisnik.prezime}} {{t.profesor.zvanje}}
+          <button type="button" class="btn btn-default right" aria-label="Brisanje" ng-click="deleteTeaching(t.predajeID)">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          </button>
+        </td>     
+      </tr>
     </table>
     <span class="right">
-      <button type="button" class="btn btn-default" aria-label="Dodavanje"  ng-click="openModal(course)">
+      <button type="button" class="btn btn-default" aria-label="Dodavanje"  ng-click="openModalT(course)">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
       </button>
     </span>
