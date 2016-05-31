@@ -124,7 +124,7 @@ angular.module('studentsClientApp')
         	 });
         	 
              $scope.ok = function() {
-                 $scope.teachings.profesor={"id":$scope.professor.id}; //!!!!!!!!!!!!!
+                 $scope.teaching.profesor={"profesorID":$scope.professor.profesorID}; //!!!!!!!!!!!!!
                  Restangular.all('predaje').post($scope.teaching).then(function (data) {
                      $scope.teachings.push(data);
                  });
@@ -137,7 +137,7 @@ angular.module('studentsClientApp')
           }];
           /////////
           $scope.openModalT= function () {
-        	  $scope.teaching = {"course":{"id":$scope.course.id}};
+        	  $scope.teaching = {"predmet":{"predmetID":$scope.course.predmetID}};
               var modalInstance = $uibModal.open({
                 templateUrl: 'views/modals/professorTeaching.html',
                 controller: ProfessorTeachingModalCtrl,
