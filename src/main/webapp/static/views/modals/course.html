@@ -8,7 +8,7 @@
       <input type="text" class="form-control" id="name" ng-model="course.naziv">
     </fieldset>
   </form>
-  <label>students</label>
+  <label>studenti</label>
     <table class="table table-bordered">
       <tr ng-repeat="enrollment in enrollments">
         <td>
@@ -41,6 +41,25 @@
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
       </button>
     </span>
+    
+    <!-- START obaveze -->
+    <label>obaveze</label>
+    <table class="table table-bordered">
+      <tr ng-repeat="task in tasks">
+        <td>
+          {{task.student.naziv}} {{task.opis}}
+          <button type="button" class="btn btn-default right" aria-label="Brisanje" ng-click="deleteTaskType(task.tipObavezeID)">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          </button>
+        </td>
+      </tr>
+      </table>
+    <span class="right">
+      <button type="button" class="btn btn-default" aria-label="Dodavanje"  ng-click="openModalO(course)">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      </button>
+    </span>
+    <!-- END obaveze -->
 </div>
 <div class="modal-footer">
   <button class="btn btn-default" type="button" ng-click="ok()">OK</button>

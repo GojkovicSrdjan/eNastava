@@ -29,6 +29,19 @@ public class TipObavezeController {
 	@Autowired
 	private PredmetService predService;
 	
+	//GET ALL
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<List<TipObavezeDTO>> getAllTipObaveze(){
+		List<TipObaveze> tipoviObaveza = tipService.findAll();
+		//convert obaveze to DTOs
+		List<TipObavezeDTO> tipoviObavezaDTO = new ArrayList<>();
+		for (TipObaveze t : tipoviObaveza){
+			tipoviObavezaDTO.add(new TipObavezeDTO(t));
+		}
+		
+		return new ResponseEntity<>(tipoviObavezaDTO, HttpStatus.OK);
+	}
+	
 	//Get one
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<TipObavezeDTO> getTipObaveze(@PathVariable Integer id){
