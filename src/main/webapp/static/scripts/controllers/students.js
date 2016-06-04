@@ -19,7 +19,7 @@ angular.module('studentsClientApp')
       Restangular.one("studenti", id).remove().then(function() {
         // uklanjamo studenta sa zadatim id-om iz kolekcije
         _.remove($scope.students, {
-          id: id
+          studentID: id
         });
       }, function() {
         $log.info("the student cannot be removed since they are enrolled to some courses");

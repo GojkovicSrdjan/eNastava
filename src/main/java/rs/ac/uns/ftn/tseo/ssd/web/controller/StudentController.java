@@ -145,20 +145,6 @@ public class StudentController {
 		return new ResponseEntity<>(new StudentDTO(student), HttpStatus.OK);	
 	}
 	
-	// DELETE
-	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Void> deleteStudent(@PathVariable Integer id){
-		Student student = studentService.findOne(id);
-		if (student != null){
-			studentService.remove(id);
-			//Kada se obrise student brise se i korisnik
-			korisnikService.remove(student.getKorisnik().getKorisnikID());
-			return new ResponseEntity<>(HttpStatus.OK);
-		} else {		
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
-	
 	// FIND ONE STUDENT by brojIndexa
 	@RequestMapping(value="/brojIndexa", method=RequestMethod.GET)
 	public ResponseEntity<StudentDTO> getStudentByBrojIndeksa(
@@ -230,10 +216,22 @@ public class StudentController {
 			obavezeDTO.add(oDTO);
 			
 		}
-		return new ResponseEntity<>(obavezeDTO, HttpStatus.OK);
+		return new ResponseEntity<>(obavezeDTO, HttpStatus.OK);	
 		
-		
-		
+	}
+	
+	// DELETE
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteStudent(@PathVariable Integer id){
+		Student student = studentService.findOne(id);
+		if (student != null){
+			studentService.remove(id);
+			//Kada se obrise student brise se i korisnik
+			korisnikService.remove(student.getKorisnik().getKorisnikID());
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {		
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
 //	//Dodavanje novog studentovog dokumenta

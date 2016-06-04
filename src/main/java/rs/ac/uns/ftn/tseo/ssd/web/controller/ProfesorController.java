@@ -130,6 +130,7 @@ public class ProfesorController {
 		Profesor p = profService.findOne(id);
 		if (p != null){
 			profService.remove(id);
+			korService.remove(p.getKorisnik().getKorisnikID());
 			return new ResponseEntity<>(HttpStatus.OK);
 		} else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

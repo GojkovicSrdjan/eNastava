@@ -1,0 +1,52 @@
+<div class="modal-header">
+  <h3 class="modal-title">Administrator</h3>
+</div>
+<div class="modal-body">
+  <form>
+    <fieldset class="form-group">
+      <label for="ime">Ime</label>
+      <input type="text" class="form-control" id="ime" ng-model="admin.korisnik.ime">
+    </fieldset>
+    <fieldset class="form-group">
+      <label for="prezime">Prezime</label>
+      <input type="text" class="form-control" id="prezime" ng-model="admin.korisnik.prezime">
+    </fieldset>
+    <fieldset class="form-group">
+    	<label>JMBG</label>
+    	<input type="text" class="form-control" id="jmbg" ng-model="admin.korisnik.jmbg" >
+    </fieldset>    
+    <fieldset class="form-group">
+    	<label>Korisnicko ime</label>
+    	<input type="text" class="form-control" id="korisnickoIme" ng-model="admin.korisnik.korisnickoIme" >
+    </fieldset>
+    <fieldset class="form-group">
+    	<label>Lozinka</label>
+    	<input type="text" class="form-control" id="lozinka" ng-model="admin.korisnik.lozinka">
+    </fieldset>
+    
+    <fieldset class="form-group">
+    	<label>Br. telefona</label>
+    	<input type="text" class="form-control" id="brojTelefona" ng-model="admin.korisnik.brojTelefona" >
+    </fieldset> 
+    <fieldset class="form-group">
+    	<label>E-mail</label>
+    	<input type="text" class="form-control" id="email" ng-model="admin.korisnik.email" >
+    </fieldset> 
+    <fieldset class="form-group">
+    	<label>Ulica i broj</label>
+    	<input type="text" class="form-control" id="ulicaIBroj" ng-model="admin.korisnik.ulicaIBroj" >
+    </fieldset> 
+    <fieldset class="form-group">
+    	<label>Postanski broj</label>
+    	<input type="text" class="form-control" id="postanskiBroj" ng-model="admin.korisnik.postanskiBroj" >
+    </fieldset> 
+    <fieldset class="form-group">
+    	<label>Mesto</label>
+    	<input type="text" class="form-control" id="mesto" ng-model="admin.korisnik.mesto" >
+    </fieldset>     
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" type="button" ng-click="ok()">OK</button>
+  <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+</div>

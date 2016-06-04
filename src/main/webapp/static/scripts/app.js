@@ -38,6 +38,11 @@ angular
         controller: 'ProfessorsCtrl',
         controllerAs: 'professors' 
       })
+      .when('/admins',{
+      	templateUrl: 'views/admins.html',
+        controller: 'AdminsCtrl',
+        controllerAs: 'admins'   
+      })
       .otherwise({
         redirectTo: '/'
       });

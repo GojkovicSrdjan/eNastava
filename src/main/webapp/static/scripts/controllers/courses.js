@@ -15,7 +15,7 @@ angular.module('studentsClientApp')
     $scope.deleteCourse = function(id) {
       Restangular.one("predmeti", id).remove().then(function() {
         _.remove($scope.courses, {
-          id: id
+          predmetID: id
         });
       }, function() {
         $log.info("something went wrong");
@@ -59,7 +59,7 @@ angular.module('studentsClientApp')
           $scope.deleteEnrollment = function (id) {
             Restangular.one("pohadja", id).remove().then(function() {
               _.remove($scope.enrollments, {
-                id: id
+                pohadjaID: id
               });
             }, function() {
               $log.info("something went wrong");
@@ -69,7 +69,7 @@ angular.module('studentsClientApp')
           $scope.deleteTeaching = function (id) {
               Restangular.one("predaje", id).remove().then(function() {
                 _.remove($scope.teachings, {
-                  id: id
+                  predajeID: id
                 });
               }, function() {
                 $log.info("something went wrong");
@@ -98,7 +98,7 @@ angular.module('studentsClientApp')
               };
 
             $scope.ok = function() {
-              $scope.enrollment.student={"id":$scope.student.id};
+              $scope.enrollment.student={"studentID":$scope.student.studentID};
               Restangular.all('pohadja').post($scope.enrollment).then(function (data) {
                   $scope.enrollments.push(data);
               });
@@ -151,7 +151,7 @@ angular.module('studentsClientApp')
 		};
           
           $scope.openModalS = function() {
-            $scope.enrollment = {"course":{"id":$scope.course.id}};
+            $scope.enrollment = {"predmet":{"predmetID":$scope.course.predmetID}};
             var modalInstance = $uibModal.open({
               templateUrl: 'views/modals/studentEnrollment.html',
               controller: StudentEnrollmentModalCtrl,

@@ -7,7 +7,7 @@ angular.module('studentsClientApp')
     $scope.deleteProfessor = function(id) {
         Restangular.one("profesori", id).remove().then(function() {
           _.remove($scope.professors, {
-            id: id
+            profesorID: id
           });
         }, function() {
           $log.info("");

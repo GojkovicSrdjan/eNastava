@@ -42,6 +42,18 @@ public class KorisnikController {
 		return new ResponseEntity<>(new KorisnikDTO(kor), HttpStatus.OK);
 	}
 	
+	//Delete
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteKorisnik(@PathVariable Integer id){
+		Korisnik k=korService.findOne(id);
+		if(k!=null){
+			korService.remove(id);
+			return new ResponseEntity<>(HttpStatus.OK);
+		}else
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
+	
 	//Find by username and password
 //	@RequestMapping(value="/{username}/{password}", method=RequestMethod.GET)
 //	public ResponseEntity<KorisnikDTO> findByUsernameAndPassword(
