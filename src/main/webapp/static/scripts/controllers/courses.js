@@ -36,6 +36,10 @@ angular.module('studentsClientApp').controller('CoursesCtrl',
     		Restangular.one("predmeti", $scope.course.predmetID).getList("profesori").then(function (entries) {
     			$scope.teachings=entries;
     		});
+    		//tip obaveze >>> tipoviObaveza - naziv liste u predmetu
+    		Restangular.one("predmeti", $scope.course.predmetID).getList("tipobaveze").then(function (entries) {
+    			$scope.tasks=entries;
+    		});
     	}
 
     	$scope.ok = function() {
@@ -180,7 +184,7 @@ angular.module('studentsClientApp').controller('CoursesCtrl',
         		$uibModalInstance.dismiss('cancel');
         	};*/
         }];
-          
+        
         /////////
         $scope.openModalO= function () {
         	$scope.teaching = {"predmet":{"predmetID":$scope.course.predmetID}};
