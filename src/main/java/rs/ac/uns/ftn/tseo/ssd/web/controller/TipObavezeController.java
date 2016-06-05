@@ -29,7 +29,7 @@ public class TipObavezeController {
 	@Autowired
 	private PredmetService predService;
 	
-	//GET ALL
+	/*//GET ALL
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<TipObavezeDTO>> getAllTipObaveze(){
 		List<TipObaveze> tipoviObaveza = tipService.findAll();
@@ -40,7 +40,7 @@ public class TipObavezeController {
 		}
 		
 		return new ResponseEntity<>(tipoviObavezaDTO, HttpStatus.OK);
-	}
+	}*/
 	
 	//Get one
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)

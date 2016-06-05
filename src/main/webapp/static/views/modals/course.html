@@ -43,11 +43,12 @@
     </span>
     
     <!-- START obaveze -->
+    <br>
     <label>obaveze</label>
     <table class="table table-bordered">
       <tr ng-repeat="task in tasks">
         <td>
-          {{task.student.naziv}} {{task.opis}}
+          {{task.naziv}} | {{task.opis}}
           <button type="button" class="btn btn-default right" aria-label="Brisanje" ng-click="deleteTaskType(task.tipObavezeID)">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
           </button>

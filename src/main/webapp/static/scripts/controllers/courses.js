@@ -156,22 +156,20 @@ angular.module('studentsClientApp').controller('CoursesCtrl',
         
         
         /*
-         * Obaveze na kursu
-         * Prikazati samo tip obaveze
-         * moze se menjati tip obaveze, uklanjati i dodavati
+         * Obaveze na kursu - za svaki kurs se kreiraju zasebne obaveze
          * Kada se kreira tip obaveze, automatski se dodeljuje studentima koji pohadjaju predmet
          */
         var TaskTypeModalCtrl=['$scope', '$uibModalInstance', function ($scope, $uibModalInstance){
         	var taskTypeIds=_.map($scope.tasks, function(value){
-        		return value.tipObaveze.tipObavezeID; 
+        		return value.tipObavezeID; 
         	});
+        	/*
         	Restangular.all('tipobaveze').getList().then(function (data) {
         		$scope.tasks=data;
         		_.remove($scope.tasks, function (task) {
-        			return _.contains(taskTypeIds, task.tipObavezeID);
+        			return _.contains(taskTypeIds, tipObavezeID);
         		});
         	});
-        	 /*
         	$scope.ok = function() {
         		$scope.teaching.profesor={"profesorID":$scope.professor.profesorID}; //!!!!!!!!!!!!!
         		Restangular.all('predaje').post($scope.teaching).then(function (data) {
