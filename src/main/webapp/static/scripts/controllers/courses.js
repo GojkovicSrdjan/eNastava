@@ -87,9 +87,9 @@ angular.module('studentsClientApp').controller('CoursesCtrl',
         // deleteTaskType(task.tipObavezeID)
         // prilikom brisanja tipa obaveze obrisati i sve obaveze koje su dodeljene studentima koji su na predmetu
         $scope.deleteTaskType = function (id) {
-        	Restangular.one("predaje", id).remove().then(function() {
-        		_.remove($scope.teachings, {
-        			predajeID: id
+        	Restangular.one("tipobaveze", id).remove().then(function() {
+        		_.remove($scope.tasks, {
+        			tipObavezeID: id
         		});
         	}, function() {
         		$log.info("something went wrong");
