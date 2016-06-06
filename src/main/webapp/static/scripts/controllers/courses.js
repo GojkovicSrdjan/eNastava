@@ -159,35 +159,31 @@ angular.module('studentsClientApp').controller('CoursesCtrl',
          * Obaveze na kursu - za svaki kurs se kreiraju zasebne obaveze
          * Kada se kreira tip obaveze, automatski se dodeljuje studentima koji pohadjaju predmet
          */
-        var TaskTypeModalCtrl=['$scope', '$uibModalInstance', function ($scope, $uibModalInstance){
+        var TaskTypeModalCtrl = ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance){
         	var taskTypeIds=_.map($scope.tasks, function(value){
         		return value.tipObavezeID; 
         	});
-        	/*
-        	Restangular.all('tipobaveze').getList().then(function (data) {
-        		$scope.tasks=data;
-        		_.remove($scope.tasks, function (task) {
-        			return _.contains(taskTypeIds, tipObavezeID);
-        		});
-        	});
+        	
         	$scope.ok = function() {
-        		$scope.teaching.profesor={"profesorID":$scope.professor.profesorID}; //!!!!!!!!!!!!!
-        		Restangular.all('predaje').post($scope.teaching).then(function (data) {
-        			$scope.teachings.push(data);
-        		});
+        		
+        		$scope.task.predmet = $scope.course;
+        		Restangular.all('tipobaveze').post($scope.task).then(function (data) {
+            		$scope.tasks.push(data);
+            	});
+        		
         		$uibModalInstance.close('ok');
         	};
 
         	$scope.cancel = function() {
         		$uibModalInstance.dismiss('cancel');
-        	};*/
+        	};
         }];
         
         /////////
         $scope.openModalO= function () {
         	$scope.teaching = {"predmet":{"predmetID":$scope.course.predmetID}};
         	var modalInstance = $uibModal.open({
-        		templateUrl: 'views/modals/professorTeaching.html', // napravi html za tip obaveze
+        		templateUrl: 'views/modals/taskType.html',
         		controller: TaskTypeModalCtrl,
         		scope: $scope,
         		resolve: {
