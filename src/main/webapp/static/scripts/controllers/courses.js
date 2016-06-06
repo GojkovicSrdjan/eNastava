@@ -168,26 +168,25 @@ angular.module('studentsClientApp').controller('CoursesCtrl',
         		$scope.task.predmet = $scope.course;
         		Restangular.all('tipobaveze').post($scope.task).then(function (data) {
             		$scope.tasks.push(data);
+            		var tipObaveze = data;
+            		
+            		//kreiranje obaveza
+            		var enrolledStudent = _.map($scope.enrollments,function (value) {
+                    	return value.student;
+                    });
+            		Restangular.all('studenti').getList().then(function (data) {
+            			$scope.students = data;
+                     	_.remove($scope.students, function (student) {
+                     		return _.contains(enrolledStudent, student);
+                     	});
+            		});
+            		
+                    for (var i in enrolledStudent){
+                    	var obaveza = {"student": enrolledStudent[i],
+                    					"tipObaveze": tipObaveze};
+                    	Restangular.all('obaveze').post(obaveza);
+                    }
         		});
-        		
-        		//kreiranje obaveza
-        		var enrolledStudent = _.map($scope.enrollments,function (value) {
-                	return value.student;
-                });
-        		Restangular.all('studenti').getList().then(function (data) {
-        			$scope.students = data;
-                 	_.remove($scope.students, function (student) {
-                 		return _.contains(enrolledStudent, student);
-                 	});
-        		});
-        		
-                for (var i in enrolledStudent){
-                	var obaveza = {"student": enrolledStudent[i],
-                					"tipObaveze":$scope.task}; // !? tipObavezeID null
-                	Restangular.all('obaveze').post(obaveza);
-                }
-             	
-                 
         		
         		$uibModalInstance.close('ok');
         	};
