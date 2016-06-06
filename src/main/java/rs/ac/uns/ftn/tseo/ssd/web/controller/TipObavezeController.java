@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import rs.ac.uns.ftn.tseo.ssd.model.Obaveza;
 import rs.ac.uns.ftn.tseo.ssd.model.TipObaveze;
+import rs.ac.uns.ftn.tseo.ssd.service.ObavezaService;
 import rs.ac.uns.ftn.tseo.ssd.service.PredmetService;
 import rs.ac.uns.ftn.tseo.ssd.service.TipObavezeService;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.ObavezaDTO;
@@ -28,6 +29,9 @@ public class TipObavezeController {
 	private TipObavezeService tipService;
 	@Autowired
 	private PredmetService predService;
+	
+	@Autowired
+	private ObavezaService obavezaService;
 	
 	/*//GET ALL
 	@RequestMapping(method=RequestMethod.GET)
@@ -92,8 +96,13 @@ public class TipObavezeController {
 	public ResponseEntity<Void> deleteTipObaveze(@PathVariable Integer id){
 		TipObaveze tip=tipService.findOne(id);
 		if(tip!=null){
-			tipService.remove(id);
 			
+			Set<Obaveza> obaveze =  tip.getObaveze();
+			for (Obaveza o : obaveze){
+				obavezaService.remove(o.getObavezaID());
+			}
+			
+			tipService.remove(id);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

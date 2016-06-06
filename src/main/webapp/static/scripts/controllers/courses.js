@@ -36,7 +36,6 @@ angular.module('studentsClientApp').controller('CoursesCtrl',
     		Restangular.one("predmeti", $scope.course.predmetID).getList("profesori").then(function (entries) {
     			$scope.teachings=entries;
     		});
-    		//tip obaveze >>> tipoviObaveza - naziv liste u predmetu
     		Restangular.one("predmeti", $scope.course.predmetID).getList("tipobaveze").then(function (entries) {
     			$scope.tasks=entries;
     		});
@@ -84,8 +83,9 @@ angular.module('studentsClientApp').controller('CoursesCtrl',
         	});
         };
         
-        // deleteTaskType(task.tipObavezeID)
-        // prilikom brisanja tipa obaveze obrisati i sve obaveze koje su dodeljene studentima koji su na predmetu
+        /**
+         * Prilikom brisanja tipa obaveze, brisu se i sve obaveze po tipom(u kontroleru)
+         */
         $scope.deleteTaskType = function (id) {
         	Restangular.one("tipobaveze", id).remove().then(function() {
         		_.remove($scope.tasks, {
@@ -155,9 +155,8 @@ angular.module('studentsClientApp').controller('CoursesCtrl',
         }];
         
         
-        /*
-         * Obaveze na kursu - za svaki kurs se kreiraju zasebne obaveze
-         * Kada se kreira tip obaveze, automatski se dodeljuje studentima koji pohadjaju predmet
+        /**
+         * Prilikom kreiranja tipaObaveze kreiraju se i obaveze za svakog studenta na kursu
          */
         var TaskTypeModalCtrl = ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance){
         	var taskTypeIds=_.map($scope.tasks, function(value){
@@ -169,7 +168,26 @@ angular.module('studentsClientApp').controller('CoursesCtrl',
         		$scope.task.predmet = $scope.course;
         		Restangular.all('tipobaveze').post($scope.task).then(function (data) {
             		$scope.tasks.push(data);
-            	});
+        		});
+        		
+        		//kreiranje obaveza
+        		var enrolledStudent = _.map($scope.enrollments,function (value) {
+                	return value.student;
+                });
+        		Restangular.all('studenti').getList().then(function (data) {
+        			$scope.students = data;
+                 	_.remove($scope.students, function (student) {
+                 		return _.contains(enrolledStudent, student);
+                 	});
+        		});
+        		
+                for (var i in enrolledStudent){
+                	var obaveza = {"student": enrolledStudent[i],
+                					"tipObaveze":$scope.task}; // !? tipObavezeID null
+                	Restangular.all('obaveze').post(obaveza);
+                }
+             	
+                 
         		
         		$uibModalInstance.close('ok');
         	};
@@ -181,7 +199,7 @@ angular.module('studentsClientApp').controller('CoursesCtrl',
         
         /////////
         $scope.openModalO= function () {
-        	$scope.teaching = {"predmet":{"predmetID":$scope.course.predmetID}};
+        	$scope.graded = {"predmet":{"predmetID":$scope.course.predmetID}};
         	var modalInstance = $uibModal.open({
         		templateUrl: 'views/modals/taskType.html',
         		controller: TaskTypeModalCtrl,
