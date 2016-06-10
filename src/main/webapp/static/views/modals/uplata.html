@@ -1,0 +1,27 @@
+<div class="modal-header">
+  <h3 class="modal-title">Uplata</h3>
+</div>
+<div class="modal-body">
+  <form>
+  	<fieldset class="form-group">
+      <label>Svrha uplate</label>
+      <input type="text" class="form-control" id="svrha" ng-model="uplata.svrha">
+    </fieldset>
+    <fieldset class="form-group">
+    <label>Datum uplate</label>
+    <input id="datum" type="text" ng-model="uplata.datum" is-open="datum.opened"
+     class="form-control" uib-datepicker-popup="dd.MM.yyyy"/>
+    <button type="button" class="btn btn-default" ng-click="openDate()">
+        <i class="glyphicon glyphicon-calendar"></i>
+    </button>
+    </fieldset>
+  	<fieldset class="form-group">
+      <label>Iznos uplate</label>
+      <input type="text" class="form-control" id="iznos" ng-model="uplata.iznos">
+    </fieldset>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" type="button" ng-click="ok()">OK</button>
+  <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+</div>
