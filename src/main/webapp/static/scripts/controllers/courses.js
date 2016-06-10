@@ -163,6 +163,11 @@ angular.module('studentsClientApp').controller('CoursesCtrl',
         		return value.tipObavezeID; 
         	});
         	
+        	$scope.date={};
+            $scope.openDate = function() {
+            	$scope.date.opened = true;
+            };
+        	
         	$scope.ok = function() {
         		
         		$scope.task.predmet = $scope.course;
