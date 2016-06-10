@@ -22,9 +22,9 @@ import rs.ac.uns.ftn.tseo.ssd.model.Korisnik;
 import rs.ac.uns.ftn.tseo.ssd.model.Obaveza;
 import rs.ac.uns.ftn.tseo.ssd.model.Pohadja;
 import rs.ac.uns.ftn.tseo.ssd.model.Student;
-import rs.ac.uns.ftn.tseo.ssd.service.DokumentService;
 import rs.ac.uns.ftn.tseo.ssd.service.ERacunService;
 import rs.ac.uns.ftn.tseo.ssd.service.KorisnikService;
+import rs.ac.uns.ftn.tseo.ssd.service.ObavezaService;
 import rs.ac.uns.ftn.tseo.ssd.service.StudentService;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.DokumentDTO;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.ObavezaDTO;
@@ -44,7 +44,7 @@ public class StudentController {
 	@Autowired
 	private ERacunService eRacunService;
 	@Autowired
-	private DokumentService dokService;
+	private ObavezaService obavezaService;
 	
 	//GET ALL
 	@RequestMapping(value="/all", method = RequestMethod.GET)
@@ -225,9 +225,17 @@ public class StudentController {
 	public ResponseEntity<Void> deleteStudent(@PathVariable Integer id){
 		Student student = studentService.findOne(id);
 		if (student != null){
-			studentService.remove(id);
+			
 			//Kada se obrise student brise se i korisnik
 			korisnikService.remove(student.getKorisnik().getKorisnikID());
+			
+			//obaveze
+			Set<Obaveza> obaveze =  student.getObaveze();
+			for (Obaveza o : obaveze){
+				obavezaService.remove(o.getObavezaID());
+			}
+			
+			studentService.remove(id);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} else {		
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

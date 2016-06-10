@@ -157,7 +157,7 @@ public class PredmetController {
 		for (TipObaveze t: tipovi) {
 			
 			TipObavezeDTO tipDTO=new TipObavezeDTO();
-			
+			tipDTO.setTipObavezeID(t.getTipObavezeID());
 			tipDTO.setDatum(t.getDatum());
 			tipDTO.setNaziv(t.getNaziv());
 			tipDTO.setOpis(t.getOpis());
