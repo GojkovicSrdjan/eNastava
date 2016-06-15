@@ -7,7 +7,7 @@
     <th>prezime</th>
     <th>akcija</th>
   </tr>
-  <tr ng-repeat="a in admins">
+  <tr ng-repeat="a in admins| filter:pretraga">
     <td>
       {{a.korisnik.ime}}
     </td>

@@ -7505,6 +7505,14 @@ button.list-group-item-danger.active:focus {
   color: #337ab7;
   background-color: #fff;
 }
+
+.nav > li > p {
+    position: relative;
+    display: block;
+    padding-top: 12px;
+    padding-left: 21px;
+    color: grey;
+}
 /* line 20, ../../../../frontEnd/FrontEndAplikacija/studentsClient/bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_panels.scss */
 .panel-primary > .panel-footer + .panel-collapse > .panel-body {
   border-bottom-color: #337ab7;

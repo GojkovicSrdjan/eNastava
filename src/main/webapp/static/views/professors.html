@@ -8,7 +8,7 @@
     <th>zvanje</th>
     <th>akcija</th>
   </tr>
-  <tr ng-repeat="p in professors">
+  <tr ng-repeat="p in professors| filter:pretraga">
     <td>
       {{p.korisnik.ime}}
     </td>

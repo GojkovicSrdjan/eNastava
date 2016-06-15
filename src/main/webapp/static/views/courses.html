@@ -6,7 +6,7 @@
     <th>naziv</th>
     <th>akcija</th>
   </tr>
-  <tr ng-repeat="course in courses">
+  <tr ng-repeat="course in courses| filter:pretraga">
     <td>
       {{course.naziv}}
     </td>
