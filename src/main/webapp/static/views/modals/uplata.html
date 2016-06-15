@@ -3,22 +3,30 @@
 </div>
 <div class="modal-body">
   <form>
+  
   	<fieldset class="form-group">
       <label>Svrha uplate</label>
       <input type="text" class="form-control" id="svrha" ng-model="uplata.svrha">
     </fieldset>
+    
     <fieldset class="form-group">
-    <label>Datum uplate</label>
-    <input id="datum" type="text" ng-model="uplata.datum" is-open="datum.opened"
-     class="form-control" uib-datepicker-popup="dd.MM.yyyy"/>
-    <button type="button" class="btn btn-default" ng-click="openDate()">
-        <i class="glyphicon glyphicon-calendar"></i>
-    </button>
+	    <label>Datum uplate</label>
+	    <p class="input-group">
+		    <input id="datum" type="text" ng-model="uplata.datum" is-open="datum.opened"
+		     class="form-control" uib-datepicker-popup="dd.MM.yyyy"/>
+		    <span class="input-group-btn">
+		      <button type="button" class="btn btn-default" ng-click="openDate()">
+		        <i class="glyphicon glyphicon-calendar"></i>
+		      </button>
+		    </span>
+		</p>
     </fieldset>
+    
   	<fieldset class="form-group">
       <label>Iznos uplate</label>
       <input type="text" class="form-control" id="iznos" ng-model="uplata.iznos">
     </fieldset>
+    
   </form>
 </div>
 <div class="modal-footer">
