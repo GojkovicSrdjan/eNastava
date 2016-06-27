@@ -22,10 +22,14 @@ import rs.ac.uns.ftn.tseo.ssd.model.Korisnik;
 import rs.ac.uns.ftn.tseo.ssd.model.Obaveza;
 import rs.ac.uns.ftn.tseo.ssd.model.Pohadja;
 import rs.ac.uns.ftn.tseo.ssd.model.Student;
+import rs.ac.uns.ftn.tseo.ssd.model.Uplata;
+import rs.ac.uns.ftn.tseo.ssd.service.DokumentService;
 import rs.ac.uns.ftn.tseo.ssd.service.ERacunService;
 import rs.ac.uns.ftn.tseo.ssd.service.KorisnikService;
 import rs.ac.uns.ftn.tseo.ssd.service.ObavezaService;
+import rs.ac.uns.ftn.tseo.ssd.service.PohadjaService;
 import rs.ac.uns.ftn.tseo.ssd.service.StudentService;
+import rs.ac.uns.ftn.tseo.ssd.service.UplataService;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.DokumentDTO;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.ObavezaDTO;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.PohadjaDTO;
@@ -45,6 +49,12 @@ public class StudentController {
 	private ERacunService eRacunService;
 	@Autowired
 	private ObavezaService obavezaService;
+	@Autowired
+	private DokumentService dokumentService;
+	@Autowired
+	private UplataService uplataService;
+	@Autowired
+	private PohadjaService pohadjaService;
 	
 	//GET ALL
 	@RequestMapping(value="/all", method = RequestMethod.GET)
@@ -226,17 +236,35 @@ public class StudentController {
 		Student student = studentService.findOne(id);
 		if (student != null){
 			
-			//Kada se obrise student brise se i korisnik
-			korisnikService.remove(student.getKorisnik().getKorisnikID());
+			//pohadjanja
+			for (Pohadja p : student.getPohadjanja()){
+				pohadjaService.remove(p.getPohadjaID());
+			}
+			
+			//dokumenta
+			for (Dokument d : student.getDokumenta()){
+				dokumentService.remove(d.getDokumentID());
+			}
 			
 			//obaveze
-			Set<Obaveza> obaveze =  student.getObaveze();
-			for (Obaveza o : obaveze){
+			for (Obaveza o : student.getObaveze()){
 				obavezaService.remove(o.getObavezaID());
 			}
 			
+			//eRacun(posle brisanja studenta) i uplate
+			for (Uplata u : student.geteRacun().getUplate()){
+				uplataService.remove(u.getUplataID());
+			}
+			
 			studentService.remove(id);
+			
+			//Kada se obrise student brise se i korisnik
+			korisnikService.remove(student.getKorisnik().getKorisnikID());
+			//i eRacun
+			eRacunService.remove(student.geteRacun().geteRacunID());
+			
 			return new ResponseEntity<>(HttpStatus.OK);
+			
 		} else {		
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
