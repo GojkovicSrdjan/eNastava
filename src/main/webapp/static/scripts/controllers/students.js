@@ -57,6 +57,35 @@ angular.module('studentsClientApp')
           $uibModalInstance.dismiss('cancel');
         };
         
+        var StudentViewCourseModalCtrl = ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance){
+        	
+        	$scope.student = student;
+        	if ($scope.course.predmetID) {
+        		Restangular.one("predmeti", $scope.course.predmetID).getList("studenti").then(function(entries) {
+        			$scope.enrollments = entries;
+        		});
+        		Restangular.one("predmeti", $scope.course.predmetID).getList("profesori").then(function (entries) {
+        			$scope.teachings=entries;
+        		});
+        		Restangular.one("predmeti", $scope.course.predmetID).getList("tipobaveze").then(function (entries) {
+        			$scope.tasks=entries;
+        		});
+        	}
+        }];
+        
+        $scope.openModalP = function(predmet) {
+        	$scope.course = predmet;
+            var modalInstance = $uibModal.open({
+            	templateUrl: 'views/modals/studentViewCourse.html',
+            	controller: StudentViewCourseModalCtrl,
+            	scope: $scope,
+            	resolve: {
+            		student: function() {
+            			return student;
+            		}
+            	}
+            });
+        };
       }
     ];
     

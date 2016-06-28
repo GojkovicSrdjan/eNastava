@@ -15,11 +15,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import rs.ac.uns.ftn.tseo.ssd.model.Obaveza;
 import rs.ac.uns.ftn.tseo.ssd.model.Pohadja;
 import rs.ac.uns.ftn.tseo.ssd.model.Predaje;
 import rs.ac.uns.ftn.tseo.ssd.model.Predmet;
 import rs.ac.uns.ftn.tseo.ssd.model.TipObaveze;
+import rs.ac.uns.ftn.tseo.ssd.service.ObavezaService;
+import rs.ac.uns.ftn.tseo.ssd.service.PohadjaService;
+import rs.ac.uns.ftn.tseo.ssd.service.PredajeService;
 import rs.ac.uns.ftn.tseo.ssd.service.PredmetService;
+import rs.ac.uns.ftn.tseo.ssd.service.TipObavezeService;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.PohadjaDTO;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.PredajeDTO;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.PredmetDTO;
@@ -32,12 +37,20 @@ import rs.ac.uns.ftn.tseo.ssd.web.dto.TipObavezeDTO;
 public class PredmetController {
 	
 	@Autowired
-	private PredmetService predService;
+	private PredmetService predmetService;
+	@Autowired
+	private PredajeService predajeService;
+	@Autowired
+	private PohadjaService pohadjaService;
+	@Autowired
+	private ObavezaService obavezaService;
+	@Autowired
+	private TipObavezeService tipObavezeService;
 	
 	//Get all
 	@RequestMapping(value="/all", method=RequestMethod.GET)
 	public ResponseEntity<List<PredmetDTO>> getAllPredmeti(){
-		List<Predmet> predmeti=predService.findAll();
+		List<Predmet> predmeti=predmetService.findAll();
 		List<PredmetDTO> predmetiDTO=new ArrayList<>();
 		for (Predmet predmet: predmeti) {
 			predmetiDTO.add(new PredmetDTO(predmet));
@@ -48,7 +61,7 @@ public class PredmetController {
 	//Get page
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<PredmetDTO>> getPredmetiPage(Pageable page){
-		Page<Predmet> predmeti=predService.findAll(page);
+		Page<Predmet> predmeti=predmetService.findAll(page);
 		List<PredmetDTO> predmetiDTO=new ArrayList<>();
 		for (Predmet predmet: predmeti) {
 			predmetiDTO.add(new PredmetDTO(predmet));
@@ -60,7 +73,7 @@ public class PredmetController {
 	//Get one 
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<PredmetDTO> getPredmet(@PathVariable Integer id){
-		Predmet predmet= predService.findOne(id);
+		Predmet predmet= predmetService.findOne(id);
 		if(predmet == null){
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -76,7 +89,7 @@ public class PredmetController {
 		p.setNaziv(predmetDTO.getNaziv());
 		p.setOpis(predmetDTO.getOpis());
 		
-		predService.save(p);
+		predmetService.save(p);
 	
 		return new ResponseEntity<>(new PredmetDTO(p), HttpStatus.CREATED);
 	}
@@ -85,14 +98,14 @@ public class PredmetController {
 	@RequestMapping(method=RequestMethod.PUT, consumes="application/json")
 	public ResponseEntity<PredmetDTO> updatePredmet(@RequestBody PredmetDTO predmetDTO){
 		
-		Predmet p= predService.findOne(predmetDTO.getPredmetID()); 
+		Predmet p= predmetService.findOne(predmetDTO.getPredmetID()); 
 		if (p == null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		p.setNaziv(predmetDTO.getNaziv());
 		p.setOpis(predmetDTO.getOpis());
 		
-		predService.save(p);
+		predmetService.save(p);
 	
 		return new ResponseEntity<>(new PredmetDTO(p), HttpStatus.CREATED);
 	}
@@ -100,9 +113,29 @@ public class PredmetController {
 	//Delete
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> deletePredmet(@PathVariable Integer id){
-		Predmet p = predService.findOne(id);
-		if (p != null){
-			predService.remove(id);
+		Predmet predmet = predmetService.findOne(id);
+		if (predmet != null){
+			
+			//predavanja
+			for (Predaje pr : predmet.getPredavanja()){
+				predajeService.remove(pr.getPredajeID());
+			}
+			
+			//pohadjanja
+			for (Pohadja po : predmet.getPohadjanja()){
+				pohadjaService.remove(po.getPohadjaID());
+			}
+			
+			//tipoviObaveza i obaveze
+			for (TipObaveze t : predmet.getTipoviObaveza()){
+				for (Obaveza o : t.getObaveze()){
+					obavezaService.remove(o.getObavezaID());
+				}
+				tipObavezeService.remove(t.getTipObavezeID());
+			}
+			
+			predmetService.remove(id);
+			
 			return new ResponseEntity<>(HttpStatus.OK);
 		} else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -112,7 +145,7 @@ public class PredmetController {
 	//All students from course
 	@RequestMapping(value="/{id}/studenti", method=RequestMethod.GET)
 	public ResponseEntity<List<PohadjaDTO>> getPredmetStudents(@PathVariable Integer id){
-		Predmet p = predService.findOne(id);
+		Predmet p = predmetService.findOne(id);
 		Set<Pohadja> pohadjanja=p.getPohadjanja();
 		List<PohadjaDTO> pohadjanjaDTO=new ArrayList<>();
 		for (Pohadja pohadja : pohadjanja) {
@@ -129,7 +162,7 @@ public class PredmetController {
 	//All teachers from course
 	@RequestMapping(value="/{id}/profesori", method=RequestMethod.GET)
 	public ResponseEntity<List<PredajeDTO>> getPredmetTeachers(@PathVariable Integer id){
-		Predmet p = predService.findOne(id);
+		Predmet p = predmetService.findOne(id);
 		Set<Predaje> predavanja=p.getPredavanja();
 		List<PredajeDTO> predavanjaDTO=new ArrayList<>();
 		for (Predaje predaje: predavanja) {
@@ -148,7 +181,7 @@ public class PredmetController {
 	//Get tip exam from predmet
 	@RequestMapping(value="/{id}/tipobaveze", method=RequestMethod.GET)
 	public ResponseEntity<List<TipObavezeDTO>> getTipObavezeFromPredmet(@PathVariable Integer id){
-		Predmet p=predService.findOne(id);
+		Predmet p=predmetService.findOne(id);
 		if(p==null)
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		

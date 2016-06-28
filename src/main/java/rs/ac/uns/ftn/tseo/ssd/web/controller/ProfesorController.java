@@ -19,6 +19,7 @@ import rs.ac.uns.ftn.tseo.ssd.model.Korisnik;
 import rs.ac.uns.ftn.tseo.ssd.model.Predaje;
 import rs.ac.uns.ftn.tseo.ssd.model.Profesor;
 import rs.ac.uns.ftn.tseo.ssd.service.KorisnikService;
+import rs.ac.uns.ftn.tseo.ssd.service.PredajeService;
 import rs.ac.uns.ftn.tseo.ssd.service.ProfesorService;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.PredajeDTO;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.PredmetDTO;
@@ -29,14 +30,16 @@ import rs.ac.uns.ftn.tseo.ssd.web.dto.ProfesorDTO;
 public class ProfesorController {
 	
 	@Autowired
-	private ProfesorService profService;
+	private ProfesorService profesorService;
 	@Autowired
-	private KorisnikService korService;
+	private KorisnikService korisnikService;
+	@Autowired
+	private PredajeService predajeService;
 	
 	//Get all
 	@RequestMapping(value="/all", method=RequestMethod.GET)
 	public ResponseEntity<List<ProfesorDTO>> getAllProfesori(){
-		List<Profesor> profesor=profService.findAll();
+		List<Profesor> profesor=profesorService.findAll();
 		List<ProfesorDTO> profesorDTO=new ArrayList<>();
 		for (Profesor p: profesor) {
 			profesorDTO.add(new ProfesorDTO(p));
@@ -48,7 +51,7 @@ public class ProfesorController {
 	//Get page
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<ProfesorDTO>> getProfesoriPage(Pageable page){
-		Page<Profesor> profesori=profService.findAll(page);
+		Page<Profesor> profesori=profesorService.findAll(page);
 		List<ProfesorDTO> profesorDTO=new ArrayList<>();
 		for (Profesor p: profesori) {
 			profesorDTO.add(new ProfesorDTO(p));
@@ -60,7 +63,7 @@ public class ProfesorController {
 	//Get one 
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<ProfesorDTO> getProfesor(@PathVariable Integer id){
-		Profesor profesor= profService.findOne(id);
+		Profesor profesor= profesorService.findOne(id);
 		if(profesor == null){
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -86,11 +89,11 @@ public class ProfesorController {
 		kor.setPrezime(profesorDTO.getKorisnik().getPrezime());
 		
 		
-		korService.save(kor);
+		korisnikService.save(kor);
 		Profesor p=new Profesor();
 		p.setZvanje(profesorDTO.getZvanje());
 		p.setKorisnik(kor);
-		profService.save(p);
+		profesorService.save(p);
 		
 		return new ResponseEntity<>(new ProfesorDTO(p), HttpStatus.CREATED);	
 	}
@@ -98,11 +101,11 @@ public class ProfesorController {
 	// UPDATE
 	@RequestMapping(method=RequestMethod.PUT, consumes="application/json")
 	public ResponseEntity<ProfesorDTO> updateProfesor(@RequestBody ProfesorDTO profesorDTO){
-		Profesor p=profService.findOne(profesorDTO.getProfesorID());
+		Profesor p=profesorService.findOne(profesorDTO.getProfesorID());
 		if(p==null)
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		
-		Korisnik kor = korService.findOne(profesorDTO.getKorisnik().getKorisnikID());
+		Korisnik kor = korisnikService.findOne(profesorDTO.getKorisnik().getKorisnikID());
 
 		kor.setJMBG(profesorDTO.getKorisnik().getJMBG());
 		kor.setBrojTelefona(profesorDTO.getKorisnik().getBrojTelefona());
@@ -115,11 +118,11 @@ public class ProfesorController {
 		kor.setIme(profesorDTO.getKorisnik().getIme());
 		kor.setPrezime(profesorDTO.getKorisnik().getPrezime());
 		
-		korService.save(kor);
+		korisnikService.save(kor);
 		
 		p.setZvanje(profesorDTO.getZvanje());
 		
-		profService.save(p);
+		profesorService.save(p);
 		
 		return new ResponseEntity<>(new ProfesorDTO(p), HttpStatus.OK);	
 	}
@@ -127,10 +130,17 @@ public class ProfesorController {
 	//Delete
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteProfesor(@PathVariable Integer id){
-		Profesor p = profService.findOne(id);
-		if (p != null){
-			profService.remove(id);
-			korService.remove(p.getKorisnik().getKorisnikID());
+		Profesor profesor = profesorService.findOne(id);
+		if (profesor != null){
+			
+			//predavanja
+			for (Predaje p : profesor.getPredavanja()){
+				predajeService.remove(p.getPredajeID());
+			}
+			
+			profesorService.remove(id);
+			korisnikService.remove(profesor.getKorisnik().getKorisnikID());
+			
 			return new ResponseEntity<>(HttpStatus.OK);
 		} else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -140,7 +150,7 @@ public class ProfesorController {
 	//All teacher courses
 	@RequestMapping(value="/{id}/predmeti", method=RequestMethod.GET)
 	public ResponseEntity<List<PredajeDTO>> getPredmetTeachers(@PathVariable Integer id){
-		Profesor p = profService.findOne(id);
+		Profesor p = profesorService.findOne(id);
 		Set<Predaje> predavanja=p.getPredavanja();
 		List<PredajeDTO> predavanjaDTO=new ArrayList<>();
 		for (Predaje predaje: predavanja) {
