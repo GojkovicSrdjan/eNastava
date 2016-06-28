@@ -240,11 +240,11 @@ public class StudentController {
 			for (Pohadja p : student.getPohadjanja()){
 				pohadjaService.remove(p.getPohadjaID());
 			}
-			
 			//dokumenta
 			for (Dokument d : student.getDokumenta()){
 				dokumentService.remove(d.getDokumentID());
 			}
+			//obaveze
 			for (Obaveza o : student.getObaveze()){
 				obavezaService.remove(o.getObavezaID());
 			}
@@ -260,9 +260,7 @@ public class StudentController {
 			korisnikService.remove(student.getKorisnik().getKorisnikID());
 			//i eRacun
 			eRacunService.remove(student.geteRacun().geteRacunID());
-			
 			return new ResponseEntity<>(HttpStatus.OK);
-			
 		} else {		
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
