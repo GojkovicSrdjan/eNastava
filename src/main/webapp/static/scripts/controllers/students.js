@@ -86,13 +86,15 @@ angular.module('studentsClientApp')
         		$scope.cancel = function() {
 		          $uibModalInstance.dismiss('cancel');
 		        };
+
+		        //U $scope.subtasks nadji subtask(obavezu) gde je tipObavezeID == $scope.task.tipObavezeID
+        		//postavu u scope > $scope.subtask
+		        //Da li moze jednostavnije?
         		for (var int = 0; int < $scope.subtasks.length; int++) {
         			if($scope.subtasks[int].tipObaveze.tipObavezeID == $scope.task.tipObavezeID){
         				$scope.subtask = $scope.subtasks[int];
         			}
 				}
-		        //U $scope.subtasks nadji subtask(obavezu) gde je tipObavezeID == $scope.task.tipObavezeID
-        		//postavu u scope > $spope.subtask
         	}];
         	//END StudentViewObavezaModalCtrl
                 
@@ -115,6 +117,22 @@ angular.module('studentsClientApp')
         }];
         //END StudentViewCourseModalCtrl
         
+        var StudentDocumentsModalCtrl = ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance){
+    		
+    		$scope.cancel = function() {
+	          $uibModalInstance.dismiss('cancel');
+	        };
+	        
+	        if ($scope.student.studentID){
+	        	Restangular.one("studenti", $scope.student.studentID).getList("dokumenti").then(function (entries) {
+	    			$scope.documents=entries;
+	    		});
+        	}
+	        
+    	}];
+        //END StudentDocumentsModalCtrl
+        
+        /////
         $scope.openModalP = function(predmet) {
         	$scope.course = predmet;
             var modalInstance = $uibModal.open({
@@ -128,8 +146,21 @@ angular.module('studentsClientApp')
             	}
             });
         };
-      }
-    ];
+        
+        $scope.openModalDokumenta = function() {
+        	var modalInstance = $uibModal.open({
+            	templateUrl: 'views/modals/documents.html',
+            	controller: StudentDocumentsModalCtrl,
+            	scope: $scope,
+            	resolve: {
+            		student: function() {
+            			return student;
+            		}
+            	}
+            });
+        }
+         
+    }];
     //END StudentsModalCtrl
     
     var ERacunModalCtrl =['$scope', '$uibModalInstance', 'eRacun', 'Restangular', '$log', '_',
