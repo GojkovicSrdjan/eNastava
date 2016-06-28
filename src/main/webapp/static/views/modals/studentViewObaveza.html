@@ -8,52 +8,32 @@
       </fieldset>
       <br>
       <fieldset class="form-group">
-        <label for="name">Naziv predmeta</label>
-        <input type="text" class="form-control" id="name" ng-model="course.naziv">
+        <label for="name">naziv obaveze</label>
+        <input type="text" class="form-control" id="name" ng-model="subtask.tipObaveze.naziv">
       </fieldset>
       <fieldset class="form-group">
-        <label for="name">Opis predmeta</label>
-        <input type="text" class="form-control" id="name" ng-model="course.opis">
+        <label for="name">opis obaveze</label>
+        <input type="text" class="form-control" id="name" ng-model="subtask.tipObaveze.opis">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="name">datum</label>
+        <input type="text" class="form-control" id="name" ng-model="subtask.tipObaveze.datum">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="name">polozeno</label>
+        <input type="text" class="form-control" id="name" ng-model="subtask.polozeno">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="name">broj bodova</label>
+        <input type="text" class="form-control" id="name" ng-model="subtask.brojBodova">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="name">ocena</label>
+        <input type="text" class="form-control" id="name" ng-model="subtask.ocena">
       </fieldset>
   	</form>
-    <br>
-    <label>profesori</label>
-    <table class="table table-bordered">
-      <tr ng-repeat="t in teachings">
-        <td>
-          {{t.profesor.korisnik.ime}} {{t.profesor.korisnik.prezime}} {{t.profesor.zvanje}}
-        </td>     
-      </tr>
-    </table>
     
-    <!-- START obaveze -->
-    <br>
-    <label>tipovi obaveza</label>
-    <table class="table table-bordered">
-      <tr>
-      	<th>naziv</th>
-      	<th>opis</th>
-      	<th>datum</th>
-      	<th></th>
-      </tr>
-      <tr ng-repeat="task in tasks">
-        <td>
-          {{task.naziv}}   
-        </td>
-        <td>
-          {{task.opis}}
-        </td>
-        <td>
-          {{task.datum}}
-        </td>
-        <td>
-	        <button type="button" class="btn btn-default right" aria-label="Prikaz" ng-click="#">
-	            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-	        </button>
-		</td>
-      </tr>
-    </table>
-    <!-- END obaveze -->
+
 </div>
 <div class="modal-footer">
   <button class="btn btn-default" type="button" ng-click="cancel()">Close</button>

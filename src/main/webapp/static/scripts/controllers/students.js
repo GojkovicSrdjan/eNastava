@@ -86,8 +86,12 @@ angular.module('studentsClientApp')
         		$scope.cancel = function() {
 		          $uibModalInstance.dismiss('cancel');
 		        };
-        		
-        		//U $scope.subtasks nadji subtask(obavezu) gde je tipObavezeID == $scope.task.tipObavezeID
+        		for (var int = 0; int < $scope.subtasks.length; int++) {
+        			if($scope.subtasks[int].tipObaveze.tipObavezeID == $scope.task.tipObavezeID){
+        				$scope.subtask = $scope.subtasks[int];
+        			}
+				}
+		        //U $scope.subtasks nadji subtask(obavezu) gde je tipObavezeID == $scope.task.tipObavezeID
         		//postavu u scope > $spope.subtask
         	}];
         	//END StudentViewObavezaModalCtrl
