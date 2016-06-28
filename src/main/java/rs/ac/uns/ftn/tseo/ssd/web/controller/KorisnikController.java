@@ -55,7 +55,7 @@ public class KorisnikController {
 	
 	
 	//Find by username and password
-//	@RequestMapping(value="/{username}/{password}", method=RequestMethod.GET)
+//	@RequestMapping(value="/{username}/{password}", method=RequestMethod.POST)
 //	public ResponseEntity<KorisnikDTO> findByUsernameAndPassword(
 //			@RequestParam String username, @RequestParam String password){
 //		Korisnik kor=korService.findByKorisnickoImeAndLozinka(username, password);

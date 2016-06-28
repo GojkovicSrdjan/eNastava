@@ -1,5 +1,5 @@
 <div>
-  <h3>Studenti</h3>
+  <h3>Administratori</h3>
 </div>
 <table class="table table-bordered">
   <tr>
@@ -7,7 +7,7 @@
     <th>prezime</th>
     <th>akcija</th>
   </tr>
-  <tr ng-repeat="a in admins| filter:pretraga">
+  <tr ng-repeat="a in adminsPage| filter:pretraga| limitTo:5">
     <td>
       {{a.korisnik.ime}}
     </td>
@@ -30,3 +30,8 @@
     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
   </button>
 </div>
+<ul ng-if="pages.length>1">
+	<li ng-repeat="p in pages track by $index">
+	 	<span ng-click="page(p)">{{p+1}}</span>
+	</li>
+</ul>

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,9 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import rs.ac.uns.ftn.tseo.ssd.model.Administrator;
 import rs.ac.uns.ftn.tseo.ssd.model.Korisnik;
+import rs.ac.uns.ftn.tseo.ssd.model.Profesor;
 import rs.ac.uns.ftn.tseo.ssd.service.AdministratorService;
 import rs.ac.uns.ftn.tseo.ssd.service.KorisnikService;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.AdministratorDTO;
+import rs.ac.uns.ftn.tseo.ssd.web.dto.ProfesorDTO;
 
 @RestController
 @RequestMapping(value="api/administratori")
@@ -27,7 +31,7 @@ public class AdministratorController {
 	private KorisnikService korService;
 
 	//Get all
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value="/all", method = RequestMethod.GET)
 	public ResponseEntity<List<AdministratorDTO>> getAllAdmins(){
 		List<Administrator> admins=adminService.findAll();
 		List<AdministratorDTO> adminsDTO=new ArrayList<>();
@@ -35,6 +39,18 @@ public class AdministratorController {
 			adminsDTO.add(new AdministratorDTO(a));
 		}
 		return new ResponseEntity<>(adminsDTO, HttpStatus.OK);
+	}
+	
+	//Get page
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<List<AdministratorDTO>> getAdminsPage(Pageable page){
+		Page<Administrator> admini=adminService.findAll(page);
+		List<AdministratorDTO> adminDTO=new ArrayList<>();
+		for (Administrator a: admini) {
+			adminDTO.add(new AdministratorDTO(a));
+		}
+		return new ResponseEntity<>(adminDTO, HttpStatus.OK);
+		
 	}
 	
 	//Get one

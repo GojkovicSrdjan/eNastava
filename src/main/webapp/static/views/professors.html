@@ -8,7 +8,7 @@
     <th>zvanje</th>
     <th>akcija</th>
   </tr>
-  <tr ng-repeat="p in professors| filter:pretraga">
+  <tr ng-repeat="p in professorsPage| filter:pretraga| limitTo:5">
     <td>
       {{p.korisnik.ime}}
     </td>
@@ -34,3 +34,8 @@
     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
   </button>
 </div>
+<ul ng-if="pages.length>1">
+	<li ng-repeat="p in pages track by $index">
+	 	<span ng-click="page(p)">{{p+1}}</span>
+	</li>
+</ul>

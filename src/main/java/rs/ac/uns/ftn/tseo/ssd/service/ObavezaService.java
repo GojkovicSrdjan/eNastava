@@ -30,4 +30,5 @@ public class ObavezaService {
 		obavezaRepo.delete(obavezaID);
 	}
 	
+	
 }

@@ -225,17 +225,18 @@ public class StudentController {
 	public ResponseEntity<Void> deleteStudent(@PathVariable Integer id){
 		Student student = studentService.findOne(id);
 		if (student != null){
-			
+
+			studentService.remove(id);
 			//Kada se obrise student brise se i korisnik
 			korisnikService.remove(student.getKorisnik().getKorisnikID());
 			
 			//obaveze
-			Set<Obaveza> obaveze =  student.getObaveze();
-			for (Obaveza o : obaveze){
-				obavezaService.remove(o.getObavezaID());
-			}
-			
-			studentService.remove(id);
+//			Set<Obaveza> obaveze =  student.getObaveze();
+//			if(obaveze!=null){
+//				for (Obaveza o : obaveze){
+//					obavezaService.remove(o.getObavezaID());
+//				}
+//			}
 			return new ResponseEntity<>(HttpStatus.OK);
 		} else {		
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

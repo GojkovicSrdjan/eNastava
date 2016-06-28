@@ -9,10 +9,12 @@
  */
 angular.module('studentsClientApp')
   .controller('StudentsCtrl', ['$scope', 'Restangular', '$uibModal', '$log', '_', function($scope, Restangular, $uibModal, $log, _) {
+	  $scope.currentPage=0;
     //Restangular koristimo za rest pozive
     Restangular.all("studenti").getList().then(function(entries) {
-      // nakon sto resursi stgnu sa sa back enda, postavimo ih u $scope da bismo mogli da ih prikazemo na stranici
       $scope.students = entries;
+      check(entries);
+      $scope.page($scope.currentPage);
     });
 
     $scope.deleteStudent = function(id) {
@@ -21,10 +23,39 @@ angular.module('studentsClientApp')
         _.remove($scope.students, {
           studentID: id
         });
+        _.remove($scope.studentsPage,{
+        	studentID:id
+		});
+        if($scope.studentsPage.length==0){
+			$scope.page($scope.currentPage-1);
+		}
+		else{
+        	$scope.page($scope.currentPage);
+		}
+		
+		check($scope.students);
       }, function() {
         $log.info("the student cannot be removed since they are enrolled to some courses");
       });
     };
+    
+    $scope.page= function page(currentPage){
+    	$scope.currentPage=currentPage;
+        Restangular.all("studenti").getList({page: currentPage,size: 5 }).then(function(entries) {
+            $scope.studentsPage = entries;
+        });
+    };
+    
+    function check(entries) {
+    	
+        var p=entries.length/5;
+        if(p%1>0 && p%1<0.5){
+      	  p++;
+        };
+        var pages=Math.round(p);
+        $scope.pageSum=pages;
+        $scope.pages= Array.from(new Array(pages), (x,i) => i);
+        };
 
     var StudentsModalCtrl = ['$scope', '$uibModalInstance', 'student', 'Restangular', '$log', '_',
       function($scope, $uibModalInstance, student, Restangular, $log, _) {
@@ -44,6 +75,11 @@ angular.module('studentsClientApp')
           } else {
             Restangular.all('studenti').post($scope.student).then(function (data) {
               $scope.students.push(data);
+      		$scope.studentsPage.push(data);
+      		check($scope.students);
+              if($scope.studentsPage.length>5){
+                	$scope.page($scope.currentPage+1);
+                };
             },
               // callback za gresku sa servera
               function() {
@@ -99,6 +135,7 @@ angular.module('studentsClientApp')
 		};
     	
         $scope.cancel = function() {
+        	$scope.updataERacun();
             $uibModalInstance.dismiss('cancel');
           };
     }
@@ -121,7 +158,7 @@ angular.module('studentsClientApp')
         $scope.ok = function() {
             if ($scope.uplata.uplataID) {
 				Restangular.all("uplate").customPUT($scope.uplata).then(function (data) {
-					$scope.uplata					
+					$scope.uplata;					
 				});
             } else {
             	$scope.uplata.eRacun={"eRacunID":$scope.eRacun.eRacunID};
@@ -133,6 +170,7 @@ angular.module('studentsClientApp')
                   $log.info('');
                 });
             }
+            $scope.eRacun.stanjeNaERacunu=$scope.eRacun.stanjeNaERacunu+parseInt($scope.uplata.iznos);
             $uibModalInstance.close('ok');
           };
 
