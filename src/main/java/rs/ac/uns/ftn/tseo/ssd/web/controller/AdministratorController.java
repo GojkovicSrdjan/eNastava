@@ -16,24 +16,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import rs.ac.uns.ftn.tseo.ssd.model.Administrator;
 import rs.ac.uns.ftn.tseo.ssd.model.Korisnik;
-import rs.ac.uns.ftn.tseo.ssd.model.Profesor;
 import rs.ac.uns.ftn.tseo.ssd.service.AdministratorService;
 import rs.ac.uns.ftn.tseo.ssd.service.KorisnikService;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.AdministratorDTO;
-import rs.ac.uns.ftn.tseo.ssd.web.dto.ProfesorDTO;
 
 @RestController
 @RequestMapping(value="api/administratori")
 public class AdministratorController {
 	@Autowired
-	private AdministratorService adminService;
+	private AdministratorService administratorService;
 	@Autowired
-	private KorisnikService korService;
+	private KorisnikService korisnikService;
 
 	//Get all
 	@RequestMapping(value="/all", method = RequestMethod.GET)
 	public ResponseEntity<List<AdministratorDTO>> getAllAdmins(){
-		List<Administrator> admins=adminService.findAll();
+		List<Administrator> admins=administratorService.findAll();
 		List<AdministratorDTO> adminsDTO=new ArrayList<>();
 		for (Administrator a : admins) {
 			adminsDTO.add(new AdministratorDTO(a));
@@ -44,7 +42,7 @@ public class AdministratorController {
 	//Get page
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<AdministratorDTO>> getAdminsPage(Pageable page){
-		Page<Administrator> admini=adminService.findAll(page);
+		Page<Administrator> admini=administratorService.findAll(page);
 		List<AdministratorDTO> adminDTO=new ArrayList<>();
 		for (Administrator a: admini) {
 			adminDTO.add(new AdministratorDTO(a));
@@ -56,7 +54,7 @@ public class AdministratorController {
 	//Get one
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<AdministratorDTO> getAdmin(@PathVariable Integer id){
-		Administrator admin=adminService.findOne(id);
+		Administrator admin=administratorService.findOne(id);
 		if(admin==null){
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);	
 		}
@@ -81,10 +79,10 @@ public class AdministratorController {
 		kor.setIme(adminDTO.getKorisnik().getIme());
 		kor.setPrezime(adminDTO.getKorisnik().getPrezime());
 		
-		korService.save(kor);
+		korisnikService.save(kor);
 		
 		admin.setKorisnik(kor);
-		adminService.save(admin);
+		administratorService.save(admin);
 		
 		return new ResponseEntity<>(new AdministratorDTO(admin), HttpStatus.CREATED);
 				
@@ -93,11 +91,11 @@ public class AdministratorController {
 	//Update
 	@RequestMapping(method=RequestMethod.PUT, consumes="application/json")
 	public ResponseEntity<AdministratorDTO> updateAdmin(@RequestBody AdministratorDTO adminDTO){
-		Administrator admin= adminService.findOne(adminDTO.getAdminID());
+		Administrator admin= administratorService.findOne(adminDTO.getAdminID());
 		if(admin==null)
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		
-		Korisnik kor=korService.findOne(admin.getKorisnik().getKorisnikID());
+		Korisnik kor=korisnikService.findOne(admin.getKorisnik().getKorisnikID());
 		kor.setJMBG(adminDTO.getKorisnik().getJMBG());
 		kor.setBrojTelefona(adminDTO.getKorisnik().getBrojTelefona());
 		kor.setEmail(adminDTO.getKorisnik().getEmail());
@@ -109,9 +107,9 @@ public class AdministratorController {
 		kor.setIme(adminDTO.getKorisnik().getIme());
 		kor.setPrezime(adminDTO.getKorisnik().getPrezime());
 		
-		korService.save(kor);
+		korisnikService.save(kor);
 		admin.setKorisnik(kor);
-		adminService.save(admin);
+		administratorService.save(admin);
 		return new ResponseEntity<>(new AdministratorDTO(admin), HttpStatus.OK);
 		
 	}
@@ -119,10 +117,10 @@ public class AdministratorController {
 	//Delete
 	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteAdmin(@PathVariable Integer id){
-		Administrator admin=adminService.findOne(id);
+		Administrator admin=administratorService.findOne(id);
 		if(admin!=null){
-			adminService.remove(id);
-			korService.remove(admin.getKorisnik().getKorisnikID());
+			administratorService.remove(id);
+			korisnikService.remove(admin.getKorisnik().getKorisnikID());
 			return new ResponseEntity<>(HttpStatus.OK);
 		}else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

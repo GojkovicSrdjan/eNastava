@@ -49,16 +49,26 @@
     	<input type="text" class="form-control" id="mesto" ng-model="student.korisnik.mesto" >
     </fieldset>     
   </form>
-  <br>
-  <label for="predmeti">predmeti</label>
+  
+    <!-- START predmeti -->
+    <br>
+    <label for="predmeti">predmeti</label>
     <table id="predmeti" class="table table-bordered">
       <tr ng-repeat="enrollment in enrollments">
         <td>
           {{enrollment.predmet.naziv}}
         </td>
+        <td>
+	      <button type="button" class="btn btn-default" aria-label="Izmena" ng-click="openModalP(enrollment.predmet)">
+	        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+	      </button>
+	    </td>
       </tr>
     </table>
+    <!-- END predmeti -->
+    
     <button ng-click="openERacun(student.eRacun)">E-racun</button>
+    <button ng-click="openModalDokumenta(student)">Dokumenta</button>
 </div>
 <div class="modal-footer">
   <button class="btn btn-default" type="button" ng-click="ok()">OK</button>

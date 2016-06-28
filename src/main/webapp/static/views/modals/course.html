@@ -2,13 +2,13 @@
   <h3 class="modal-title">Kurs</h3>
 </div>
 <div class="modal-body">
-  <form>
-    <fieldset class="form-group">
-      <label for="name">Naziv</label>
-      <input type="text" class="form-control" id="name" ng-model="course.naziv">
-    </fieldset>
-  </form>
-  <label>studenti</label>
+  	<form>
+      <fieldset class="form-group">
+        <label for="name">Naziv</label>
+        <input type="text" class="form-control" id="name" ng-model="course.naziv">
+      </fieldset>
+  	</form>
+    <label>studenti</label>
     <table class="table table-bordered">
       <tr ng-repeat="enrollment in enrollments">
         <td>
@@ -18,7 +18,7 @@
           </button>
         </td>
       </tr>
-      </table>
+    </table>
     <span class="right">
       <button type="button" class="btn btn-default" aria-label="Dodavanje"  ng-click="openModalS(course)">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -44,11 +44,25 @@
     
     <!-- START obaveze -->
     <br>
-    <label>obaveze</label>
+    <label>tipovi obaveza</label>
     <table class="table table-bordered">
+      <tr>
+      	<th>naziv</th>
+      	<th>opis</th>
+      	<th>datum</th>
+      	<th>akcija</th>
+      </tr>
       <tr ng-repeat="task in tasks">
         <td>
-          {{task.naziv}} | {{task.opis}}
+          {{task.naziv}} 
+       	</td>
+       	<td>
+          {{task.opis}}
+        </td>
+        <td>
+          {{task.datum}}
+        </td>
+        <td>
           <button type="button" class="btn btn-default right" aria-label="Brisanje" ng-click="deleteTaskType(task.tipObavezeID)">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
           </button>

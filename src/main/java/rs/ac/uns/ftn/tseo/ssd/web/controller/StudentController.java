@@ -22,10 +22,14 @@ import rs.ac.uns.ftn.tseo.ssd.model.Korisnik;
 import rs.ac.uns.ftn.tseo.ssd.model.Obaveza;
 import rs.ac.uns.ftn.tseo.ssd.model.Pohadja;
 import rs.ac.uns.ftn.tseo.ssd.model.Student;
+import rs.ac.uns.ftn.tseo.ssd.model.Uplata;
+import rs.ac.uns.ftn.tseo.ssd.service.DokumentService;
 import rs.ac.uns.ftn.tseo.ssd.service.ERacunService;
 import rs.ac.uns.ftn.tseo.ssd.service.KorisnikService;
 import rs.ac.uns.ftn.tseo.ssd.service.ObavezaService;
+import rs.ac.uns.ftn.tseo.ssd.service.PohadjaService;
 import rs.ac.uns.ftn.tseo.ssd.service.StudentService;
+import rs.ac.uns.ftn.tseo.ssd.service.UplataService;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.DokumentDTO;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.ObavezaDTO;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.PohadjaDTO;
@@ -45,6 +49,12 @@ public class StudentController {
 	private ERacunService eRacunService;
 	@Autowired
 	private ObavezaService obavezaService;
+	@Autowired
+	private DokumentService dokumentService;
+	@Autowired
+	private UplataService uplataService;
+	@Autowired
+	private PohadjaService pohadjaService;
 	
 	//GET ALL
 	@RequestMapping(value="/all", method = RequestMethod.GET)
@@ -199,8 +209,8 @@ public class StudentController {
 	
 	//All student exams
 	@RequestMapping(value="/{studentID}/obaveze", method=RequestMethod.GET)
-	public ResponseEntity<List<ObavezaDTO>> getStudentExams(@PathVariable Integer id){
-		Student s=studentService.findOne(id);
+	public ResponseEntity<List<ObavezaDTO>> getStudentExams(@PathVariable Integer studentID){
+		Student s=studentService.findOne(studentID);
 		if(s==null)
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		
@@ -225,40 +235,36 @@ public class StudentController {
 	public ResponseEntity<Void> deleteStudent(@PathVariable Integer id){
 		Student student = studentService.findOne(id);
 		if (student != null){
-
+			
+			//pohadjanja
+			for (Pohadja p : student.getPohadjanja()){
+				pohadjaService.remove(p.getPohadjaID());
+			}
+			
+			//dokumenta
+			for (Dokument d : student.getDokumenta()){
+				dokumentService.remove(d.getDokumentID());
+			}
+			for (Obaveza o : student.getObaveze()){
+				obavezaService.remove(o.getObavezaID());
+			}
+			
+			//eRacun(posle brisanja studenta) i uplate
+			for (Uplata u : student.geteRacun().getUplate()){
+				uplataService.remove(u.getUplataID());
+			}
+			
 			studentService.remove(id);
+			
 			//Kada se obrise student brise se i korisnik
 			korisnikService.remove(student.getKorisnik().getKorisnikID());
+			//i eRacun
+			eRacunService.remove(student.geteRacun().geteRacunID());
 			
-			//obaveze
-//			Set<Obaveza> obaveze =  student.getObaveze();
-//			if(obaveze!=null){
-//				for (Obaveza o : obaveze){
-//					obavezaService.remove(o.getObavezaID());
-//				}
-//			}
 			return new ResponseEntity<>(HttpStatus.OK);
+			
 		} else {		
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
-//	//Dodavanje novog studentovog dokumenta
-//	@RequestMapping(value = "/{id}/dokument", method=RequestMethod.POST)
-//	public ResponseEntity<DokumentDTO> addDocumentToStudent(@RequestParam Integer id,
-//			@RequestBody DokumentDTO dokDTO){
-//		Student s=studentService.findOne(id);
-//		if(s==null)
-//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//		
-//		Dokument dok=new Dokument();
-//		
-//		dok.setNaziv(dokDTO.getNaziv());
-//		dok.setPutanjaDoDokumenta(dokDTO.getPutanjaDoDokumenta());
-//		dok.setTip(dokDTO.getTip());
-//		dok.setStudent(s);
-//		dokService.save(dok);
-//		
-//		return new ResponseEntity<>(new DokumentDTO(dok), HttpStatus.CREATED);
-//	}
 }

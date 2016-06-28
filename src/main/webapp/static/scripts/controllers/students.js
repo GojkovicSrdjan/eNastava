@@ -93,8 +93,111 @@ angular.module('studentsClientApp')
           $uibModalInstance.dismiss('cancel');
         };
         
-      }
-    ];
+        var StudentViewCourseModalCtrl = ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance){
+        	
+        	$scope.cancel = function() {
+                $uibModalInstance.dismiss('cancel');
+            };
+        	
+        	$scope.student = student;
+        	if ($scope.course.predmetID) {
+        		Restangular.one("predmeti", $scope.course.predmetID).getList("studenti").then(function(entries) {
+        			$scope.enrollments = entries;
+        		});
+        		Restangular.one("predmeti", $scope.course.predmetID).getList("profesori").then(function (entries) {
+        			$scope.teachings=entries;
+        		});
+        		Restangular.one("predmeti", $scope.course.predmetID).getList("tipobaveze").then(function (entries) {
+        			$scope.tasks=entries;
+        		});
+        	}
+        	if ($scope.student.studentID){
+	        	Restangular.one("studenti", $scope.student.studentID).getList("obaveze").then(function (entries) {
+	    			$scope.subtasks=entries;
+	    		});
+        	}
+        	
+        	var StudentViewObavezaModalCtrl = ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance){
+        		
+        		$scope.cancel = function() {
+		          $uibModalInstance.dismiss('cancel');
+		        };
+
+		        //U $scope.subtasks nadji subtask(obavezu) gde je tipObavezeID == $scope.task.tipObavezeID
+        		//postavu u scope > $scope.subtask
+		        //Da li moze jednostavnije?
+        		for (var int = 0; int < $scope.subtasks.length; int++) {
+        			if($scope.subtasks[int].tipObaveze.tipObavezeID == $scope.task.tipObavezeID){
+        				$scope.subtask = $scope.subtasks[int];
+        			}
+				}
+        	}];
+        	//END StudentViewObavezaModalCtrl
+                
+        	
+        	$scope.openModalO = function(tipObaveze) {
+            	$scope.task = tipObaveze;
+            	
+                var modalInstance = $uibModal.open({
+                	templateUrl: 'views/modals/studentViewObaveza.html',
+                	controller: StudentViewObavezaModalCtrl,
+                	scope: $scope,
+                	resolve: {
+                		tipObaveze: function() {
+                			return tipObaveze;
+                		}
+                	}
+                });
+            };
+            
+        }];
+        //END StudentViewCourseModalCtrl
+        
+        var StudentDocumentsModalCtrl = ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance){
+    		
+    		$scope.cancel = function() {
+	          $uibModalInstance.dismiss('cancel');
+	        };
+	        
+	        if ($scope.student.studentID){
+	        	Restangular.one("studenti", $scope.student.studentID).getList("dokumenti").then(function (entries) {
+	    			$scope.documents=entries;
+	    		});
+        	}
+	        
+    	}];
+        //END StudentDocumentsModalCtrl
+        
+        /////
+        $scope.openModalP = function(predmet) {
+        	$scope.course = predmet;
+            var modalInstance = $uibModal.open({
+            	templateUrl: 'views/modals/studentViewCourse.html',
+            	controller: StudentViewCourseModalCtrl,
+            	scope: $scope,
+            	resolve: {
+            		predmet: function() {
+            			return predmet;
+            		}
+            	}
+            });
+        };
+        
+        $scope.openModalDokumenta = function() {
+        	var modalInstance = $uibModal.open({
+            	templateUrl: 'views/modals/documents.html',
+            	controller: StudentDocumentsModalCtrl,
+            	scope: $scope,
+            	resolve: {
+            		student: function() {
+            			return student;
+            		}
+            	}
+            });
+        }
+         
+    }];
+    //END StudentsModalCtrl
     
     var ERacunModalCtrl =['$scope', '$uibModalInstance', 'eRacun', 'Restangular', '$log', '_',
       function($scope, $uibModalInstance, eRacun, Restangular, $log, _) {

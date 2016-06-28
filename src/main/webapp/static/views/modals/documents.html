@@ -1,0 +1,56 @@
+<div class="modal-header">
+  <h3 class="modal-title">Dokumenta</h3>
+</div>
+<div class="modal-body">
+  	<form>
+  	  <fieldset class="form-group">
+        <label for="name">{{student.korisnik.ime}} {{student.korisnik.prezime}} {{student.brojIndexa}}</label>
+      </fieldset>
+      <br>
+  	</form>
+    
+    <!-- START dokumenta -->
+    <br>
+    <label>dokumenta</label>
+    <table class="table table-bordered">
+      <tr>
+      	<th>naziv</th>
+      	<th>tip</th>
+      	<th>akcija</th>
+      </tr>
+      <tr ng-repeat="document in documents">
+        <td>
+          {{document.naziv}} 
+       	</td>
+       	<td>
+          {{document.tip}}
+        </td>
+        <td>
+          <a ng-href="{{document.putanjaDoDokumenta}}">
+            <button type="button" class="btn btn-default" aria-label="Prikaz" ng-click="#">
+              <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+      	    </button>
+          </a>
+          
+          <button type="button" class="btn btn-default" aria-label="Izmena" ng-click="openModalUploadDocument(document)">
+        	<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+      	  </button>
+        
+     	  <button type="button" class="btn btn-default" aria-label="Brisanje" ng-click="deleteDocument(document.dokumentID)">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          </button>
+        </td>
+      </tr>
+      </table>
+    <span class="right">
+      <button type="button" class="btn btn-default" aria-label="Dodavanje"  ng-click="openModalUploadDocument()">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      </button>
+    </span>
+    <!-- END dokumenta -->
+    
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" type="button" ng-click="ok()">OK</button>
+  <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+</div>

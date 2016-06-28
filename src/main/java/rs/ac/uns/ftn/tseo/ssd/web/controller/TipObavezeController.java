@@ -97,8 +97,8 @@ public class TipObavezeController {
 		TipObaveze tip=tipService.findOne(id);
 		if(tip!=null){
 			
-			Set<Obaveza> obaveze =  tip.getObaveze();
-			for (Obaveza o : obaveze){
+			//obaveze
+			for (Obaveza o : tip.getObaveze()){
 				obavezaService.remove(o.getObavezaID());
 			}
 			

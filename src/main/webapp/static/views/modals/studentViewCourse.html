@@ -1,0 +1,60 @@
+<div class="modal-header">
+  <h3 class="modal-title">Student - pogled na kurs</h3>
+</div>
+<div class="modal-body-datepicker">
+	<form>
+      <fieldset class="form-group">
+        <label for="name">{{student.korisnik.ime}} {{student.korisnik.prezime}} {{student.brojIndexa}}</label>
+      </fieldset>
+      <br>
+      <fieldset class="form-group">
+        <label for="name">naziv predmeta</label>
+        <input type="text" class="form-control" id="name" ng-model="course.naziv">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="name">opis predmeta</label>
+        <input type="text" class="form-control" id="name" ng-model="course.opis">
+      </fieldset>
+  	</form>
+    <br>
+    <label>profesori</label>
+    <table class="table table-bordered">
+      <tr ng-repeat="t in teachings">
+        <td>
+          {{t.profesor.korisnik.ime}} {{t.profesor.korisnik.prezime}} {{t.profesor.zvanje}}
+        </td>     
+      </tr>
+    </table>
+    
+    <!-- START obaveze -->
+    <br>
+    <label>tipovi obaveza</label>
+    <table class="table table-bordered">
+      <tr>
+      	<th>naziv</th>
+      	<th>opis</th>
+      	<th>datum</th>
+      	<th>akcija</th>
+      </tr>
+      <tr ng-repeat="task in tasks">
+        <td>
+          {{task.naziv}}   
+        </td>
+        <td>
+          {{task.opis}}
+        </td>
+        <td>
+          {{task.datum}}
+        </td>
+        <td>
+	        <button type="button" class="btn btn-default right" aria-label="Prikaz" ng-click="openModalO(task)">
+	            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+	        </button>
+		</td>
+      </tr>
+    </table>
+    <!-- END obaveze -->
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" type="button" ng-click="cancel()">Close</button>
+</div>
