@@ -59,6 +59,10 @@ angular.module('studentsClientApp')
         
         var StudentViewCourseModalCtrl = ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance){
         	
+        	$scope.cancel = function() {
+                $uibModalInstance.dismiss('cancel');
+            };
+        	
         	$scope.student = student;
         	if ($scope.course.predmetID) {
         		Restangular.one("predmeti", $scope.course.predmetID).getList("studenti").then(function(entries) {
@@ -71,7 +75,41 @@ angular.module('studentsClientApp')
         			$scope.tasks=entries;
         		});
         	}
+        	if ($scope.student.studentID){
+	        	Restangular.one("studenti", $scope.student.studentID).getList("obaveze").then(function (entries) {
+	    			$scope.subtasks=entries;
+	    		});
+        	}
+        	
+        	var StudentViewObavezaModalCtrl = ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance){
+        		
+        		$scope.cancel = function() {
+		          $uibModalInstance.dismiss('cancel');
+		        };
+        		
+        		//U $scope.subtasks nadji subtask(obavezu) gde je tipObavezeID == $scope.task.tipObavezeID
+        		//postavu u scope > $spope.subtask
+        	}];
+        	//END StudentViewObavezaModalCtrl
+                
+        	
+        	$scope.openModalO = function(tipObaveze) {
+            	$scope.task = tipObaveze;
+            	
+                var modalInstance = $uibModal.open({
+                	templateUrl: 'views/modals/studentViewObaveza.html',
+                	controller: StudentViewObavezaModalCtrl,
+                	scope: $scope,
+                	resolve: {
+                		tipObaveze: function() {
+                			return tipObaveze;
+                		}
+                	}
+                });
+            };
+            
         }];
+        //END StudentViewCourseModalCtrl
         
         $scope.openModalP = function(predmet) {
         	$scope.course = predmet;
@@ -80,14 +118,15 @@ angular.module('studentsClientApp')
             	controller: StudentViewCourseModalCtrl,
             	scope: $scope,
             	resolve: {
-            		student: function() {
-            			return student;
+            		predmet: function() {
+            			return predmet;
             		}
             	}
             });
         };
       }
     ];
+    //END StudentsModalCtrl
     
     var ERacunModalCtrl =['$scope', '$uibModalInstance', 'eRacun', 'Restangular', '$log', '_',
       function($scope, $uibModalInstance, eRacun, Restangular, $log, _) {

@@ -209,8 +209,8 @@ public class StudentController {
 	
 	//All student exams
 	@RequestMapping(value="/{studentID}/obaveze", method=RequestMethod.GET)
-	public ResponseEntity<List<ObavezaDTO>> getStudentExams(@PathVariable Integer id){
-		Student s=studentService.findOne(id);
+	public ResponseEntity<List<ObavezaDTO>> getStudentExams(@PathVariable Integer studentID){
+		Student s=studentService.findOne(studentID);
 		if(s==null)
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		
