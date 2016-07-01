@@ -165,6 +165,63 @@ angular.module('studentsClientApp')
 	    		});
         	}
 	        
+	        var StudentUploadDocumentModalCtrl = ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance){
+	    		
+	    		$scope.cancel = function() {
+		          $uibModalInstance.dismiss('cancel');
+		        };
+		        
+		        $scope.ok = function() {
+		        	$uibModalInstance.dismiss('cancel');
+		        };
+		        
+		        $scope.Submit = function(){
+		        	
+		        	var fd = new FormData();
+		        	fd.append('file', $scope.document.file);
+		    		fd.append('nazivDokumenta', $scope.document.naziv);
+		    		fd.append('tipDokumenta', $scope.document.tip);
+		    		fd.append('studentID', $scope.student.studentID);
+		    		
+		    		if($scope.document.dokumentID){
+		    			Restangular.one('dokumenti')
+			    		.withHttpConfig({transformRequest: angular.identity})
+			    		.customPUT(fd, '', undefined, {'Content-Type': undefined});
+			     	}else{
+			     		Restangular.one('dokumenti')
+			    		.withHttpConfig({transformRequest: angular.identity})
+			    		.customPOST(fd, '', undefined, {'Content-Type': undefined});
+			     	}
+		        }
+	        
+	        }];
+	        //END StudentUploadDocumentModalCtrl
+	        
+	        /////
+	        $scope.openModalUploadDocument = function(document) {
+	        	
+	        	if (!document) {
+	                document = {
+	                  naziv: '',
+	                  tip: '',
+	                  putanjaDoDokumenta: ''                  
+	                };
+	            }
+	        	
+	        	$scope.document = document;
+	            var modalInstance = $uibModal.open({
+	            	templateUrl: 'views/modals/document.html',
+	            	controller: StudentUploadDocumentModalCtrl,
+	            	
+	            	scope: $scope,
+	            	resolve: {
+	            		document: function() {
+	            			return document;
+	            		}
+	            	}
+	            });
+	        };
+	        
     	}];
         //END StudentDocumentsModalCtrl
         

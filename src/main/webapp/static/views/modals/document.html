@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <h3 class="modal-title">Dokument</h3>
+</div>
+<div class="modal-body">
+  	<form>
+  	  <fieldset class="form-group">
+        <label>{{student.korisnik.ime}} {{student.korisnik.prezime}} {{student.brojIndexa}}</label>
+      </fieldset>
+      <br>
+  	
+  	  <fieldset class="form-group">
+        <label for="naziv">naziv dokumenta</label>
+        <input type="text" class="form-control" id="naziv" ng-model="document.naziv">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="tip">tip dokumenta</label>
+        <input type="text" class="form-control" id="tip" ng-model="document.tip">
+      </fieldset>
+      <fieldset ng-if="document.putanjaDoDokumenta!=&quot&quot" class="form-group">
+        <label for="putanja">URL</label>
+        <a ng-href="{{document.putanjaDoDokumenta}}">
+          {{document.putanjaDoDokumenta}}
+        </a>
+      </fieldset>
+      
+      <fieldset class="form-group">
+    	<label for="inputFile">dodaj dokument</label>
+    	<input type="file" id="inputFile" file-model="document.file">
+  	  </fieldset>
+  	  
+	  <button type="submit" class="btn btn-default" ng-click="Submit()">Submit</button>
+  	</form>
+    
+    {{document}}
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" type="button" ng-click="ok()">OK</button>
+  <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+</div>
