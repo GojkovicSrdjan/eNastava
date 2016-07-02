@@ -18,8 +18,11 @@ public class DokumentDTO {
 	}
 	
 	public DokumentDTO(Dokument dokument) {
-		dokumentID = dokument.getDokumentID();
-		student = new StudentDTO(dokument.getStudent());
+		this.dokumentID = dokument.getDokumentID();
+		this.student = new StudentDTO(dokument.getStudent());
+		this.naziv = dokument.getNaziv();
+		this.tip = dokument.getTip();
+		this.putanjaDoDokumenta = dokument.getPutanjaDoDokumenta();
 	}
 
 	public DokumentDTO(Integer dokumentID, StudentDTO student, String naziv, String tip, String putanjaDoDokumenta) {

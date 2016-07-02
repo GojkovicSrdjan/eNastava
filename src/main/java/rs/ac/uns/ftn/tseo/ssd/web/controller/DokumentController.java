@@ -1,18 +1,22 @@
 package rs.ac.uns.ftn.tseo.ssd.web.controller;
 
+import java.util.UUID;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.common.io.Files;
+
 import rs.ac.uns.ftn.tseo.ssd.model.Dokument;
+import rs.ac.uns.ftn.tseo.ssd.model.Student;
 import rs.ac.uns.ftn.tseo.ssd.service.DokumentService;
 import rs.ac.uns.ftn.tseo.ssd.service.StudentService;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.DokumentDTO;
@@ -21,50 +25,25 @@ import rs.ac.uns.ftn.tseo.ssd.web.dto.DokumentDTO;
 @RequestMapping(value="api/dokumenti")
 public class DokumentController {
 	@Autowired
-	private DokumentService dokService;
+	private DokumentService dokumentService;
 	@Autowired
 	private StudentService studentService;
+	
+	private static final Logger LOG = Logger.getLogger(DokumentController.class);
 	
 	//Get one
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<DokumentDTO> getDocumetn(@PathVariable Integer id){
-		Dokument dok=dokService.findOne(id);
+		Dokument dok=dokumentService.findOne(id);
 		if(dok==null){
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);	
 		}
 		return new ResponseEntity<>(new DokumentDTO(dok), HttpStatus.OK);
 		
 	}
-
-	/**
-     * Adds a document to the archive.
-     * 
-     * Url: /archive/upload?file={file}&person={person}&date={date} [POST]
-     * 
-     * @param file A file posted in a multipart request
-     * @param person The name of the uploading person
-     * @param date The date of the document
-     * @return The meta data of the added document
-     */
-//    @RequestMapping(value = "/upload", method = RequestMethod.POST)
-//    public @ResponseBody DocumentMetadata handleFileUpload(
-//            @RequestParam(value="file", required=true) MultipartFile file ,
-//            @RequestParam(value="person", required=true) String person,
-//            @RequestParam(value="date", required=true) @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
-//        
-//        try {
-//            Document document = new Document(file.getBytes(), file.getOriginalFilename(), date, person );
-//            getArchiveService().save(document);
-//            return document.getMetadata();
-//        } catch (RuntimeException e) {
-//            LOG.error("Error while uploading.", e);
-//            throw e;
-//        } catch (Exception e) {
-//            LOG.error("Error while uploading.", e);
-//            throw new RuntimeException(e);
-//        }      
-//    }
     
+	
+	
     //Add new document to student
   	@RequestMapping(method=RequestMethod.POST)
   	public ResponseEntity<DokumentDTO> createDocument(
@@ -73,44 +52,108 @@ public class DokumentController {
   			@RequestParam(value="tipDokumenta", required=true) String tip,
   			@RequestParam(value="studentID", required=true) String studentID
   			){
-  		Dokument dok=new Dokument();
+  		try {
+  			Dokument dokument = new Dokument();
+  	  		Student student = studentService.findOne(Integer.parseInt(studentID));
+  	  		dokument.setStudent(student);
+  	  	
+  	  		//priprema nove putanje
+  			String hostname = "localhost";
+  		    String port = "8080";
+  		    String folderPath = "/static/uploads/dokumenti/";
+  		    String fileUUID = UUID.randomUUID().toString(); //dokument cuvamo pod nazivom
+  			String ext = Files.getFileExtension(file.getOriginalFilename());
+  			String path = hostname+":"+port+folderPath+fileUUID+"."+ext;
+  			
+  			dokument.setPutanjaDoDokumenta(path);
+  	  		dokument.setNaziv(naziv);
+  			dokument.setTip(tip);
+  			
+  			dokumentService.save(dokument);
+  	  		return new ResponseEntity<>(new DokumentDTO(dokument), HttpStatus.CREATED);
+  		} catch (RuntimeException e) {
+  		  LOG.error("Error while uploading.", e);
+          throw e;
+  		} catch (Exception e) {
+          LOG.error("Error while uploading.", e);
+          throw new RuntimeException(e);
+  		}
   		
-  		
-//  		dok.setNaziv(dokDTO.getNaziv());
-//  		dok.setPutanjaDoDokumenta(dokDTO.getPutanjaDoDokumenta());
-//  		dok.setTip(dokDTO.getTip());
-//  		dok.setStudent(studentService.findOne(dokDTO.getStudent().getStudentID()));
-//  		dokService.save(dok);
-  		return new ResponseEntity<>(new DokumentDTO(dok), HttpStatus.CREATED);
   	}
-	//Update document
+  	
+  	
+  	  
+  	// Update document - change metadata
 	@RequestMapping(method=RequestMethod.PUT)
 	public ResponseEntity<DokumentDTO> updateDocumenthandleFileUpload(
+  			@RequestParam(value="nazivDokumenta", required=true) String naziv,
+  			@RequestParam(value="tipDokumenta", required=true) String tip,
+  			@RequestParam(value="dokumentID", required=true) String dokumentID
+  			){
+		try {
+  			Dokument dokument = dokumentService.findOne(Integer.parseInt(dokumentID)); 
+  	  		
+  	  		dokument.setNaziv(naziv);
+  			dokument.setTip(tip);
+  			dokumentService.save(dokument);
+  	  		return new ResponseEntity<>(new DokumentDTO(dokument), HttpStatus.OK); 			
+  		} catch (RuntimeException e) {
+  		  LOG.error("Error while uploading.", e);
+          throw e;
+  		} catch (Exception e) {
+          LOG.error("Error while uploading.", e);
+          throw new RuntimeException(e);
+  		}
+	}
+	// Update document - upload new file
+	@RequestMapping(value="/upload",method=RequestMethod.PUT)
+  	public ResponseEntity<DokumentDTO> createUpdateDocument(
   			@RequestParam(value="file", required=true) MultipartFile file,
   			@RequestParam(value="nazivDokumenta", required=true) String naziv,
   			@RequestParam(value="tipDokumenta", required=true) String tip,
-  			@RequestParam(value="studentID", required=true) String studentID,
-  			@RequestParam(value="dokumentID", required=true) String dokumentID
+  			@RequestParam(value="dokumentID", required=true) String dokumentID,
+  			@RequestParam(value="putanjaDoDokumenta", required=true) String staraPutanja
   			){
-		Dokument dok=dokService.findOne(Integer.parseInt(dokumentID));
-		if(dok==null)
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		
-		dok.setNaziv(naziv);
-		//dok.setPutanjaDoDokumenta(dokDTO.getPutanjaDoDokumenta());
-		dok.setTip(tip);
-		dokService.save(dok);
-		return new ResponseEntity<>(new DokumentDTO(dok), HttpStatus.OK);
-		
-		
-	}
+  		try {
+  			Dokument dokument = dokumentService.findOne(Integer.parseInt(dokumentID));
+  			
+  	  		//priprema nove putanje
+  			String hostname = "localhost";
+  		    String port = "8080";
+  		    String folderPath = "/static/uploads/dokumenti/";
+  		    String fileUUID = UUID.randomUUID().toString(); //dokument cuvamo pod nazivom
+  			String ext = Files.getFileExtension(file.getOriginalFilename());
+  			String path = hostname+":"+port+folderPath+fileUUID+"."+ext;
+  			
+  			dokument.setPutanjaDoDokumenta(path);
+  	  		dokument.setNaziv(naziv);
+  			dokument.setTip(tip);
+  			
+  			dokumentService.save(dokument);
+  	  		
+  			
+  			//cuvanje novog fajla
+  			//brisanje starog
+  			
+  			return new ResponseEntity<>(new DokumentDTO(dokument), HttpStatus.OK);
+  		} catch (RuntimeException e) {
+  		  LOG.error("Error while uploading.", e);
+          throw e;
+  		} catch (Exception e) {
+          LOG.error("Error while uploading.", e);
+          throw new RuntimeException(e);
+  		}
+  		
+  	}
+	
+	
 	
 	//Remove document
 	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteDocument(@PathVariable Integer id){
-		Dokument dok=dokService.findOne(id);
+		Dokument dok=dokumentService.findOne(id);
 		if(dok!=null){
-			dokService.remove(id);
+			dokumentService.remove(id);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

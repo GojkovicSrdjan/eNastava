@@ -35,6 +35,7 @@ angular.module('studentsClientApp')
 		
 		check($scope.students);
       }, function() {
+    	//Nece se nikad prikazati
         $log.info("the student cannot be removed since they are enrolled to some courses");
       });
     };
@@ -159,6 +160,29 @@ angular.module('studentsClientApp')
 	          $uibModalInstance.dismiss('cancel');
 	        };
 	        
+	        $scope.ok = function() {
+		          $uibModalInstance.dismiss('cancel');
+		    };
+		    
+		    $scope.deleteDocument = function(id) {
+		    	Restangular.one("dokumenti", id).remove().then(function() {
+		          // uklanjamo studenta sa zadatim id-om iz kolekcije
+		          _.remove($scope.documents, {
+		            dokumentID: id
+		          });
+		          /*_.remove($scope.documentsPage,{
+		          	dokumentID:id
+		  		  });
+		          if($scope.documentssPage.length==0){
+		  			$scope.page($scope.currentPage-1);
+		  		  }
+		  		  else{
+		          	$scope.page($scope.currentPage);
+		  		  }*/
+		  		  check($scope.documents);
+		        });
+		    };
+	        
 	        if ($scope.student.studentID){
 	        	Restangular.one("studenti", $scope.student.studentID).getList("dokumenti").then(function (entries) {
 	    			$scope.documents=entries;
@@ -172,25 +196,69 @@ angular.module('studentsClientApp')
 		        };
 		        
 		        $scope.ok = function() {
+			        var funPUT = function(urlPut,formData) {
+		        		Restangular.one(urlPut)
+			    		.withHttpConfig({transformRequest: angular.identity})
+			    		.customPUT(fd, '', undefined, {'Content-Type': undefined})
+			    		.then(function (data) {
+		    				var index = _.indexOf($scope.documents, _.find($scope.documents, {id: $scope.document.dokumentID}));
+			    			$scope.documents.splice(index, 1, data);
+			    		});
+		        	}
+		        	var funPOST = function(formData) {
+		        		Restangular.one('dokumenti')
+			    		.withHttpConfig({transformRequest: angular.identity})
+			    		.customPOST(fd, '', undefined, {'Content-Type': undefined})
+			    		.then(function (data) {
+			    			$scope.documents.push(data);
+			    		});
+		        	}
 		        	
 		        	var fd = new FormData();
-		        	fd.append('file', $scope.document.file);
-		    		fd.append('nazivDokumenta', $scope.document.naziv);
-		    		console.log($scope.document.file.type);
+		        	fd.append('nazivDokumenta', $scope.document.naziv);
 		    		fd.append('tipDokumenta', $scope.document.file.type);
-		    		fd.append('studentID', $scope.student.studentID);
 		    		
-		    		if($scope.document.dokumentID){
-		    			fd.append('dokumentID', $scope.document.dokumentID);
-		    			Restangular.one('dokumenti')
-			    		.withHttpConfig({transformRequest: angular.identity})
-			    		.customPUT(fd, '', undefined, {'Content-Type': undefined});
-			     	}else{
-			     		Restangular.one('dokumenti')
-			    		.withHttpConfig({transformRequest: angular.identity})
-			    		.customPOST(fd, '', undefined, {'Content-Type': undefined});
-			     	}
+		    		//Selektovan fajl
+		        	if($scope.document.file.size != null){
+		        		var t = $scope.document.file.type;
+		        		if(t == 'application/kswps' || t == 'image/jpg' || t == 'image/jpeg'){
+		        			if($scope.document.file.size < 5242880){
+					        	fd.append('file', $scope.document.file);
+					        	//Update
+					    		if($scope.document.dokumentID != null){
+					    			fd.append('dokumentID', $scope.document.dokumentID);
+					    			fd.append('putanjaDoDokumenta', $scope.document.putanjaDoDokumenta);
+					    			funPUT('dokumenti/upload',fd);
+					    			$uibModalInstance.close('ok');
+					        	//Create
+					    		}else{
+					    			fd.append('studentID', $scope.student.studentID);
+					    			funPOST(fd);
+					    			$uibModalInstance.close('ok');
+					    		}
+					    	}else{
+					    		alert('Error! File is to big. Max aproved size is 5MB');
+			        			$log.info('Error! File is to big. Max aproved size is 5MB');
+				        	}
+		        		}else{
+		        			alert('Error! Invalid document type. Allowed formats are .pdf .jpg .jpeg');
+		        			$log.info('Error! Invalid document type. Allowed formats are .pdf .jpg .jpeg');
+		        		}
+		        	//Nije selektovan fajl
+		        	}else{
+			    		//Update
+			    		if($scope.document.dokumentID != null){
+			    			fd.append('dokumentID', $scope.document.dokumentID);
+			    			funPUT('dokumenti',fd);
+			    			$uibModalInstance.close('ok');
+			        	//Create
+			    		}else{
+			    			alert('Error! To create Document u must select File to upload.');
+			    			$log.info('Error! To create Document u must select File to upload.');
+			    		}
+		        	}
 		        }
+		        
 	        
 	        }];
 	        //END StudentUploadDocumentModalCtrl
