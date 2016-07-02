@@ -87,19 +87,19 @@ public class DokumentController {
 	@RequestMapping(method=RequestMethod.PUT)
 	public ResponseEntity<DokumentDTO> updateDocumenthandleFileUpload(
   			@RequestParam(value="file", required=true) MultipartFile file,
-  			@RequestParam(value="dokumentID", required=true) String dokumentID,
   			@RequestParam(value="nazivDokumenta", required=true) String naziv,
   			@RequestParam(value="tipDokumenta", required=true) String tip,
-  			@RequestParam(value="studentID", required=true) String studentID
+  			@RequestParam(value="studentID", required=true) String studentID,
+  			@RequestParam(value="dokumentID", required=true) String dokumentID
   			){
 		Dokument dok=dokService.findOne(Integer.parseInt(dokumentID));
-//		if(dok==null)
-//			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//		
-//		dok.setNaziv(dokDTO.getNaziv());
-//		dok.setPutanjaDoDokumenta(dokDTO.getPutanjaDoDokumenta());
-//		dok.setTip(dokDTO.getTip());
-//		dokService.save(dok);
+		if(dok==null)
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		
+		dok.setNaziv(naziv);
+		//dok.setPutanjaDoDokumenta(dokDTO.getPutanjaDoDokumenta());
+		dok.setTip(tip);
+		dokService.save(dok);
 		return new ResponseEntity<>(new DokumentDTO(dok), HttpStatus.OK);
 		
 		

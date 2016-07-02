@@ -172,18 +172,16 @@ angular.module('studentsClientApp')
 		        };
 		        
 		        $scope.ok = function() {
-		        	$uibModalInstance.dismiss('cancel');
-		        };
-		        
-		        $scope.Submit = function(){
 		        	
 		        	var fd = new FormData();
 		        	fd.append('file', $scope.document.file);
 		    		fd.append('nazivDokumenta', $scope.document.naziv);
-		    		fd.append('tipDokumenta', $scope.document.tip);
+		    		console.log($scope.document.file.type);
+		    		fd.append('tipDokumenta', $scope.document.file.type);
 		    		fd.append('studentID', $scope.student.studentID);
 		    		
 		    		if($scope.document.dokumentID){
+		    			fd.append('dokumentID', $scope.document.dokumentID);
 		    			Restangular.one('dokumenti')
 			    		.withHttpConfig({transformRequest: angular.identity})
 			    		.customPUT(fd, '', undefined, {'Content-Type': undefined});
@@ -204,11 +202,13 @@ angular.module('studentsClientApp')
 	                document = {
 	                  naziv: '',
 	                  tip: '',
-	                  putanjaDoDokumenta: ''                  
+	                  putanjaDoDokumenta: ''                
 	                };
 	            }
-	        	
 	        	$scope.document = document;
+	        	$scope.document.file = {};
+	        	$scope.document.file.type = document.tip;
+	        	
 	            var modalInstance = $uibModal.open({
 	            	templateUrl: 'views/modals/document.html',
 	            	controller: StudentUploadDocumentModalCtrl,
@@ -240,7 +240,7 @@ angular.module('studentsClientApp')
             });
         };
         
-        $scope.openModalDokumenta = function() {
+        $scope.openModalDokumenta = function(student) {
         	var modalInstance = $uibModal.open({
             	templateUrl: 'views/modals/documents.html',
             	controller: StudentDocumentsModalCtrl,
