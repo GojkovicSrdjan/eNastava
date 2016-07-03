@@ -18,8 +18,8 @@
       </fieldset>
       <fieldset ng-if="document.putanjaDoDokumenta!=&quot&quot" class="form-group">
         <label for="putanja">URL</label>
-        <a ng-href="{{document.putanjaDoDokumenta}}">
-          {{document.putanjaDoDokumenta}}
+        <a ng-href="{{protocol}}{{baseURLHref}}{{baseURLPort}}{{document.putanjaDoDokumenta}}">
+          {{protocol}}{{baseURLHref}}{{baseURLPort}}{{document.putanjaDoDokumenta}}
         </a>
       </fieldset>
       

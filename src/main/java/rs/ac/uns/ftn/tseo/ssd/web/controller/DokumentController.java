@@ -1,5 +1,8 @@
 package rs.ac.uns.ftn.tseo.ssd.web.controller;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
@@ -58,16 +61,22 @@ public class DokumentController {
   	  		dokument.setStudent(student);
   	  	
   	  		//priprema nove putanje
-  			String hostname = "localhost";
-  		    String port = "8080";
-  		    String folderPath = "/static/uploads/dokumenti/";
+  		    String folderPath = "static/uploads/dokumenti/";
   		    String fileUUID = UUID.randomUUID().toString(); //dokument cuvamo pod nazivom
   			String ext = Files.getFileExtension(file.getOriginalFilename());
-  			String path = hostname+":"+port+folderPath+fileUUID+"."+ext;
+  			String putanjaDoDokumenta = folderPath+fileUUID+"."+ext;
   			
-  			dokument.setPutanjaDoDokumenta(path);
+  			dokument.setPutanjaDoDokumenta(putanjaDoDokumenta);
   	  		dokument.setNaziv(naziv);
   			dokument.setTip(tip);
+  			
+  			dokumentService.save(dokument);
+  	  		
+  			//cuvanje novog fajla
+  			String filePathString = "src/main/webapp/static/uploads/dokumenti/"+fileUUID+"."+ext;
+  			String filePath = new File(filePathString).getAbsolutePath();
+  			File dest = new File(filePath);
+            file.transferTo(dest);
   			
   			dokumentService.save(dokument);
   	  		return new ResponseEntity<>(new DokumentDTO(dokument), HttpStatus.CREATED);
@@ -111,29 +120,36 @@ public class DokumentController {
   			@RequestParam(value="file", required=true) MultipartFile file,
   			@RequestParam(value="nazivDokumenta", required=true) String naziv,
   			@RequestParam(value="tipDokumenta", required=true) String tip,
-  			@RequestParam(value="dokumentID", required=true) String dokumentID,
-  			@RequestParam(value="putanjaDoDokumenta", required=true) String staraPutanja
+  			@RequestParam(value="dokumentID", required=true) String dokumentID
   			){
   		try {
   			Dokument dokument = dokumentService.findOne(Integer.parseInt(dokumentID));
+  			String staraPutanja = dokument.getPutanjaDoDokumenta();
   			
   	  		//priprema nove putanje
-  			String hostname = "localhost";
-  		    String port = "8080";
-  		    String folderPath = "/static/uploads/dokumenti/";
+  		    String folderPath = "static/uploads/dokumenti/";
   		    String fileUUID = UUID.randomUUID().toString(); //dokument cuvamo pod nazivom
   			String ext = Files.getFileExtension(file.getOriginalFilename());
-  			String path = hostname+":"+port+folderPath+fileUUID+"."+ext;
+  			String putanjaDoDokumenta = folderPath+fileUUID+"."+ext;
   			
-  			dokument.setPutanjaDoDokumenta(path);
+  			dokument.setPutanjaDoDokumenta(putanjaDoDokumenta);
   	  		dokument.setNaziv(naziv);
   			dokument.setTip(tip);
   			
   			dokumentService.save(dokument);
   	  		
-  			
   			//cuvanje novog fajla
-  			//brisanje starog
+  			String filePathString = "src/main/webapp/static/uploads/dokumenti/"+fileUUID+"."+ext;
+  			String filePath = new File(filePathString).getAbsolutePath();
+  			File dest = new File(filePath);
+            file.transferTo(dest);
+  	  		
+  	  		//brisanje starog fajla
+            System.out.println(staraPutanja);
+            if(staraPutanja!=null && !staraPutanja.trim().equalsIgnoreCase("")){
+            	Path pathPath = Paths.get(new File("src/main/webapp/"+staraPutanja).getAbsolutePath());
+      			java.nio.file.Files.delete(pathPath);
+            }
   			
   			return new ResponseEntity<>(new DokumentDTO(dokument), HttpStatus.OK);
   		} catch (RuntimeException e) {

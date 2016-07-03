@@ -227,7 +227,6 @@ angular.module('studentsClientApp')
 					        	//Update
 					    		if($scope.document.dokumentID != null){
 					    			fd.append('dokumentID', $scope.document.dokumentID);
-					    			fd.append('putanjaDoDokumenta', $scope.document.putanjaDoDokumenta);
 					    			funPUT('dokumenti/upload',fd);
 					    			$uibModalInstance.close('ok');
 					        	//Create

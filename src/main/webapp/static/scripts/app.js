@@ -48,7 +48,12 @@ var myApp = angular
       });
   }])
   // run se izvrsava pre svega ostalog
-  .run(['Restangular', '$log', function(Restangular, $log) {
+  .run(['Restangular', '$rootScope', '$location', '$log', function(Restangular, $rootScope, $location, $log) {
+	//postavljamo $rootScope radi zaobilaska unsafe:url...
+	//primer ng-href="{{protocol}}{{baseURLHref}}{{baseURLPort}}routingPathName"
+	$rootScope.protocol = 'http://';
+    $rootScope.baseURLHref = $location.host();
+    $rootScope.baseURLPort = ':' + $location.port() + '/';
     // postavimo base url za Restangular da ne bismo morali da ga
     // navodimo svaki put kada se obracamo back endu
     // poziv vrsimo na http://localhost:8080/api/
@@ -60,4 +65,5 @@ var myApp = angular
       }
       return true; // greska nije obradjena
     });
+    
   }]);
