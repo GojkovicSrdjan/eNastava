@@ -14,7 +14,8 @@ var myApp = angular
     'ngRoute',
     'restangular',
     'ui.bootstrap',
-    'lodash'
+    'lodash',
+    "gettext"
   ])
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
@@ -48,7 +49,9 @@ var myApp = angular
       });
   }])
   // run se izvrsava pre svega ostalog
-  .run(['Restangular', '$rootScope', '$location', '$log', function(Restangular, $rootScope, $location, $log) {
+  .run(['Restangular', '$rootScope', 'gettextCatalog', '$location', '$log', function(Restangular, $rootScope, gettextCatalog, $location, $log) {
+	  gettextCatalog.currentLanguage='sr';
+	  gettextCatalog.debug=true;
 	//postavljamo $rootScope radi zaobilaska unsafe:url...
 	//primer ng-href="{{protocol}}{{baseURLHref}}{{baseURLPort}}routingPathName"
 	$rootScope.protocol = 'http://';

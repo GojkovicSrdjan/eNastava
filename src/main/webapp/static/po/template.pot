@@ -1,0 +1,313 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+
+#: views/modals/admin.html:2
+msgid "Administrator"
+msgstr ""
+
+#: index.html:44
+#: views/admins.html:2
+msgid "Administratori"
+msgstr ""
+
+#: views/admins.html:8
+#: views/courses.html:7
+#: views/modals/course.html:53
+#: views/modals/documents.html:19
+#: views/modals/eracun.html:22
+#: views/modals/studentViewCourse.html:37
+#: views/professors.html:9
+#: views/students.html:9
+msgid "Akcija"
+msgstr ""
+
+#: views/modals/admin.html:28
+#: views/modals/professor.html:32
+#: views/modals/student.html:32
+msgid "Br. telefona"
+msgstr ""
+
+#: views/modals/studentViewObaveza.html:32
+msgid "Broj bodova"
+msgstr ""
+
+#: views/modals/student.html:7
+#: views/students.html:6
+msgid "Broj indeksa"
+msgstr ""
+
+#: views/modals/course.html:52
+#: views/modals/studentViewCourse.html:36
+#: views/modals/studentViewObaveza.html:24
+#: views/modals/taskType.html:7
+msgid "Datum"
+msgstr ""
+
+#: views/modals/uplata.html:13
+msgid "Datum uplate"
+msgstr ""
+
+#: views/modals/document.html:27
+msgid "Dodaj dokument"
+msgstr ""
+
+#: views/modals/taskType.html:2
+msgid "Dodavanje Obaveze(tip obaveze) na Kurs"
+msgstr ""
+
+#: views/modals/professorTeaching.html:2
+msgid "Dodavanje profesora na predmet"
+msgstr ""
+
+#: views/modals/studentEnrollment.html:2
+msgid "Dodavanje studenta na kurs"
+msgstr ""
+
+#: views/modals/document.html:2
+msgid "Dokument"
+msgstr ""
+
+#: views/modals/documents.html:14
+#: views/modals/documents.html:2
+#: views/modals/student.html:71
+msgid "Dokumenta"
+msgstr ""
+
+#: views/modals/admin.html:32
+#: views/modals/professor.html:36
+#: views/modals/student.html:36
+msgid "E-mail"
+msgstr ""
+
+#: views/modals/eracun.html:2
+#: views/modals/student.html:70
+msgid "E-racun"
+msgstr ""
+
+#: views/admins.html:6
+#: views/modals/admin.html:7
+#: views/modals/professor.html:7
+#: views/modals/student.html:11
+#: views/professors.html:6
+#: views/students.html:7
+msgid "Ime"
+msgstr ""
+
+#: views/modals/eracun.html:21
+msgid "Iznos"
+msgstr ""
+
+#: views/modals/uplata.html:26
+msgid "Iznos uplate"
+msgstr ""
+
+#: views/modals/admin.html:15
+#: views/modals/professor.html:19
+#: views/modals/student.html:19
+msgid "JMBG"
+msgstr ""
+
+#: views/modals/admin.html:19
+#: views/modals/professor.html:23
+#: views/modals/student.html:23
+msgid "Korisnicko ime"
+msgstr ""
+
+#: index.html:42
+msgid "Krusevi"
+msgstr ""
+
+#: views/modals/course.html:2
+msgid "Kurs"
+msgstr ""
+
+#: views/courses.html:2
+msgid "Kursevi"
+msgstr ""
+
+#: views/modals/admin.html:23
+#: views/modals/professor.html:27
+#: views/modals/student.html:27
+msgid "Lozinka"
+msgstr ""
+
+#: views/modals/admin.html:44
+#: views/modals/professor.html:48
+#: views/modals/student.html:48
+msgid "Mesto"
+msgstr ""
+
+#: views/courses.html:6
+#: views/modals/course.html:50
+#: views/modals/course.html:7
+#: views/modals/documents.html:17
+#: views/modals/studentViewCourse.html:34
+#: views/modals/taskType.html:20
+msgid "Naziv"
+msgstr ""
+
+#: views/modals/document.html:12
+msgid "Naziv dokumenta"
+msgstr ""
+
+#: views/modals/studentViewObaveza.html:16
+msgid "Naziv obaveze"
+msgstr ""
+
+#: views/modals/studentViewCourse.html:11
+msgid "Naziv predmeta"
+msgstr ""
+
+#: views/modals/studentViewObaveza.html:36
+msgid "Ocena"
+msgstr ""
+
+#: views/modals/course.html:51
+#: views/modals/studentViewCourse.html:35
+#: views/modals/taskType.html:25
+msgid "Opis"
+msgstr ""
+
+#: views/modals/studentViewObaveza.html:20
+msgid "Opis obaveze"
+msgstr ""
+
+#: views/modals/studentViewCourse.html:15
+msgid "Opis predmeta"
+msgstr ""
+
+#: views/modals/admin.html:51
+#: views/modals/course.html:81
+#: views/modals/document.html:36
+#: views/modals/documents.html:55
+#: views/modals/professor.html:64
+#: views/modals/professorTeaching.html:10
+#: views/modals/student.html:75
+#: views/modals/studentEnrollment.html:10
+#: views/modals/studentViewCourse.html:59
+#: views/modals/studentViewObaveza.html:44
+#: views/modals/taskType.html:32
+#: views/modals/uplata.html:34
+msgid "Otkazi"
+msgstr ""
+
+#: views/modals/studentViewObaveza.html:28
+msgid "Polozeno"
+msgstr ""
+
+#: views/modals/admin.html:40
+#: views/modals/professor.html:44
+#: views/modals/student.html:44
+msgid "Postanski broj"
+msgstr ""
+
+#: views/modals/studentViewObaveza.html:11
+msgid "Predmet"
+msgstr ""
+
+#: views/modals/professor.html:53
+#: views/modals/student.html:55
+msgid "Predmeti"
+msgstr ""
+
+#: views/admins.html:7
+#: views/modals/admin.html:11
+#: views/modals/professor.html:11
+#: views/modals/student.html:15
+#: views/professors.html:7
+#: views/students.html:8
+msgid "Prezime"
+msgstr ""
+
+#: views/modals/professor.html:2
+#: views/modals/professorTeaching.html:5
+msgid "Profesor"
+msgstr ""
+
+#: index.html:43
+#: views/modals/course.html:28
+#: views/modals/studentViewCourse.html:20
+#: views/professors.html:2
+msgid "Profesori"
+msgstr ""
+
+#: views/modals/eracun.html:7
+msgid "Stanje na racunu"
+msgstr ""
+
+#: views/modals/student.html:2
+#: views/modals/studentEnrollment.html:5
+msgid "Student"
+msgstr ""
+
+#: views/modals/studentViewObaveza.html:2
+msgid "Student - pogled na Obavezu"
+msgstr ""
+
+#: views/modals/studentViewCourse.html:2
+msgid "Student - pogled na kurs"
+msgstr ""
+
+#: index.html:41
+#: views/modals/course.html:11
+#: views/students.html:2
+msgid "Studenti"
+msgstr ""
+
+#: views/modals/eracun.html:20
+#: views/modals/uplata.html:8
+msgid "Svrha uplate"
+msgstr ""
+
+#: views/modals/documents.html:18
+msgid "Tip"
+msgstr ""
+
+#: views/modals/document.html:16
+msgid "Tip dokumenta"
+msgstr ""
+
+#: views/modals/course.html:47
+#: views/modals/studentViewCourse.html:31
+msgid "Tipovi obaveza"
+msgstr ""
+
+#: views/modals/admin.html:50
+#: views/modals/course.html:80
+#: views/modals/document.html:35
+#: views/modals/documents.html:54
+#: views/modals/eracun.html:46
+#: views/modals/professor.html:63
+#: views/modals/professorTeaching.html:9
+#: views/modals/student.html:74
+#: views/modals/studentEnrollment.html:9
+#: views/modals/taskType.html:31
+#: views/modals/uplata.html:33
+msgid "U redu"
+msgstr ""
+
+#: views/modals/admin.html:36
+#: views/modals/professor.html:40
+#: views/modals/student.html:40
+msgid "Ulica i broj"
+msgstr ""
+
+#: index.html:45
+msgid "Unesite vrednost pretrage"
+msgstr ""
+
+#: views/modals/uplata.html:2
+msgid "Uplata"
+msgstr ""
+
+#: views/modals/eracun.html:17
+msgid "Uplate"
+msgstr ""
+
+#: views/modals/professor.html:15
+#: views/professors.html:8
+msgid "Zvanje"
+msgstr ""

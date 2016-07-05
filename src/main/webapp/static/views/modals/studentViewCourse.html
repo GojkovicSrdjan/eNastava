@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h3 class="modal-title">Student - pogled na kurs</h3>
+  <h3 class="modal-title" translate>Student - pogled na kurs</h3>
 </div>
 <div class="modal-body-datepicker">
 	<form>
@@ -8,16 +8,16 @@
       </fieldset>
       <br>
       <fieldset class="form-group">
-        <label for="name">naziv predmeta</label>
+        <label for="name" translate>Naziv predmeta</label>
         <input type="text" class="form-control" id="name" ng-model="course.naziv">
       </fieldset>
       <fieldset class="form-group">
-        <label for="name">opis predmeta</label>
+        <label for="name" translate>Opis predmeta</label>
         <input type="text" class="form-control" id="name" ng-model="course.opis">
       </fieldset>
   	</form>
     <br>
-    <label>profesori</label>
+    <label translate>Profesori</label>
     <table class="table table-bordered">
       <tr ng-repeat="t in teachings">
         <td>
@@ -28,13 +28,13 @@
     
     <!-- START obaveze -->
     <br>
-    <label>tipovi obaveza</label>
+    <label translate>Tipovi obaveza</label>
     <table class="table table-bordered">
       <tr>
-      	<th>naziv</th>
-      	<th>opis</th>
-      	<th>datum</th>
-      	<th>akcija</th>
+      	<th translate>Naziv</th>
+      	<th translate>Opis</th>
+      	<th translate>Datum</th>
+      	<th translate>Akcija</th>
       </tr>
       <tr ng-repeat="task in tasks">
         <td>
@@ -56,5 +56,5 @@
     <!-- END obaveze -->
 </div>
 <div class="modal-footer">
-  <button class="btn btn-default" type="button" ng-click="cancel()">Close</button>
+  <button class="btn btn-default" type="button" ng-click="cancel()" translate>Otkazi</button>
 </div>

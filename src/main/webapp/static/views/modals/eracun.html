@@ -1,10 +1,10 @@
 <div class="modal-header">
-  <h3 class="modal-title">E-racun</h3>
+  <h3 class="modal-title" translate>E-racun</h3>
 </div>
 <div class="modal-body">
   <form>
     <fieldset class="form-group">
-      <label for="stanjeNaERacunu">Stanje na racunu</label>
+      <label for="stanjeNaERacunu" translate>Stanje na racunu</label>
       <input type="text" class="form-control" id="stanjeNaERacunu" ng-model="eRacun.stanjeNaERacunu">
     </fieldset>
   </form>
@@ -14,12 +14,12 @@
       </button>
     </span>
     <br>
-    <label>Uplate</label>
+    <label translate>Uplate</label>
     <table class="table table-bordered">
   		<tr>
-    		<th>svrha uplate</th>
-    		<th>iznos</th>
-    		<th>akcija</th>
+    		<th translate>Svrha uplate</th>
+    		<th translate>Iznos</th>
+    		<th translate>Akcija</th>
  		</tr>
     	<tr ng-repeat="u in uplate">
     		<td>{{u.svrha}}</td>
@@ -43,5 +43,5 @@
 </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-default" type="button" ng-click="cancel()">OK</button>
+  <button class="btn btn-default" type="button" ng-click="cancel()" translate>U redu</button>
 </div>

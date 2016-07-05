@@ -38,13 +38,21 @@
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
             <ul class="nav navbar-nav">
-              <li><a ng-href="#/students">Studenti</a></li>
-              <li><a ng-href="#/courses">Krusevi</a></li>
-              <li><a ng-href="#/professors">Profesori</a></li>
-              <li><a ng-href="#/admins">Administratori</a></li>
-              <li><p>Pretraga <input type="text" placeholder="Unesite vrednost pretrage" ng-model="pretraga" ></p></li>
+              <li><a ng-href="#/students">{{'Studenti'|translate}}</a></li>
+              <li><a ng-href="#/courses">{{'Krusevi'|translate}}</a></li>
+              <li><a ng-href="#/professors">{{'Profesori'|translate}}</a></li>
+              <li><a ng-href="#/admins">{{'Administratori'|translate}}</a></li>
+              <li><p><input type="text" placeholder="{{'Unesite vrednost pretrage'|translate}}" ng-model="pretraga" ></p></li>
+              <li>&nbsp;</li>
+              <li><div ng-controller="MainCtrl">
+          	<ul>
+              <li ng-click="changeLanguage('en')"><img src="images/gb-flag.png"> English</li>
+              <li ng-click="changeLanguage('sr')"><img src="images/sr-flag.png"> Srpski</li>
+          	</ul>
+          </div></li>
             </ul>
           </div>
+            
         </div>
       </div>
     </div>
@@ -81,7 +89,8 @@
     <script src="bower_components/lodash/lodash.js"></script>
     <script src="bower_components/restangular/dist/restangular.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/angular-lodash-module/angular-lodash-module.js"></script>
+    <script src="bower_components/angular-lodash-module/angular-lodash-module.js"></script>   
+    <script src="bower_components/angular-gettext/dist/angular-gettext.js"></script>
     <!-- endbower -->
     
     <!-- endbuild -->
@@ -92,8 +101,8 @@
         <script src="scripts/controllers/admins.js"></script>
         <script src="scripts/controllers/students.js"></script>
         <script src="scripts/controllers/professors.js"></script>
-        <script src="scripts/controllers/courses.js"></script>
-        
+        <script src="scripts/controllers/courses.js"></script>       
+        <script src="scripts/translations.js"></script>
     	<script src="scripts/directives/fileModel.js"></script>
         <!-- endbuild -->
         

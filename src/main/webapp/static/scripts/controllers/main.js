@@ -8,5 +8,11 @@
  * Controller of the studentsClientApp
  */
 angular.module('studentsClientApp')
-  .controller('MainCtrl', function () {
-  });
+	.controller('MainCtrl', ['$scope', '$route',  'gettextCatalog', function($scope, $route, gettextCatalog){
+
+		  $scope.changeLanguage= function (l) {
+				 gettextCatalog.currentLanguage= l;
+				 $route.reload();
+			};
+}]);
+

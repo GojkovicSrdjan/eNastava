@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h3 class="modal-title">Dokument</h3>
+  <h3 class="modal-title" translate>Dokument</h3>
 </div>
 <div class="modal-body">
   	<form>
@@ -9,11 +9,11 @@
       <br>
   	
   	  <fieldset class="form-group">
-        <label for="naziv">naziv dokumenta</label>
+        <label for="naziv" translate>Naziv dokumenta</label>
         <input type="text" class="form-control" id="naziv" ng-model="document.naziv">
       </fieldset>
       <fieldset class="form-group">
-        <label for="tip">tip dokumenta</label>
+        <label for="tip" translate>Tip dokumenta</label>
         <input type="text" class="form-control" id="tip" ng-model="document.file.type" disabled="disabled">
       </fieldset>
       <fieldset ng-if="document.putanjaDoDokumenta!=&quot&quot" class="form-group">
@@ -24,7 +24,7 @@
       </fieldset>
       
       <fieldset class="form-group">
-    	<label for="inputFile">dodaj dokument</label>
+    	<label for="inputFile" translate>Dodaj dokument</label>
     	<input type="file" id="inputFile" file-model="document.file">
   	  </fieldset>
   	  
@@ -32,6 +32,6 @@
   	
 </div>
 <div class="modal-footer">
-  <button class="btn btn-default" type="button" ng-click="ok()">OK</button>
-  <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+  <button class="btn btn-default" type="button" ng-click="ok()" translate>U redu</button>
+  <button class="btn btn-default" type="button" ng-click="cancel()" translate>Otkazi</button>
 </div>

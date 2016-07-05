@@ -1,10 +1,10 @@
 <div class="modal-header">
-  <h3 class="modal-title">Dodavanje Obaveze(tip obaveze) na Kurs</h3>
+  <h3 class="modal-title" translate>Dodavanje Obaveze(tip obaveze) na Kurs</h3>
 </div>
 <div class="modal-body-datepicker">
 
 	<fieldset class="form-group">
-		<label for="date">Datum</label>
+		<label for="date" translate>Datum</label>
 		<p class="input-group">
 		    <input id="date" type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy"
 		      ng-model="task.datum" close-text="Close" is-open="date.opened" ng-required="true" />
@@ -17,17 +17,17 @@
 	</fieldset>
 	
 	<fieldset class="form-group">
-      <label for="name">Naziv</label>
+      <label for="name" translate>Naziv</label>
       <input type="text" class="form-control" id="name" ng-model="task.naziv">
     </fieldset>
     
     <fieldset class="form-group">
-      <label for="description">Opis</label>
+      <label for="description" translate>Opis</label>
       <input type="text" class="form-control" id="description" ng-model="task.opis">
     </fieldset>
 
 </div>
 <div class="modal-footer">
-  <button class="btn btn-default" type="button" ng-click="ok()">OK</button>
-  <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+  <button class="btn btn-default" type="button" ng-click="ok()" translate>U redu</button>
+  <button class="btn btn-default" type="button" ng-click="cancel()" translate>Otkazi</button>
 </div>

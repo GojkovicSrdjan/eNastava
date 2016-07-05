@@ -1,11 +1,11 @@
 <div class="modal-header">
-  <h3 class="modal-title">Dodavanje profesora na predmet</h3>
+  <h3 class="modal-title" translate>Dodavanje profesora na predmet</h3>
 </div>
 <div>
-	<label>profesor</label>
+	<label translate>Profesor</label>
   	<select id="professors" class="form-control" ng-model="professor" ng-options=" p.korisnik.ime + ' ' + p.korisnik.prezime + ' ' +p.zvanje for p in professors"></select>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-default" type="button" ng-click="ok()">OK</button>
-  <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+  <button class="btn btn-default" type="button" ng-click="ok()" translate>U redu</button>
+  <button class="btn btn-default" type="button" ng-click="cancel()" translate>Otkazi</button>
 </div>

@@ -1,56 +1,56 @@
 <div class="modal-header">
-  <h3 class="modal-title">Profesor</h3>
+  <h3 class="modal-title" translate>Profesor</h3>
 </div>
 <div class="modal-body">
   <form>
     <fieldset class="form-group">
-      <label for="ime">Ime</label>
+      <label for="ime" translate>Ime</label>
       <input type="text" class="form-control" id="ime" ng-model="professor.korisnik.ime">
     </fieldset>
     <fieldset class="form-group">
-      <label for="prezime">Prezime</label>
+      <label for="prezime" translate>Prezime</label>
       <input type="text" class="form-control" id="prezime" ng-model="professor.korisnik.prezime">
     </fieldset>
     <fieldset class="form-group">
-      <label for="brojIndexa">Zvanje</label>
+      <label for="brojIndexa" translate>Zvanje</label>
       <input type="text" class="form-control" id="zvanje" ng-model="professor.zvanje">
     </fieldset>
     <fieldset class="form-group">
-    	<label>JMBG</label>
+    	<label translate>JMBG</label>
     	<input type="text" class="form-control" id="jmbg" ng-model="professor.korisnik.jmbg" >
     </fieldset>    
     <fieldset class="form-group">
-    	<label>Korisnicko ime</label>
+    	<label translate>Korisnicko ime</label>
     	<input type="text" class="form-control" id="korisnickoIme" ng-model="professor.korisnik.korisnickoIme" >
     </fieldset>
     <fieldset class="form-group">
-    	<label>Lozinka</label>
+    	<label translate>Lozinka</label>
     	<input type="text" class="form-control" id="lozinka" ng-model="professor.korisnik.lozinka">
     </fieldset>
     
     <fieldset class="form-group">
-    	<label>Br. telefona</label>
+    	<label translate>Br. telefona</label>
     	<input type="text" class="form-control" id="brojTelefona" ng-model="professor.korisnik.brojTelefona" >
     </fieldset> 
     <fieldset class="form-group">
-    	<label>E-mail</label>
+    	<label translate>E-mail</label>
     	<input type="text" class="form-control" id="email" ng-model="professor.korisnik.email" >
     </fieldset> 
     <fieldset class="form-group">
-    	<label>Ulica i broj</label>
+    	<label translate>Ulica i broj</label>
     	<input type="text" class="form-control" id="ulicaIBroj" ng-model="professor.korisnik.ulicaIBroj" >
     </fieldset> 
     <fieldset class="form-group">
-    	<label>Postanski broj</label>
+    	<label translate>Postanski broj</label>
     	<input type="text" class="form-control" id="postanskiBroj" ng-model="professor.korisnik.postanskiBroj" >
     </fieldset> 
     <fieldset class="form-group">
-    	<label>Mesto</label>
+    	<label translate>Mesto</label>
     	<input type="text" class="form-control" id="mesto" ng-model="professor.korisnik.mesto" >
     </fieldset>     
   </form>
   <br>
-  <label for="predmeti">predmeti</label>
+  <label for="predmeti" translate>Predmeti</label>
     <table id="predmeti" class="table table-bordered">
       <tr ng-repeat="t in teachings">
         <td>
@@ -60,6 +60,6 @@
     </table>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-default" type="button" ng-click="ok()">OK</button>
-  <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+  <button class="btn btn-default" type="button" ng-click="ok()" translate>U redu</button>
+  <button class="btn btn-default" type="button" ng-click="cancel()" translate>Otkazi</button>
 </div>
