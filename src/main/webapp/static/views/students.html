@@ -19,9 +19,12 @@
       {{student.korisnik.prezime}}
     </td>
     <td>
-      <button type="button" class="btn btn-default" aria-label="Izmena" ng-click="openModal(student)">
-        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-      </button>
+      <a ng-href="#/students/{{student.studentID}}">
+        <button type="button" class="btn btn-default" aria-label="Izmena">
+	        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+	    </button>
+      </a>
+      
 
       <button type="button" class="btn btn-default" aria-label="Brisanje" ng-click="deleteStudent(student.studentID)">
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
@@ -30,9 +33,11 @@
   </tr>
 </table>
 <div class="right">
-  <button type="button" class="btn btn-default" aria-label="Dodavanje" ng-click="openModal()">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-  </button>
+  <a ng-href="#/students/new">
+	  <button type="button" class="btn btn-default" aria-label="Dodavanje">
+	    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+	  </button>
+  </a>
 </div>
 
 <ul ng-if="pages.length>1">

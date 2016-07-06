@@ -29,6 +29,11 @@ var myApp = angular
         controller: 'StudentsCtrl',
         controllerAs: 'students'
       })
+      .when('/students/:id', {
+        templateUrl: 'views/student.html',
+        controller: 'StudentCtrl',
+        controllerAs: 'student'
+      })
       .when('/courses', {
         templateUrl: 'views/courses.html',
         controller: 'CoursesCtrl',
