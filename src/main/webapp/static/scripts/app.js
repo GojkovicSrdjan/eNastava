@@ -60,6 +60,11 @@ var myApp = angular
         controller: 'ProfessorCtrl',
         controllerAs: 'professor' 
       })
+      .when('/professors/:id', {
+    	templateUrl: 'views/professor.html',
+        controller: 'ProfessorCtrl',
+        controllerAs: 'professor' 
+      })
       .when('/admins',{
       	templateUrl: 'views/admins.html',
         controller: 'AdminsCtrl',

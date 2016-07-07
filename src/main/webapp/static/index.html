@@ -44,14 +44,14 @@
               <li><a ng-href="#/admins">{{'Administratori'|translate}}</a></li>
               <li><p><input type="text" placeholder="{{'Unesite vrednost pretrage'|translate}}" ng-model="pretraga" ></p></li>
               <li>&nbsp;</li>
-              <li><div ng-controller="MainCtrl">
-          	
-          	<ul>
-              <li ng-click="changeLanguage('en')"><img src="images/gb-flag.png"> English</li>
-              <li ng-click="changeLanguage('sr')"><img src="images/sr-flag.png"> Srpski</li>
-          	  <li><a ng-click="openLoginType()" >Uloguj se</a></li>
-          	</ul>
-          </div></li>
+              <li>
+                <div ng-controller="MainCtrl">
+	          	<ul>
+	              <li ng-click="changeLanguage('en')"><img src="images/gb-flag.png"> English</li>
+	              <li ng-click="changeLanguage('sr')"><img src="images/sr-flag.png"> Srpski</li>
+	          	</ul>
+          		</div>
+          	  </li>
             </ul>
           </div>
             
