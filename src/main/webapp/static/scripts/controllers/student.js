@@ -21,6 +21,10 @@ myApp.controller('StudentCtrl', ['$scope', 'Restangular', '$routeParams', '$uibM
 	    	Restangular.one("studenti").customGET(studentID).then(function (data) {
 	    		$scope.student = data;
 			});
+	    	
+	    	Restangular.one("studenti", studentID).getList("predmeti").then(function(entries) {
+				$scope.enrollments = entries;
+			});
 	    }
 	}
 	
@@ -42,7 +46,6 @@ myApp.controller('StudentCtrl', ['$scope', 'Restangular', '$routeParams', '$uibM
             $uibModalInstance.dismiss('cancel');
         };
     	
-    	$scope.student = student;
     	if ($scope.course.predmetID) {
     		Restangular.one("predmeti", $scope.course.predmetID).getList("studenti").then(function(entries) {
     			$scope.enrollments = entries;

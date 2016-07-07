@@ -32,7 +32,9 @@
               <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="#/">&lambda; LMS</a>
+            <a class="navbar-brand" href="#/">
+            	<img class="icon-bar" src="images/home-icon.png">
+			</a>
           </div>
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
@@ -42,7 +44,7 @@
               <li><a ng-href="#/courses">{{'Krusevi'|translate}}</a></li>
               <li><a ng-href="#/professors">{{'Profesori'|translate}}</a></li>
               <li><a ng-href="#/admins">{{'Administratori'|translate}}</a></li>
-              <li><p><input type="text" placeholder="{{'Unesite vrednost pretrage'|translate}}" ng-model="pretraga" ></p></li>
+              <li><p><input type="text" placeholder="{{'Pretraga'|translate}}" ng-model="pretraga" ></p></li>
               <li>&nbsp;</li>
               <li>
                 <div ng-controller="MainCtrl">
@@ -53,6 +55,7 @@
 	              <li ng-if="studentK!=null" >{{studentK.korisnik.korisnickoIme}}<a ng-click="logout('student')">Izloguj se</a> </li>
 	              <li ng-if="profesorK!=null" >{{profesorK.korisnik.korisnickoIme}}<a ng-click="logout('profesor')">Izloguj se</a> </li>
 	              <li ng-if="adminK!=null" >{{adminK.korisnik.korisnickoIme}}<a ng-click="logout('admin')">Izloguj se</a> </li>
+
 	          	</ul>
           		</div>
           	  </li>
@@ -69,7 +72,10 @@
 
     <div class="footer">
       <div class="container">
-        <p><span class="glyphicon glyphicon-copyright-mark"></span> Goran Savić i Milan Segedinac 2016.</p>
+        <p><span class="glyphicon glyphicon-copyright-mark"></span></p>
+        <p> Profesori: Goran Savić i Milan Segedinac</p>
+        <p> Studenti: Srđan Gojković i Srđan Jazić</p>
+        <p> Godina: 2016.</p>
       </div>
     </div>
 
