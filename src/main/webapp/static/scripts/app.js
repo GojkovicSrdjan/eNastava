@@ -39,15 +39,30 @@ var myApp = angular
         controller: 'CoursesCtrl',
         controllerAs: 'courses'
       })
+      .when('/courses/:id', {
+        templateUrl: 'views/course.html',
+        controller: 'CourseCtrl',
+        controllerAs: 'course'
+      })
       .when('/professors', {
     	templateUrl: 'views/professors.html',
         controller: 'ProfessorsCtrl',
         controllerAs: 'professors' 
       })
+      .when('/professors/:id', {
+    	templateUrl: 'views/professor.html',
+        controller: 'ProfessorCtrl',
+        controllerAs: 'professor' 
+      })
       .when('/admins',{
       	templateUrl: 'views/admins.html',
         controller: 'AdminsCtrl',
         controllerAs: 'admins'   
+      })
+      .when('/admins/:id',{
+      	templateUrl: 'views/admin.html',
+        controller: 'AdminCtrl',
+        controllerAs: 'admin'   
       })
       .otherwise({
         redirectTo: '/'
