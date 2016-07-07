@@ -32,7 +32,9 @@
               <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="#/">&lambda; LMS</a>
+            <a class="navbar-brand" href="#/">
+            	<img class="icon-bar" src="images/home-icon.png">
+			</a>
           </div>
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
@@ -42,13 +44,13 @@
               <li><a ng-href="#/courses">{{'Krusevi'|translate}}</a></li>
               <li><a ng-href="#/professors">{{'Profesori'|translate}}</a></li>
               <li><a ng-href="#/admins">{{'Administratori'|translate}}</a></li>
-              <li><p><input type="text" placeholder="{{'Unesite vrednost pretrage'|translate}}" ng-model="pretraga" ></p></li>
+              <li><p><input type="text" placeholder="{{'Pretraga'|translate}}" ng-model="pretraga" ></p></li>
               <li>&nbsp;</li>
               <li>
                 <div ng-controller="MainCtrl">
-	          	<ul>
-	              <li ng-click="changeLanguage('en')"><img src="images/gb-flag.png"> English</li>
-	              <li ng-click="changeLanguage('sr')"><img src="images/sr-flag.png"> Srpski</li>
+	          	<ul class="nav navbar-lang">
+	              <li ng-click="changeLanguage('en')"><img src="images/gb-flag.png"><strong> ENG </strong></li>
+	              <li ng-click="changeLanguage('sr')"><img src="images/sr-flag.png"><strong> SRB </strong></li>
 	          	</ul>
           		</div>
           	  </li>
@@ -65,7 +67,10 @@
 
     <div class="footer">
       <div class="container">
-        <p><span class="glyphicon glyphicon-copyright-mark"></span> Goran Savić i Milan Segedinac 2016.</p>
+        <p><span class="glyphicon glyphicon-copyright-mark"></span></p>
+        <p> Profesori: Goran Savić i Milan Segedinac</p>
+        <p> Studenti: Srđan Gojković i Srđan Jazić</p>
+        <p> Godina: 2016.</p>
       </div>
     </div>
 
