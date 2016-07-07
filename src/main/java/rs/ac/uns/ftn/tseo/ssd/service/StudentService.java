@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import rs.ac.uns.ftn.tseo.ssd.model.Korisnik;
 import rs.ac.uns.ftn.tseo.ssd.model.Student;
 import rs.ac.uns.ftn.tseo.ssd.repository.StudentRepository;
 
@@ -38,6 +39,10 @@ public class StudentService {
 	
 	public Page<Student> findAll(Pageable page) {
 		return studentRepository.findAll(page);
+	}
+	
+	public Student findOneByKorisnik(Korisnik korisnik){
+		return studentRepository.findOneByKorisnik(korisnik);
 	}
 
 	

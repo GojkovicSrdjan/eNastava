@@ -21,6 +21,7 @@ import rs.ac.uns.ftn.tseo.ssd.model.Profesor;
 import rs.ac.uns.ftn.tseo.ssd.service.KorisnikService;
 import rs.ac.uns.ftn.tseo.ssd.service.PredajeService;
 import rs.ac.uns.ftn.tseo.ssd.service.ProfesorService;
+import rs.ac.uns.ftn.tseo.ssd.web.dto.KorisnikDTO;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.PredajeDTO;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.PredmetDTO;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.ProfesorDTO;
@@ -164,5 +165,20 @@ public class ProfesorController {
 		}
 		
 		return new ResponseEntity<>(predavanjaDTO, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public ResponseEntity<ProfesorDTO> findOneByUsernameAndPassword(@RequestBody KorisnikDTO korisnikDTO){
+		Korisnik kor=korisnikService.findOneByKorisnickoImeAndLozinka(korisnikDTO.getKorisnickoIme(), korisnikDTO.getLozinka());
+		//Korisnik kor=korisnikService.findOneByKorisnickoImeAndLozinka(studentDTO.getKorisnik().getKorisnickoIme(), studentDTO.getKorisnik().getLozinka());
+		if(kor!=null){
+			Profesor p = profesorService.findOneByKorisnik(kor);
+			if(p!=null){
+				return new ResponseEntity<>(new ProfesorDTO(p), HttpStatus.OK);
+			}else
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}else
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		
 	}
 }

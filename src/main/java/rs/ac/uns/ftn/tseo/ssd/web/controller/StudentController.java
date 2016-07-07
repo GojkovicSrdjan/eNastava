@@ -31,6 +31,7 @@ import rs.ac.uns.ftn.tseo.ssd.service.PohadjaService;
 import rs.ac.uns.ftn.tseo.ssd.service.StudentService;
 import rs.ac.uns.ftn.tseo.ssd.service.UplataService;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.DokumentDTO;
+import rs.ac.uns.ftn.tseo.ssd.web.dto.KorisnikDTO;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.ObavezaDTO;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.PohadjaDTO;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.PredmetDTO;
@@ -265,4 +266,20 @@ public class StudentController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public ResponseEntity<StudentDTO> findOneByUsernameAndPassword(@RequestBody KorisnikDTO korisnikDTO){
+		Korisnik kor=korisnikService.findOneByKorisnickoImeAndLozinka(korisnikDTO.getKorisnickoIme(), korisnikDTO.getLozinka());
+		//Korisnik kor=korisnikService.findOneByKorisnickoImeAndLozinka(studentDTO.getKorisnik().getKorisnickoIme(), studentDTO.getKorisnik().getLozinka());
+		if(kor!=null){
+			Student s = studentService.findOneByKorisnik(kor);
+			if(s!=null){
+				return new ResponseEntity<>(new StudentDTO(s), HttpStatus.OK);
+			}else
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}else
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		
+	}
+
 }

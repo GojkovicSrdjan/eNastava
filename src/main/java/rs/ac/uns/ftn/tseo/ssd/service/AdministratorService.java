@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import rs.ac.uns.ftn.tseo.ssd.model.Administrator;
+import rs.ac.uns.ftn.tseo.ssd.model.Korisnik;
 import rs.ac.uns.ftn.tseo.ssd.repository.AdministratorRepository;
 
 @Service
@@ -36,4 +37,7 @@ public class AdministratorService {
 		return adminRepo.findAll(page);
 	}
 	
+	public Administrator findOneByKorisnik(Korisnik korisnik){
+		return adminRepo.findOneByKorisnik(korisnik);
+	}
 }

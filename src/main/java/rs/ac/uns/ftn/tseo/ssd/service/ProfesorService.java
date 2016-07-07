@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import rs.ac.uns.ftn.tseo.ssd.model.Korisnik;
 import rs.ac.uns.ftn.tseo.ssd.model.Profesor;
 import rs.ac.uns.ftn.tseo.ssd.repository.ProfesorRepository;
 
@@ -40,4 +41,7 @@ public class ProfesorService {
 		return profRepo.findAll(page);
 	}
 	
+	public Profesor findOneByKorisnik(Korisnik korisnik){
+		return profRepo.findOneByKorisnik(korisnik);
+	}
 }

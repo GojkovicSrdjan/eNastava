@@ -1,0 +1,19 @@
+<div class="modal-header">
+  <h3 class="modal-title" translate>Logovanje</h3>
+</div>
+<div class="modal-body">
+  <form>
+    <fieldset class="form-group">
+      <label for="brojIndexa" translate>Korisnicko ime</label>
+      <input type="text" class="form-control" id="korisnickoIme" ng-model="korisnik.korisnickoIme">
+    </fieldset>
+    <fieldset class="form-group">
+      <label for="ime" translate>Lozinka</label>
+      <input type="text" class="form-control" id="lozinka" ng-model="korisnik.lozinka">
+    </fieldset>
+    </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" type="button" ng-click="login()" translate>Uloguj se</button>
+  <button class="btn btn-default" type="button" ng-click="cancel()" translate>Otkazi</button>
+</div>

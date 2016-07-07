@@ -34,8 +34,8 @@ public class KorisnikService {
 		return korRepo.findOneByImeAndPrezime(ime, prezime);
 	}
 	
-	public Korisnik findByKorisnickoImeAndLozinka(String korisnickoIme, String lozinka){
-		return korRepo.findByKorisnickoImeAndLozinka(korisnickoIme, lozinka);
+	public Korisnik findOneByKorisnickoImeAndLozinka(String korisnickoIme, String lozinka){
+		return korRepo.findOneByKorisnickoImeAndLozinka(korisnickoIme, lozinka);
 	}
 	
 }

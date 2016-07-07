@@ -15,7 +15,8 @@ var myApp = angular
     'restangular',
     'ui.bootstrap',
     'lodash',
-    "gettext"
+    "gettext",
+    "ngCookies"
   ])
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
@@ -39,6 +40,11 @@ var myApp = angular
         controller: 'ProfessorsCtrl',
         controllerAs: 'professors' 
       })
+//      .when('/login',{
+//    	  templateUrl: 'views/login.html',
+//    	  controller: 'LoginCtrl',
+//    	  controllerAs: 'main'
+//      })
       .when('/admins',{
       	templateUrl: 'views/admins.html',
         controller: 'AdminsCtrl',

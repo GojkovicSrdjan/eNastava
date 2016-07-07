@@ -19,6 +19,7 @@ import rs.ac.uns.ftn.tseo.ssd.model.Korisnik;
 import rs.ac.uns.ftn.tseo.ssd.service.AdministratorService;
 import rs.ac.uns.ftn.tseo.ssd.service.KorisnikService;
 import rs.ac.uns.ftn.tseo.ssd.web.dto.AdministratorDTO;
+import rs.ac.uns.ftn.tseo.ssd.web.dto.KorisnikDTO;
 
 @RestController
 @RequestMapping(value="api/administratori")
@@ -124,5 +125,20 @@ public class AdministratorController {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public ResponseEntity<AdministratorDTO> findOneByUsernameAndPassword(@RequestBody KorisnikDTO korisnikDTO){
+		Korisnik kor=korisnikService.findOneByKorisnickoImeAndLozinka(korisnikDTO.getKorisnickoIme(), korisnikDTO.getLozinka());
+		//Korisnik kor=korisnikService.findOneByKorisnickoImeAndLozinka(studentDTO.getKorisnik().getKorisnickoIme(), studentDTO.getKorisnik().getLozinka());
+		if(kor!=null){
+			Administrator a = administratorService.findOneByKorisnik(kor);
+			if(a!=null){
+				return new ResponseEntity<>(new AdministratorDTO(a), HttpStatus.OK);
+			}else
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}else
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		
 	}
 }
