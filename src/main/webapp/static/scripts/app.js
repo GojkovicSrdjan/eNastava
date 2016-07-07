@@ -30,10 +30,20 @@ var myApp = angular
         controller: 'StudentsCtrl',
         controllerAs: 'students'
       })
+      .when('/students/:id', {
+        templateUrl: 'views/student.html',
+        controller: 'StudentCtrl',
+        controllerAs: 'student'
+      })
       .when('/courses', {
         templateUrl: 'views/courses.html',
         controller: 'CoursesCtrl',
         controllerAs: 'courses'
+      })
+      .when('/courses/:id', {
+        templateUrl: 'views/course.html',
+        controller: 'CourseCtrl',
+        controllerAs: 'course'
       })
       .when('/professors', {
     	templateUrl: 'views/professors.html',
@@ -45,10 +55,20 @@ var myApp = angular
 //    	  controller: 'LoginCtrl',
 //    	  controllerAs: 'main'
 //      })
+      .when('/professors/:id', {
+    	templateUrl: 'views/professor.html',
+        controller: 'ProfessorCtrl',
+        controllerAs: 'professor' 
+      })
       .when('/admins',{
       	templateUrl: 'views/admins.html',
         controller: 'AdminsCtrl',
         controllerAs: 'admins'   
+      })
+      .when('/admins/:id',{
+      	templateUrl: 'views/admin.html',
+        controller: 'AdminCtrl',
+        controllerAs: 'admin'   
       })
       .otherwise({
         redirectTo: '/'

@@ -14,7 +14,7 @@ public class Korisnik {
 	private Integer korisnikID;
 	
 	@Column(unique=true, nullable=false, length=13)
-	private Integer JMBG;
+	private Long JMBG;
 	
 	@Column(unique=true, nullable=false)
 	private String korisnickoIme;
@@ -38,7 +38,7 @@ public class Korisnik {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Korisnik(Integer jMBG, String korisnickoIme, String lozinka, String ime, String prezime,
+	public Korisnik(Long jMBG, String korisnickoIme, String lozinka, String ime, String prezime,
 			String brojTelefona, String email, String ulicaIBroj, Integer postanskiBroj, String mesto) {
 		super();
 		JMBG = jMBG;
@@ -63,11 +63,11 @@ public class Korisnik {
 		this.korisnikID = korisnikID;
 	}
 
-	public Integer getJMBG() {
+	public Long getJMBG() {
 		return JMBG;
 	}
 
-	public void setJMBG(Integer jMBG) {
+	public void setJMBG(Long jMBG) {
 		JMBG = jMBG;
 	}
 

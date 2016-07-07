@@ -5,7 +5,7 @@ import rs.ac.uns.ftn.tseo.ssd.model.Korisnik;
 public class KorisnikDTO {
 	
 	private Integer korisnikID;
-	private Integer JMBG;
+	private Long JMBG;
 	private String korisnickoIme;
 	private String lozinka;
 	
@@ -41,7 +41,7 @@ public class KorisnikDTO {
 			);
 	}
 	
-	public KorisnikDTO(Integer korisnikID, Integer jMBG, String korisnickoIme, String lozinka, String ime,
+	public KorisnikDTO(Integer korisnikID, Long jMBG, String korisnickoIme, String lozinka, String ime,
 			String prezime, String brojTelefona, String email, String ulicaIBroj, Integer postanskiBroj, String mesto) {
 		super();
 		this.korisnikID = korisnikID;
@@ -65,10 +65,10 @@ public class KorisnikDTO {
 	public void setKorisnikID(Integer korisnikID) {
 		this.korisnikID = korisnikID;
 	}
-	public Integer getJMBG() {
+	public Long getJMBG() {
 		return JMBG;
 	}
-	public void setJMBG(Integer jMBG) {
+	public void setJMBG(Long jMBG) {
 		JMBG = jMBG;
 	}
 	public String getKorisnickoIme() {
