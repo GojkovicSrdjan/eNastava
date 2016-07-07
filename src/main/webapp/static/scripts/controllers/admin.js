@@ -31,8 +31,7 @@ myApp.controller('AdminCtrl', ['$scope', 'Restangular', '$routeParams', '$uibMod
         if(Restangular.all('administratori').post($scope.admin)){}
         else{
         	// callback za gresku sa servera
-            alert('the student with such a cardNumber already exists');
-            $log.info('the student with such a cardNumber already exists');
+        	$log.info('something went wrong!');
         };
       }
     };

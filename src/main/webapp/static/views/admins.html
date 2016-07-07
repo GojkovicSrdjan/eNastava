@@ -15,9 +15,11 @@
       {{a.korisnik.prezime}}
     </td>
     <td>
-      <button type="button" class="btn btn-default" aria-label="Izmena" ng-click="openModal(a)">
-        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-      </button>
+      <a ng-href="#/admins/{{a.adminID}}">
+	      <button type="button" class="btn btn-default" aria-label="Izmena" >
+	        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+	      </button>
+      </a>
 
       <button type="button" class="btn btn-default" aria-label="Brisanje" ng-click="deleteAdmin(a.adminID)">
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
@@ -26,9 +28,11 @@
   </tr>
 </table>
 <div class="right">
-  <button type="button" class="btn btn-default" aria-label="Dodavanje" ng-click="openModal()">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-  </button>
+	 <a ng-href="#/admins/new">
+	 	<button type="button" class="btn btn-default" aria-label="Dodavanje" >
+		    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+		</button>
+	 </a>
 </div>
 <ul ng-if="pages.length>1">
 	<li ng-repeat="p in pages track by $index">

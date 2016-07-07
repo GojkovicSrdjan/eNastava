@@ -21,8 +21,6 @@ myApp.controller('StudentCtrl', ['$scope', 'Restangular', '$routeParams', '$uibM
 	    	Restangular.one("studenti").customGET(studentID).then(function (data) {
 	    		$scope.student = data;
 			});
-	    } else {
-	    	
 	    }
 	}
 	
@@ -33,7 +31,6 @@ myApp.controller('StudentCtrl', ['$scope', 'Restangular', '$routeParams', '$uibM
         if(Restangular.all('studenti').post($scope.student)){}
         else{
         	// callback za gresku sa servera
-            alert('the student with such a cardNumber already exists');
             $log.info('the student with such a cardNumber already exists');
         };
       }
