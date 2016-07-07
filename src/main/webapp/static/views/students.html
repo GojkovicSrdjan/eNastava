@@ -8,7 +8,7 @@
     <th translate>Prezime</th>
     <th translate>Akcija</th>
   </tr>
-  <tr ng-repeat="student in studentsPage| filter:pretraga| limitTo:5">
+  <tr ng-if="studentK==null" ng-repeat="student in studentsPage| filter:pretraga| limitTo:5">
     <td>
       {{student.brojIndexa}}
     </td>
@@ -30,6 +30,24 @@
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
       </button>
     </td>
+  </tr>
+  
+  <tr ng-if="studentK!=null">
+      <td>
+      {{studentK.brojIndexa}}
+    </td>
+    <td>
+      {{studentK.korisnik.ime}}
+    </td>
+    <td>
+      {{studentK.korisnik.prezime}}
+    </td>
+    <td>
+      <a ng-href="#/students/{{studentK.studentID}}">
+        <button type="button" class="btn btn-default" aria-label="Izmena">
+	        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+	    </button>
+      </a>
   </tr>
 </table>
 <div class="right">
