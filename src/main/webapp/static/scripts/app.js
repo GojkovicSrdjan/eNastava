@@ -45,6 +45,11 @@ var myApp = angular
         controller: 'CourseCtrl',
         controllerAs: 'course'
       })
+      .when('/courses/:id', {
+        templateUrl: 'views/course.html',
+        controller: 'CourseCtrl',
+        controllerAs: 'course'
+      })
       .when('/professors', {
     	templateUrl: 'views/professors.html',
         controller: 'ProfessorsCtrl',
@@ -55,6 +60,11 @@ var myApp = angular
 //    	  controller: 'LoginCtrl',
 //    	  controllerAs: 'main'
 //      })
+      .when('/professors/:id', {
+    	templateUrl: 'views/professor.html',
+        controller: 'ProfessorCtrl',
+        controllerAs: 'professor' 
+      })
       .when('/professors/:id', {
     	templateUrl: 'views/professor.html',
         controller: 'ProfessorCtrl',
