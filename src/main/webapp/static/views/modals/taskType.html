@@ -25,6 +25,18 @@
       <label for="description" translate>Opis</label>
       <input type="text" class="form-control" id="description" ng-model="task.opis">
     </fieldset>
+    
+    <label translate>Studenti</label>
+    <table class="table table-bordered">
+      <tr ng-repeat="enrollment in enrollments">
+        <td>
+          {{enrollment.student.korisnik.ime}} {{enrollment.student.korisnik.prezime}} {{enrollment.student.brojIndexa}}
+          <button type="button" class="btn btn-default right" aria-label="Brisanje" ng-click="editObaveza(enrollment.student,task)">
+            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+          </button>
+        </td>
+      </tr>
+    </table>
 
 </div>
 <div class="modal-footer">

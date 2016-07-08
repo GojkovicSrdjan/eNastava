@@ -140,10 +140,13 @@ myApp.controller('CourseCtrl', ['$scope', 'Restangular', '$routeParams', '$uibMo
     /**
      * Prilikom kreiranja tipaObaveze kreiraju se i obaveze za svakog studenta na kursu
      */
-    var TaskTypeModalCtrl = ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance){
-    	var taskTypeIds=_.map($scope.tasks, function(value){
-    		return value.tipObavezeID; 
-    	});
+    var TaskTypeModalCtrl = ['$scope', '$uibModalInstance', 'task', function ($scope, $uibModalInstance, task){
+    	
+        Restangular.one("predmeti", $scope.course.predmetID).getList("studenti").then(function(entries) {
+			$scope.enrollments = entries;
+		});
+        
+    	$scope.task = task;
     	
     	$scope.date={};
         $scope.openDate = function() {
@@ -151,48 +154,110 @@ myApp.controller('CourseCtrl', ['$scope', 'Restangular', '$routeParams', '$uibMo
         };
     	
     	$scope.ok = function() {
-    		
-    		$scope.task.predmet = $scope.course;
-    		Restangular.all('tipobaveze').post($scope.task).then(function (data) {
-        		$scope.tasks.push(data);
-        		var tipObaveze = data;
-        		
-        		//kreiranje obaveza
-        		var enrolledStudent = _.map($scope.enrollments,function (value) {
-                	return value.student;
-                });
-        		Restangular.all('studenti').getList().then(function (data) {
-        			$scope.students = data;
-                 	_.remove($scope.students, function (student) {
-                 		return _.contains(enrolledStudent, student);
-                 	});
-        		});
-        		
-                for (var i in enrolledStudent){
-                	var obaveza = {"student": enrolledStudent[i],
-                					"tipObaveze": tipObaveze};
-                	Restangular.all('obaveze').post(obaveza);
-                }
-    		});
-    		
+    		if(task){
+    			task.predmet = $scope.course;
+	    		Restangular.all('tipobaveze').customPUT(task).then(function (data) {
+	        		//$scope.tasks.push(data);
+	        		var tipObaveze = data;
+	        		
+	        		//kreiranje obaveza
+	        		var enrolledStudent = _.map($scope.enrollments,function (value) {
+	                	return value.student;
+	                });
+	        		Restangular.all('studenti').getList().then(function (data) {
+	        			$scope.students = data;
+	                 	_.remove($scope.students, function (student) {
+	                 		return _.contains(enrolledStudent, student);
+	                 	});
+	        		});
+	        		
+	                for (var i in enrolledStudent){
+	                	var obaveza = {"student": enrolledStudent[i],
+	                					"tipObaveze": tipObaveze};
+	                	Restangular.all('obaveze').customPUT(obaveza);
+	                }
+	    		});
+    		} else {
+	    		$scope.task.predmet = $scope.course;
+	    		Restangular.all('tipobaveze').post($scope.task).then(function (data) {
+	        		$scope.tasks.push(data);
+	        		var tipObaveze = data;
+	        		
+	        		//kreiranje obaveza
+	        		var enrolledStudent = _.map($scope.enrollments,function (value) {
+	                	return value.student;
+	                });
+	        		Restangular.all('studenti').getList().then(function (data) {
+	        			$scope.students = data;
+	                 	_.remove($scope.students, function (student) {
+	                 		return _.contains(enrolledStudent, student);
+	                 	});
+	        		});
+	        		
+	                for (var i in enrolledStudent){
+	                	var obaveza = {"student": enrolledStudent[i],
+	                					"tipObaveze": tipObaveze};
+	                	Restangular.all('obaveze').post(obaveza);
+	                }
+	    		});
+    		}
     		$uibModalInstance.close('ok');
     	};
 
     	$scope.cancel = function() {
     		$uibModalInstance.dismiss('cancel');
     	};
+    	
+    	var TaskModalCtrl = ['$scope', '$uibModalInstance', 'taskType', function ($scope, $uibModalInstance, taskType){
+    		
+    		if ($scope.student.studentID){
+            	Restangular.one("studenti", $scope.student.studentID).getList("obaveze").then(function (entries) {
+        			for (var int = 0; int < entries.length; int++) {
+            			if(entries[int].tipObaveze.tipObavezeID == taskType.tipObavezeID){
+            				$scope.subtask = entries[int];
+            				$scope.subtask.tipObaveze = taskType;
+            			}
+        			}
+        		});
+        	}
+    		
+    		$scope.ok = function() {
+    			Restangular.all('obaveze').customPUT($scope.subtask);
+    			$uibModalInstance.dismiss('cancel');
+        	};
+    		
+    		$scope.cancel = function() {
+        		$uibModalInstance.dismiss('cancel');
+        	};
+    		
+    	}];
+    	//END  TaskModalCtrl
+    	
+    	/////
+    	$scope.editObaveza = function (student,taskType) {
+    		$scope.student = student;
+        	var modalInstance = $uibModal.open({
+        		templateUrl: 'views/modals/task.html',
+        		controller: TaskModalCtrl,
+        		scope: $scope,
+        		resolve: {
+        			taskType: function() {
+        				return taskType;
+        			}
+        		}
+        	});
+        };
     }];
     
     /////////
-    $scope.openModalO= function (course) {
-    	$scope.graded = {"predmet":{"predmetID":$scope.course.predmetID}};
+    $scope.openModalO= function (task) {
     	var modalInstance = $uibModal.open({
     		templateUrl: 'views/modals/taskType.html',
     		controller: TaskTypeModalCtrl,
     		scope: $scope,
     		resolve: {
-    			course: function() {
-    				return course;
+    			task: function() {
+    				return task;
     			}
     		}
     	});
