@@ -8847,6 +8847,28 @@ body {
   padding-bottom: 19px;
 }
 
+/* line 26, ../../../../frontEnd/FrontEndAplikacija/studentsClient/app/styles/main.scss */
+.navbar-topbar {
+	margin: 10px;
+}
+
+/* line 26, ../../../../frontEnd/FrontEndAplikacija/studentsClient/app/styles/main.scss */
+.navbar-topbar li {
+	display: inline;
+	color: #4d535b;
+	font-weight: bold;
+}
+
+.navbar-topbar li a{
+	display: inline;
+	padding: 0;
+}
+.navbar-topbar li a:hover{
+	background-color: inherit;
+	color: #337ab7;
+	text-decoration: underline;
+}
+
 /* line 49, ../../../../frontEnd/FrontEndAplikacija/studentsClient/app/styles/main.scss */
 .navbar-lang {
 	margin-top: 8px;
@@ -8858,6 +8880,7 @@ body {
 	display: inline;
 	margin-right: 5px;
 	color: #4d535b;
+	font-weight: bold;
 }
 .navbar-lang li:hover {
 	color: #bab0b0;
