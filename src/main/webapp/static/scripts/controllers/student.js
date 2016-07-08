@@ -264,6 +264,10 @@ myApp.controller('StudentCtrl', ['$scope', 'Restangular', '$routeParams', '$uibM
 	    //uplata.eRacun
 	    
 	    $scope.cancel = function() {
+			Restangular.all("eracun").customPUT($scope.eRacun).then(function (data) {
+				$scope.eRacun
+				
+			});
 	        $uibModalInstance.dismiss('cancel');
 	    };
 	    
