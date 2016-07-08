@@ -40,10 +40,10 @@
 	        	<a ng-href="#/admins/{{adminK.adminID}}">
 	        		{{adminK.korisnik.korisnickoIme}}
 	        	</a>
-	        	<button ng-click="logout('admin')" translate>Odjavi se</button>
+	        	<button ng-click="logout('admin')">{{'Odjavi se'|translate}}</button>
 	        </li>
       		<li>
-      			<button ng-click="openLoginType()" translate>Prijavi se</button>
+      			<button ng-click="openLoginType()" ng-if="loggedIn==null">{{'Prijavi se'|translate}}</button>
       		</li>
       	</ul>
       	</div>

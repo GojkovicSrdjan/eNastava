@@ -25,11 +25,12 @@ angular.module('studentsClientApp')
 		$scope.logout= function (type) {
 			$cookies.remove(type);
 			$cookies.remove("loggedIn");
+			$route.reload();
 			$location.path("/")	;
 		}	
 			
 		  $scope.openLoginType= function() {
-		        var modalInstance = $uibModal.open({
+		        var modalInstanceP = $uibModal.open({
 		        	templateUrl: 'views/loginUserType.html',
 		            controller: LoginCtrl,
 		            scope: $scope
@@ -38,8 +39,8 @@ angular.module('studentsClientApp')
 		};
 
 		
-		var LoginCtrl=['$scope', '$rootScope', '$cookies', '$location', '$uibModalInstance', 'Restangular', '$log', '_',
-		               function($scope, $rootScope, $cookies, $location, $uibModalInstance, Restangular, $log, _) {
+		var LoginCtrl=['$scope', '$rootScope', '$uibModalStack', '$cookies', '$location', '$uibModalInstance', 'Restangular', '$log', '_',
+		               function($scope, $rootScope,  $uibModalStack, $cookies, $location, $uibModalInstance, Restangular, $log, _) {
 			
 			$scope.cancel = function() {
 		          $uibModalInstance.dismiss('cancel');
@@ -51,7 +52,9 @@ angular.module('studentsClientApp')
 						Restangular.one('studenti').post("login", $scope.korisnik).then(function (data) {
 							$cookies.putObject("loggedIn",true);
 							$cookies.putObject('student', data);
+							$route.reload();
 							$location.path("/")	
+					        $uibModalStack.dismissAll();
 						});
 					}else if($scope.type=="profesor"){
 						Restangular.one('profesori').post("login", $scope.korisnik).then(function (data) {
@@ -60,14 +63,19 @@ angular.module('studentsClientApp')
 							Restangular.one("profesori", data.profesorID).getList("predmeti").then(function(entries) {
 					    		$cookies.putObject('profesorPredmeti', entries);
 					    	});
-							$location.path("/")	
+							$route.reload();
+							$location.path("/");
+					        $uibModalStack.dismissAll();	
 						});
 						
 					}else if($scope.type=="admin"){
 						Restangular.one('administratori').post("login", $scope.korisnik).then(function (data) {
 							$cookies.putObject("loggedIn",true);
 							$cookies.putObject('admin', data);
-							$location.path("/")	
+							$route.reload();
+							$location.path("/");
+					        $uibModalStack.dismissAll();
+							
 						});
 					}
 					//pronadji na osnovu tipa ulogovanog
@@ -78,7 +86,6 @@ angular.module('studentsClientApp')
   
 				$scope.checkType= function (tip) {
 					$scope.type=tip;
-					
 			        var modalInstance = $uibModal.open({
 			        	templateUrl: 'views/login.html',
 			            controller: LoginCtrl,

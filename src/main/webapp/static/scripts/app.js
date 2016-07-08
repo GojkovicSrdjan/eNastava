@@ -29,7 +29,8 @@ var myApp = angular
     	  resolve:{
     		  "check":function($location, $cookies){
     			  var p= $cookies.getObject("profesor");
-    			  if(p!=null){
+    			  var log=$cookies.getObject("loggedIn");
+    			  if(p!=null||log==null){
     				  $location.path("/")
     			  }
     		  }
@@ -42,7 +43,8 @@ var myApp = angular
     	  resolve:{
     		  "check":function($location, $cookies){
     			  var p= $cookies.getObject("profesor");
-    			  if(p!=null){
+    			  var log=$cookies.getObject("loggedIn");
+    			  if(p!=null||log==null){
     				  $location.path("/")
     			  }
     		  }
@@ -55,7 +57,8 @@ var myApp = angular
     	  resolve:{
     		  "check":function($location, $cookies){
     			  var s= $cookies.getObject("student");
-    			  if(s!=null){
+    			  var log=$cookies.getObject("loggedIn");
+    			  if(s!=null||log==null){
     				  $location.path("/")
     			  }
     		  }
@@ -69,7 +72,8 @@ var myApp = angular
     	  resolve:{
     		  "check":function($location, $cookies){
     			  var s= $cookies.getObject("student");
-    			  if(s!=null){
+    			  var log=$cookies.getObject("loggedIn");
+    			  if(s!=null||log==null){
     				  $location.path("/")
     			  }
     		  }
@@ -82,7 +86,8 @@ var myApp = angular
     	  resolve:{
     		  "check":function($location, $cookies){
     			  var s= $cookies.getObject("student");
-    			  if(s!=null){
+    			  var log=$cookies.getObject("loggedIn");
+    			  if(s!=null||log==null){
     				  $location.path("/")
     			  }
     		  }
@@ -100,7 +105,8 @@ var myApp = angular
     	  resolve:{
     		  "check":function($location, $cookies){
     			  var s= $cookies.getObject("student");
-    			  if(s!=null){
+    			  var log=$cookies.getObject("loggedIn");
+    			  if(s!=null||log==null){
     				  $location.path("/")
     			  }
     		  }
@@ -114,7 +120,8 @@ var myApp = angular
     		  "check":function($location, $cookies){
     			  var s= $cookies.getObject("student");
     			  var p= $cookies.getObject("profesor");
-    			  if(s!=null||p!=null){
+    			  var log=$cookies.getObject("loggedIn");
+    			  if(s!=null||p!=null||log==null){
     				  $location.path("/")
     			  }
     		  }
@@ -128,7 +135,8 @@ var myApp = angular
     		  "check":function($location, $cookies){
     			  var s= $cookies.getObject("student");
     			  var p= $cookies.getObject("profesor");
-    			  if(s!=null||p!=null){
+    			  var log=$cookies.getObject("loggedIn");
+    			  if(s!=null||p!=null||log==null){
     				  $location.path("/")
     			  }
     		  }
