@@ -57,7 +57,7 @@
 		</button>
 	</a>
 </div>
-<ul ng-if="pages.length>1">
+<ul class="nav navbar-paging" ng-if="pages.length>1">
 	<li ng-if="profesorK==null" ng-repeat="p in pages track by $index">
 	 	<span ng-click="page(p)">{{p+1}}</span>
 	</li>

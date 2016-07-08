@@ -2,8 +2,24 @@
   <h3 class="modal-title" translate>Tip korisnika</h3>
 </div>
 <div class="modal-body">
-	<h1>Tip korisnika</h1>
-	 <a ng-click="checkType('student')" >Student</a>
-	 <a ng-click="checkType('profesor')">Profesor</a>
-	 <a ng-click="checkType('admin')">Administrator</a>
+	<ul class="navbar-login">
+		<li>
+			<a ng-click="checkType('student')" >
+			 	<p>Student</p>
+			 	<img class="icon-login" src="images/student-icon.png">
+			 </a>
+		</li>
+		<li>
+			<a ng-click="checkType('profesor')">
+			 	<p>Profesor</p>
+			 	<img class="icon-login" src="images/professor-icon.png">
+			 </a>
+		</li>
+		<li>
+			<a ng-click="checkType('admin')">
+			 	<p>Administrator</p>
+			 	<img class="icon-login" src="images/admin-icon.png">
+			 </a>
+		</li>
+	</ul>
 </div>

@@ -8847,6 +8847,28 @@ body {
   padding-bottom: 19px;
 }
 
+/* line 26, ../../../../frontEnd/FrontEndAplikacija/studentsClient/app/styles/main.scss */
+.navbar-topbar {
+	margin: 10px;
+}
+
+/* line 26, ../../../../frontEnd/FrontEndAplikacija/studentsClient/app/styles/main.scss */
+.navbar-topbar li {
+	display: inline;
+	color: #4d535b;
+	font-weight: bold;
+}
+
+.navbar-topbar li a{
+	display: inline;
+	padding: 0;
+}
+.navbar-topbar li a:hover{
+	background-color: inherit;
+	color: #337ab7;
+	text-decoration: underline;
+}
+
 /* line 49, ../../../../frontEnd/FrontEndAplikacija/studentsClient/app/styles/main.scss */
 .navbar-lang {
 	margin-top: 8px;
@@ -8858,10 +8880,33 @@ body {
 	display: inline;
 	margin-right: 5px;
 	color: #4d535b;
+	font-weight: bold;
 }
 .navbar-lang li:hover {
 	color: #bab0b0;
 }
+
+/* line 49, ../../../../frontEnd/FrontEndAplikacija/studentsClient/app/styles/main.scss */
+.navbar-login {
+	margin: 8px;
+	display: inline-flex;
+}
+
+/* line 49, ../../../../frontEnd/FrontEndAplikacija/studentsClient/app/styles/main.scss */
+.navbar-login li {
+	display: inline;
+	margin: 30px;
+	color: #4d535b;
+	font-weight: bold;
+}
+.navbar-login li:hover {
+	color: #bab0b0;
+}
+.icon-login{
+	width: 5em;
+	height: 5em;
+}
+
 
 /* line bottom, ../../../../frontEnd/FrontEndAplikacija/studentsClient/app/styles/main.scss */
 .navbar-paging {
@@ -8971,3 +9016,4 @@ body {
 .mb10 {
 	margin-bottom: 10px;
 }
+
