@@ -50,7 +50,7 @@
       </a>
   </tr>
 </table>
-<div class="mb10 right">
+<div class="mb10 right" ng-if="studentK==null">
   <a ng-href="#/students/new">
 	  <button type="button" class="btn btn-default" aria-label="Dodavanje">
 	    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -59,7 +59,7 @@
 </div>
 
 <ul class="nav navbar-paging" ng-if="pages.length>1">
-	<li ng-repeat="p in pages track by $index">
+	<li ng-if="studentK==null" ng-repeat="p in pages track by $index">
 	 	<span ng-click="page(p)">{{p+1}}</span>
 	</li>
 </ul>

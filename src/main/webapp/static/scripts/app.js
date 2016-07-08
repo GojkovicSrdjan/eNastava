@@ -26,11 +26,27 @@ var myApp = angular
         controllerAs: 'main'
       })
       .when('/students', {
+    	  resolve:{
+    		  "check":function($location, $cookies){
+    			  var p= $cookies.getObject("profesor");
+    			  if(p!=null){
+    				  $location.path("/")
+    			  }
+    		  }
+    	  },
         templateUrl: 'views/students.html',
         controller: 'StudentsCtrl',
         controllerAs: 'students'
       })
       .when('/students/:id', {
+    	  resolve:{
+    		  "check":function($location, $cookies){
+    			  var p= $cookies.getObject("profesor");
+    			  if(p!=null){
+    				  $location.path("/")
+    			  }
+    		  }
+    	  },
         templateUrl: 'views/student.html',
         controller: 'StudentCtrl',
         controllerAs: 'student'
@@ -50,6 +66,14 @@ var myApp = angular
     	  
       })
       .when('/courses/:id', {
+    	  resolve:{
+    		  "check":function($location, $cookies){
+    			  var s= $cookies.getObject("student");
+    			  if(s!=null){
+    				  $location.path("/")
+    			  }
+    		  }
+    	  },
         templateUrl: 'views/course.html',
         controller: 'CourseCtrl',
         controllerAs: 'course'
@@ -89,7 +113,8 @@ var myApp = angular
     	  resolve:{
     		  "check":function($location, $cookies){
     			  var s= $cookies.getObject("student");
-    			  if(s!=null){
+    			  var p= $cookies.getObject("profesor");
+    			  if(s!=null||p!=null){
     				  $location.path("/")
     			  }
     		  }
@@ -102,7 +127,8 @@ var myApp = angular
     	  resolve:{
     		  "check":function($location, $cookies){
     			  var s= $cookies.getObject("student");
-    			  if(s!=null){
+    			  var p= $cookies.getObject("profesor");
+    			  if(s!=null||p!=null){
     				  $location.path("/")
     			  }
     		  }

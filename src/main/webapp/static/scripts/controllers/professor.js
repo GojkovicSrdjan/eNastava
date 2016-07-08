@@ -30,10 +30,10 @@ myApp.controller('ProfessorCtrl', ['$scope', 'Restangular', '$routeParams', '$ui
 	}
 	
     $scope.ok = function() {
-      if ($scope.student.studentID) {
-        Restangular.all('studenti').customPUT($scope.student);
+      if ($scope.professor.profesorID) {
+        Restangular.all('profesori').customPUT($scope.professor);
       } else {
-        if(Restangular.all('studenti').post($scope.student)){}
+        if(Restangular.all('profesori').post($scope.professor)){}
         else{
         	// callback za gresku sa servera
             $log.info('the student with such a cardNumber already exists');

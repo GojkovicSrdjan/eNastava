@@ -1,9 +1,9 @@
 <div class="modal-header">
   <h3 class="modal-title" translate>Profesor</h3>
 </div>
-<div class="modal-body">
+<div class="modal-body" ng-if="profesorK.korisnik.korisnickoIme==professor.korisnik.korisnickoIme||profesorK==null">
   <form>
-    <fieldset class="form-group">
+    <fieldset class="form-group" >
       <label for="ime" translate>Ime</label>
       <input type="text" class="form-control" id="ime" ng-model="professor.korisnik.ime">
     </fieldset>

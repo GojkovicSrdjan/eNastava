@@ -6,7 +6,7 @@
     <th translate>Naziv</th>
     <th translate>Akcija</th>
   </tr>
-  <tr ng-repeat="course in coursesPage| filter:pretraga| limitTo:5">
+  <tr ng-if="profesorK==null" ng-repeat="course in coursesPage| filter:pretraga| limitTo:5">
     <td>
       {{course.naziv}}
     </td>
@@ -22,8 +22,20 @@
       </button>
     </td>
   </tr>
+  
+  <tr ng-if="profesorK!=null" ng-repeat="c in profesorPredmeti">
+    <td>
+      {{c.predmet.naziv}}
+    </td>
+    <td>
+      <a ng-href="#/courses/{{c.predmet.predmetID}}">
+        <button type="button" class="btn btn-default" aria-label="Izmena">
+	        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+	    </button>
+      </a>
+  </tr>
 </table>
-<div class="right">
+<div class="right" ng-if="profesorK==null">
 	<a ng-href="#/courses/new">
 	  <button type="button" class="btn btn-default" aria-label="Dodavanje" >
 	    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>

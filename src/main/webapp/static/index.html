@@ -52,9 +52,9 @@
 	              <li ng-click="changeLanguage('en')"><img src="images/gb-flag.png"> English</li>
 	              <li ng-click="changeLanguage('sr')"><img src="images/sr-flag.png"> Srpski</li>
 	              <li ng-click="openLoginType()">Uloguj se</li>
-	              <li ng-if="studentK!=null" >{{studentK.korisnik.korisnickoIme}}<a ng-click="logout('student')">Izloguj se</a> </li>
+	              <li ng-if="studentK!=null" >{{studentK.korisnik.korisnickoIme}} <a ng-click="logout('student')">Izloguj se</a> </li>
 	              <li ng-if="profesorK!=null" >{{profesorK.korisnik.korisnickoIme}}<a ng-click="logout('profesor')">Izloguj se</a> </li>
-	              <li ng-if="adminK!=null" >{{adminK.korisnik.korisnickoIme}}<a ng-click="logout('admin')">Izloguj se</a> </li>
+	              <li ng-if="adminK!=null" >{{adminK.korisnik.korisnickoIme}}  <a ng-click="logout('admin')">Izloguj se</a> </li>
 
 	          	</ul>
           		</div>

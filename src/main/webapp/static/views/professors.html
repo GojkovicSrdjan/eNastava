@@ -10,7 +10,7 @@
     <th translate>Zvanje</th>
     <th translate>Akcija</th>
   </tr>
-  <tr ng-repeat="p in professorsPage| filter:pretraga| limitTo:5">
+  <tr ng-if="profesorK==null" ng-repeat="p in professorsPage| filter:pretraga| limitTo:5">
     <td>
       {{p.korisnik.ime}}
     </td>
@@ -32,16 +32,33 @@
       </button>
     </td>
   </tr>
+    <tr ng-if="profesorK!=null">
+    <td>
+      {{profesorK.korisnik.ime}}
+    </td>
+    <td>
+      {{profesorK.korisnik.prezime}}
+    </td>      
+    <td>
+      {{profesorK.zvanje}}
+    </td>
+    <td>
+      <a ng-href="#/professors/{{profesorK.profesorID}}">
+        <button type="button" class="btn btn-default" aria-label="Izmena">
+	        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+	    </button>
+      </a>
+  </tr>
 </table>
-<div class="right">
-	<a ng-href="#/professors/{{p.profesorID}}">
+<div class="right" ng-if="profesorK==null">
+	<a ng-href="#/professors/new">
 		<button type="button" class="btn btn-default" aria-label="Dodavanje">
 		    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 		</button>
 	</a>
 </div>
 <ul ng-if="pages.length>1">
-	<li ng-repeat="p in pages track by $index">
+	<li ng-if="profesorK==null" ng-repeat="p in pages track by $index">
 	 	<span ng-click="page(p)">{{p+1}}</span>
 	</li>
 </ul>

@@ -14,6 +14,7 @@ angular.module('studentsClientApp')
 		$rootScope.loggedIn=$cookies.getObject("loggedIn");
 		$rootScope.studentK=$cookies.getObject("student");
 		$rootScope.profesorK=$cookies.getObject("profesor");
+		$rootScope.profesorPredmeti=$cookies.getObject("profesorPredmeti");
 		$rootScope.adminK=$cookies.getObject("admin");
 		
 		  $scope.changeLanguage= function (l) {
@@ -24,7 +25,7 @@ angular.module('studentsClientApp')
 		$scope.logout= function (type) {
 			$cookies.remove(type);
 			$cookies.remove("loggedIn");
-			$route.reload();
+			$location.path("/")	;
 		}	
 			
 		  $scope.openLoginType= function() {
@@ -56,8 +57,12 @@ angular.module('studentsClientApp')
 						Restangular.one('profesori').post("login", $scope.korisnik).then(function (data) {
 							$cookies.putObject("loggedIn",true);
 							$cookies.putObject('profesor', data);
+							Restangular.one("profesori", data.profesorID).getList("predmeti").then(function(entries) {
+					    		$cookies.putObject('profesorPredmeti', entries);
+					    	});
 							$location.path("/")	
 						});
+						
 					}else if($scope.type=="admin"){
 						Restangular.one('administratori').post("login", $scope.korisnik).then(function (data) {
 							$cookies.putObject("loggedIn",true);
