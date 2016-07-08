@@ -21,7 +21,7 @@
 
     <!-- Add your site or application content here -->
     <div class="header">
-      <div class="topbar">
+      <div class="topbar" ng-controller="MainCtrl">
       	<div class="container">
       		<ul class="nav navbar-topbar">
 	        <li ng-if="studentK!=null">
@@ -74,7 +74,7 @@
               <li><p><input type="text" placeholder="{{'Pretraga'|translate}}" ng-model="pretraga" ></p></li>
               <li>&nbsp;</li>
               <li>
-                <div ng-controller="MainCtrl">
+                <div>
 	          	<ul class="nav navbar-lang">
 	              <li ng-click="changeLanguage('en')"><img src="images/gb-flag.png"> ENG </li>
 	              <li ng-click="changeLanguage('sr')"><img src="images/sr-flag.png"> SRB </li>

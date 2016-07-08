@@ -8886,6 +8886,28 @@ body {
 	color: #bab0b0;
 }
 
+/* line 49, ../../../../frontEnd/FrontEndAplikacija/studentsClient/app/styles/main.scss */
+.navbar-login {
+	margin: 8px;
+	display: inline-flex;
+}
+
+/* line 49, ../../../../frontEnd/FrontEndAplikacija/studentsClient/app/styles/main.scss */
+.navbar-login li {
+	display: inline;
+	margin: 30px;
+	color: #4d535b;
+	font-weight: bold;
+}
+.navbar-login li:hover {
+	color: #bab0b0;
+}
+.icon-login{
+	width: 5em;
+	height: 5em;
+}
+
+
 /* line bottom, ../../../../frontEnd/FrontEndAplikacija/studentsClient/app/styles/main.scss */
 .navbar-paging {
 	margin-left: 20px;
@@ -8994,3 +9016,4 @@ body {
 .mb10 {
 	margin-bottom: 10px;
 }
+
