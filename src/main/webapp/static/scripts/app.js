@@ -36,18 +36,14 @@ var myApp = angular
         controllerAs: 'student'
       })
       .when('/courses', {
-    	  resolve:{
-    		  "check":function($location, $cookies){
-    			  var s= $cookies.getObject("student");
-    			  if(s!=null){
-    				  $location.path("/")
-    			  }
-    		  }
-    	  },
         templateUrl: 'views/courses.html',
         controller: 'CoursesCtrl',
         controllerAs: 'courses'
-    	  
+      })
+      .when('/courses/:id', {
+        templateUrl: 'views/course.html',
+        controller: 'CourseCtrl',
+        controllerAs: 'course'
       })
       .when('/courses/:id', {
         templateUrl: 'views/course.html',
@@ -55,14 +51,6 @@ var myApp = angular
         controllerAs: 'course'
       })
       .when('/professors', {
-    	  resolve:{
-    		  "check":function($location, $cookies){
-    			  var s= $cookies.getObject("student");
-    			  if(s!=null){
-    				  $location.path("/")
-    			  }
-    		  }
-    	  },
     	templateUrl: 'views/professors.html',
         controller: 'ProfessorsCtrl',
         controllerAs: 'professors' 
@@ -73,40 +61,31 @@ var myApp = angular
 //    	  controllerAs: 'main'
 //      })
       .when('/professors/:id', {
-    	  resolve:{
-    		  "check":function($location, $cookies){
-    			  var s= $cookies.getObject("student");
-    			  if(s!=null){
-    				  $location.path("/")
-    			  }
-    		  }
-    	  },
+    	templateUrl: 'views/professor.html',
+        controller: 'ProfessorCtrl',
+        controllerAs: 'professor' 
+      })
+      .when('/professors/:id', {
+    	templateUrl: 'views/professor.html',
+        controller: 'ProfessorCtrl',
+        controllerAs: 'professor' 
+      })
+      .when('/professors/:id', {
+    	templateUrl: 'views/professor.html',
+        controller: 'ProfessorCtrl',
+        controllerAs: 'professor' 
+      })
+      .when('/professors/:id', {
     	templateUrl: 'views/professor.html',
         controller: 'ProfessorCtrl',
         controllerAs: 'professor' 
       })
       .when('/admins',{
-    	  resolve:{
-    		  "check":function($location, $cookies){
-    			  var s= $cookies.getObject("student");
-    			  if(s!=null){
-    				  $location.path("/")
-    			  }
-    		  }
-    	  },
       	templateUrl: 'views/admins.html',
         controller: 'AdminsCtrl',
         controllerAs: 'admins'   
       })
       .when('/admins/:id',{
-    	  resolve:{
-    		  "check":function($location, $cookies){
-    			  var s= $cookies.getObject("student");
-    			  if(s!=null){
-    				  $location.path("/")
-    			  }
-    		  }
-    	  },
       	templateUrl: 'views/admin.html',
         controller: 'AdminCtrl',
         controllerAs: 'admin'   
