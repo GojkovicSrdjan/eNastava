@@ -1,0 +1,44 @@
+<div class="modal-header">
+  <h3 class="modal-title" translate>Obaveza</h3>
+</div>
+<div class="modal-body-datepicker">
+	<form>
+      <fieldset class="form-group">
+        <label for="name">{{student.korisnik.ime}} {{student.korisnik.prezime}} {{student.brojIndexa}}</label>
+      </fieldset>
+      <br>
+      <fieldset class="form-group">
+        <label for="name" translate>Predmet</label>
+        <input type="text" class="form-control" id="name" ng-model="course.naziv">
+      </fieldset>
+      <br>
+      <fieldset class="form-group">
+        <label for="name" translate>Naziv obaveze</label>
+        <input type="text" class="form-control" id="name" ng-model="subtask.tipObaveze.naziv">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="name" translate>Opis obaveze</label>
+        <input type="text" class="form-control" id="name" ng-model="subtask.tipObaveze.opis">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="name" translate>Datum</label>
+        <input type="text" class="form-control" id="name" ng-model="subtask.tipObaveze.datum">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="name" translate>Polozeno</label>
+        <input type="text" class="form-control" id="name" ng-model="subtask.polozeno">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="name" translate>Broj bodova</label>
+        <input type="text" class="form-control" id="name" ng-model="subtask.brojBodova">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="name" translate>Ocena</label>
+        <input type="text" class="form-control" id="name" ng-model="subtask.ocena">
+      </fieldset>
+  	</form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" type="button" ng-click="ok()" translate>U redu</button>
+  <button class="btn btn-default" type="button" ng-click="cancel()" translate>Otkazi</button>
+</div>
