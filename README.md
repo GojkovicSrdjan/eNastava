@@ -1,2 +1,5 @@
+Aplikacija za administraciju nastavnog procesa u obrazovnoj instituciji.
 
-Developed by using Spring Boot, AngularJS, REST API.
+
+Klijentski deo - Single Page Application # AngularJS ( static/... )
+Serverski deo - REST API # Java platforma # SpringBoot radni okvir Baza podataka - MySQL
